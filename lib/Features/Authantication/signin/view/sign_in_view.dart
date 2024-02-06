@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/changepass/view/forgetpass.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/Features/Authantication/signup/view/signup.dart';
-import 'package:sports_app/core/components/homelayout.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/changepass/view/forgetpass.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
+import 'package:Toxicon/core/components/homelayout.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class SignIn extends StatelessWidget {
@@ -13,6 +13,8 @@ class SignIn extends StatelessWidget {
   TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -35,14 +37,14 @@ class SignIn extends StatelessWidget {
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontSize: 24)),
             ),
             SizedBox(
               height: size.height * .001,
             ),
             Card(
-              shadowColor: Colors.black,
+              shadowColor: isDark?Colors.white:Colors.black,
               elevation: 8,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -55,7 +57,7 @@ class SignIn extends StatelessWidget {
                       style: GoogleFonts.sanchez(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w700,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 16)),
                     ),
                     SizedBox(
@@ -77,7 +79,7 @@ class SignIn extends StatelessWidget {
                       style: GoogleFonts.sanchez(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w700,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 16)),
                     ),
                     SizedBox(
@@ -152,9 +154,9 @@ class SignIn extends StatelessWidget {
                     child: Text(
                       'Sign In',
                       style: GoogleFonts.sanchez(
-                          textStyle: const TextStyle(
+                          textStyle:  TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color:isDark?Colors.white:Colors.black,
                               fontSize: 18)),
                     ),
                   ),
@@ -180,7 +182,7 @@ class SignIn extends StatelessWidget {
                   style: GoogleFonts.sanchez(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontSize: 16)),
                 ),
                 Container(

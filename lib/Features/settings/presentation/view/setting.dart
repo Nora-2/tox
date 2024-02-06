@@ -1,9 +1,11 @@
+import 'package:Toxicon/Features/settings/presentation/view/history.dart';
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/settings/presentation/view/aboutus.dart';
-import 'package:sports_app/Features/settings/presentation/view/profile.dart';
-import 'package:sports_app/Features/settings/presentation/widgets/custtomcard.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/settings/presentation/view/aboutus.dart';
+import 'package:Toxicon/Features/settings/presentation/view/profile.dart';
+import 'package:Toxicon/Features/settings/presentation/widgets/custtomcard.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -11,14 +13,21 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+          icolor,
+          icolor,
+          isDark ? Colors.white : Colors.white ,
+          kcolor,
+          isDark ? Colors.white : Colors.white ,
+          icolor
+        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -27,20 +36,9 @@ class SettingScreen extends StatelessWidget {
           SizedBox(
             height: size.height * .02,
           ),
-          // Center(
-          //   child: Text(
-          //     'Setting',
-          //     style: GoogleFonts.lakkiReddy(
-          //         textStyle: const TextStyle(
-          //             fontWeight: FontWeight.w400,
-          //             color: Colors.black,
-          //             fontSize: 24)),
-          //   ),
-          // ),
           SizedBox(
             height: size.height * .07,
           ),
-         
           Padding(
             padding: const EdgeInsets.only(
               left: 10,
@@ -72,7 +70,7 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 24)),
                     ),
                     Text(
@@ -80,7 +78,7 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 20)),
                     ),
                   ],
@@ -89,12 +87,14 @@ class SettingScreen extends StatelessWidget {
                   width: size.width * .22,
                 ),
                 IconButton(
-                    onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ProfileScreen(),
-                      ),
-                    );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProfileScreen(),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.edit,
                       size: 30,
@@ -102,16 +102,14 @@ class SettingScreen extends StatelessWidget {
               ],
             ),
           ),
-
           SizedBox(
             height: size.height * .07,
           ),
-
           Expanded(
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDark ? Colors.black : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -128,11 +126,21 @@ class SettingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomContainerCard(
-                    titel: 'History',
-                    icon: Icons.history,
-                    size: size,
-                    icontralling: Icons.arrow_forward,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HistoryScreen(),
+                        ),
+                      );
+                    },
+                    child: CustomContainerCard(
+                      titel: 'History',
+                      icon: Icons.history,
+                      size: size,
+                      icontralling: Icons.arrow_forward,
+                    ),
                   ),
                   CustomContainerCard(
                     titel: 'language',
@@ -140,11 +148,16 @@ class SettingScreen extends StatelessWidget {
                     size: size,
                     icontralling: Icons.arrow_forward,
                   ),
-                  CustomContainerCard(
-                    titel: 'Dark Mode',
-                    icon: Icons.dark_mode,
-                    size: size,
-                    icontralling: Icons.arrow_forward,
+                  GestureDetector(
+                    onTap: () {
+                      AppCubit.get(context).changemode();
+                    },
+                    child: CustomContainerCard(
+                      titel: 'Dark Mode',
+                      icon: Icons.dark_mode,
+                      size: size,
+                      icontralling: Icons.arrow_forward,
+                    ),
                   ),
                   CustomContainerCard(
                     titel: 'Help Center',
@@ -155,11 +168,11 @@ class SettingScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>const InfoScreen(),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const InfoScreen(),
+                        ),
+                      );
                     },
                     child: CustomContainerCard(
                       titel: 'About Us',

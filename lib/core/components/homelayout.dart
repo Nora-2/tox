@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/core/constants/constants.dart';
-import 'package:sports_app/core/cubit_home/homecubit_cubit.dart';
-import 'package:sports_app/core/widgets/custom_bottom_navbar.dart';
+import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/cubit_home/homecubit_cubit.dart';
+import 'package:Toxicon/core/widgets/custom_bottom_navbar.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
@@ -13,11 +13,14 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return BlocProvider(
       create: (context) => HomecubitCubit(),
       child: BlocConsumer<HomecubitCubit, HomecubitState>(
         builder: (context, state) => Scaffold(
-            backgroundColor: Colors.white,
+          backgroundColor:isDark?Colors.black:Colors.white,
+                  
             body: HomecubitCubit.get(context)
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],
             bottomNavigationBar: Padding(
@@ -43,23 +46,23 @@ class HomeLayout extends StatelessWidget {
                         ),
                         title:  Text(
                           'Home',style: GoogleFonts.acme(
-                  textStyle: const TextStyle(
+                  textStyle:  TextStyle(
                       fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                      color: isDark?Colors.white:Colors.black,
                       fontSize: 20)),
                         ),
-                        activeColor: Colors.white,
-                        inactiveColor: Colors.white),
+                        activeColor: isDark?Colors.black:Colors.white,
+                        inactiveColor: isDark?Colors.black:Colors.white,),
                     BottomNavyBarItem(
                         icon: const Icon(Icons.settings),
                         title:  Text('Settings',style: GoogleFonts.acme(
-                  textStyle: const TextStyle(
+                  textStyle:  TextStyle(
                       fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                      color: isDark?Colors.white:Colors.black,
                       fontSize: 20)),
             ),
-                        activeColor: Colors.white,
-                        inactiveColor: Colors.white),
+                        activeColor: isDark?Colors.black:Colors.white,
+                        inactiveColor: isDark?Colors.black:Colors.white,),
                   ],
                 ),
               ),

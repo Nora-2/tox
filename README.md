@@ -1,4 +1,4 @@
-# sports_app
+# Toxicon
 
 A new Flutter project.
 

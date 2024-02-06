@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class CustomInfoCard extends StatelessWidget {
   const CustomInfoCard({
@@ -18,6 +18,8 @@ class CustomInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Card(
@@ -25,7 +27,7 @@ class CustomInfoCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         color: icolor.withOpacity(0.95),
-        shadowColor: Colors.black,
+        shadowColor: isDark?Colors.white:Colors.black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,
@@ -42,7 +44,7 @@ class CustomInfoCard extends StatelessWidget {
                   style: GoogleFonts.acme(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontSize: 18)),
                 ),
                 SizedBox(    height: size.height * .015,),
@@ -51,7 +53,7 @@ class CustomInfoCard extends StatelessWidget {
                   style: GoogleFonts.acme(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontSize: 16)),
                 ),
                 

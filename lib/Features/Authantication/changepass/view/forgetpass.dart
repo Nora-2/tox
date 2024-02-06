@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/changepass/view/otp.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/changepass/view/otp.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     TextEditingController email = TextEditingController();
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -33,9 +35,9 @@ class ForgetPassword extends StatelessWidget {
             Text(
               'Forget Password?',
               style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
+                  textStyle:  TextStyle(
                       fontWeight: FontWeight.w900,
-                      color: Colors.black,
+                      color: isDark?Colors.white:Colors.black,
                       fontSize: 24)),
             ),
             SizedBox(
@@ -55,9 +57,9 @@ class ForgetPassword extends StatelessWidget {
             Text(
               'Email',
               style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
+                  textStyle:  TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                      color: isDark?Colors.white:Colors.black,
                       fontSize: 16)),
             ),
             SizedBox(
@@ -97,9 +99,9 @@ class ForgetPassword extends StatelessWidget {
                       child: Text(
                         'Send Code',
                         style: GoogleFonts.sanchez(
-                            textStyle: const TextStyle(
+                            textStyle:  TextStyle(
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                              color:  isDark?Colors.black:Colors.white,
                                 fontSize: 18)),
                       ),
                     ),

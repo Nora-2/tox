@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/settings/presentation/widgets/customprofilecard.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -15,12 +15,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
+             colors: [icolor,icolor, isDark?Colors.black:Colors.white, kcolor, isDark?Colors.white:Colors.black, icolor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -29,23 +31,26 @@ class ProfileScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: size.height * .02,
+            height: size.height * .03,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )),
-         
-              
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left:4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back,
+                      // color: Colors.black,
+                    )),
+                   
+                
+              ],
+            ),
           ),
           SizedBox(
             height: size.height * .009,
@@ -57,8 +62,8 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 height: 150,
                 width: 150,
-                decoration: BoxDecoration(
-                    image: const DecorationImage(
+                decoration:const BoxDecoration(
+                    image:  DecorationImage(
                         image: AssetImage(
                           'assets/images/profile.png',
                         ),
@@ -69,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        // color: Colors.black,
                         fontSize: 24)),
               ),
               Text(
@@ -77,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        // color: Colors.black,
                         fontSize: 20)),
               ),
             ],
@@ -89,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDark?Colors.black:Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),

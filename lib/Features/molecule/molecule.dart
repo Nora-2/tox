@@ -3,8 +3,8 @@
 import 'package:circular/circular.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class MoleculeScreen extends StatefulWidget {
@@ -19,6 +19,8 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     bool result = true;
     return Scaffold(
@@ -26,7 +28,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
             child: Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
+              colors: [icolor,icolor, Colors.white,  icolor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -35,33 +37,35 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: size.height * .02,
+            height: size.height * .03,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )),
-              SizedBox(
-                width: size.width * .2,
-              ),
-              Image.asset(
-                'assets/images/wepik-export-20240131042544KUTb.png',
-                width: 190,
-                height: 100,
-              )
-            ],
+          Padding(
+
+            padding: const EdgeInsets.only(left:4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back,
+                      // color: Colors.black,
+                    )),
+                SizedBox(
+                  width: size.width * .2,
+                ),
+                Image.asset(
+                  'assets/images/wepik-export-20240131042544KUTb.png',
+                  width: 190,
+                  height: 100,
+                )
+              ],
+            ),
           ),
-          SizedBox(
-            height: size.height * .009,
-          ),
+         
           SizedBox(
             height: size.height * .02,
           ),
@@ -69,7 +73,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDark?Colors.black:Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -154,7 +158,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                           width: size.width * .44,
                           decoration: BoxDecoration(
                             border: Border.all(color: icolor, width: 2),
-                            color: result ? icolor : Colors.white,
+                            color: result ? icolor : isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
@@ -163,7 +167,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               style: GoogleFonts.sanchez(
                                   textStyle: const TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                       color: Colors.black,
                                       fontSize: 20)),
                             ),
                           ),
@@ -173,7 +177,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                           width: size.width * .4,
                           decoration: BoxDecoration(
                             border: Border.all(color: icolor, width: 2),
-                            color: !result ? icolor : Colors.white,
+                            color: !result ? icolor : isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
@@ -198,13 +202,13 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                             CircularViewer(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(200),
-                                  boxShadow: const [
+                                  boxShadow:  [
                                     BoxShadow(
                                         offset: Offset(-5, -5),
-                                        color: Colors.white,
+                                        color: isDark?Colors.black:Colors.white,
                                         blurRadius: 20,
                                         spreadRadius: 1),
-                                    BoxShadow(
+                                   const BoxShadow(
                                         offset: Offset(5, 5),
                                         color:
                                             Color.fromARGB(255, 158, 158, 158),
@@ -224,7 +228,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               style: GoogleFonts.sanchez(
                                   textStyle: const TextStyle(
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.black,
+                                       color: Colors.black,
                                       fontSize: 20)),
                             ),
                           ],
@@ -234,13 +238,13 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                             CircularViewer(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(200),
-                                  boxShadow: const [
+                                  boxShadow:  [
                                     BoxShadow(
                                         offset: Offset(-5, -5),
-                                        color: Colors.white,
+                                        color: isDark?Colors.black:Colors.white,
                                         blurRadius: 20,
                                         spreadRadius: 1),
-                                    BoxShadow(
+                                 const BoxShadow(
                                         offset: Offset(5, 5),
                                         color:
                                             Color.fromARGB(255, 158, 158, 158),

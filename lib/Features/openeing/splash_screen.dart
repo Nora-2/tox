@@ -2,8 +2,8 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:sports_app/core/constants/constants.dart';
-import 'package:sports_app/main.dart';
+import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/main.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'onboarding_screen.dart';
 
@@ -12,12 +12,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: Stack(
         children: [
           Container(
-              decoration:const  BoxDecoration( gradient: LinearGradient(
-              colors: [icolor,Colors.white,kcolor,],
+              decoration:  BoxDecoration( gradient: LinearGradient(
+              colors: [icolor,isDark?Colors.black:Colors.white,kcolor,],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight),
         ),
@@ -48,9 +50,9 @@ class SplashScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width *
-                  0.1, // 10% of screen width
+                  0.1, 
               right: MediaQuery.of(context).size.width *
-                  0.1, // 10% of screen width
+                  0.1, 
 top:MediaQuery.of(context).size.width *
                   0.01 ,
               bottom: MediaQuery.of(context).size.width * 0.65, //
@@ -58,7 +60,7 @@ top:MediaQuery.of(context).size.width *
             alignment: Alignment.bottomCenter,
             child: TextAnimator('TOXIKON',
                 initialDelay: const Duration(seconds: 1),
-                characterDelay:const  Duration(milliseconds: 250),
+                characterDelay:const  Duration(milliseconds: 100),
                 incomingEffect: WidgetTransitionEffects.incomingScaleDown(),
                 atRestEffect: WidgetRestingEffects.bounce(),
                 outgoingEffect: WidgetTransitionEffects.outgoingScaleUp(),

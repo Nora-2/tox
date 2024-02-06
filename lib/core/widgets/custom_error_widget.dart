@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:sports_app/core/utils/styles.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({super.key, required this.errMessage});

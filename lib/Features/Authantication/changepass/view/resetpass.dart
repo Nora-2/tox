@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/signin/view/sign_in_view.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
@@ -12,6 +12,8 @@ class ResetPassword extends StatelessWidget {
     TextEditingController password = TextEditingController();
     TextEditingController confirmpass = TextEditingController();
     final size = MediaQuery.of(context).size;
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -36,7 +38,7 @@ class ResetPassword extends StatelessWidget {
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontSize: 24)),
             ),
             SizedBox(
@@ -58,7 +60,7 @@ class ResetPassword extends StatelessWidget {
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontSize: 16)),
             ),
             SizedBox(
@@ -85,7 +87,7 @@ class ResetPassword extends StatelessWidget {
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontSize: 16)),
             ),
             SizedBox(
@@ -128,9 +130,9 @@ class ResetPassword extends StatelessWidget {
                     child: Text(
                       'Rest Password',
                       style: GoogleFonts.sanchez(
-                          textStyle: const TextStyle(
+                          textStyle:  TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color:isDark?Colors.black:Colors.white,
                               fontSize: 18)),
                     ),
                   ),

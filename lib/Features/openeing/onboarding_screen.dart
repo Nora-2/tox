@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:sports_app/Features/Authantication/signup/view/signup.dart';
-import 'package:sports_app/Features/openeing/custom_button.dart';
+import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
+import 'package:Toxicon/Features/openeing/custom_button.dart';
 import '../../core/constants/constants.dart';
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -96,7 +96,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           style: const TextStyle(
                             fontSize: 29.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            // color: Colors.black,
                           ),
                         ),
                         Text(
@@ -104,7 +104,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 16.0,
-                            color: Colors.black,
+                            // color: Colors.black,
                           ),
                         ),
                       ],
@@ -118,7 +118,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               effect: const ExpandingDotsEffect(
                 dotHeight: 5,
                 dotWidth: 5,
-                activeDotColor: Colors.black,
+                activeDotColor: icolor,
                 dotColor: Colors.grey,
               ),
             ),

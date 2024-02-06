@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/settings/presentation/widgets/Customaboutcard.dart';
+import 'package:Toxicon/Features/settings/presentation/widgets/Customaboutcard.dart';
 
 // ignore: camel_case_types
 class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
       CustomInfoCard(
@@ -68,10 +70,10 @@ class InfoScreen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
         gradient: LinearGradient(colors: [
-          Colors.white,
-          Colors.white,
+         isDark?Colors.white:Colors.black,
+          isDark?Colors.white:Colors.black,
         ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(
@@ -79,33 +81,36 @@ class InfoScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
              SizedBox(
-            height: size.height * .01,
+            height: size.height * .03,
           ),
-           Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    )),
-                const SizedBox(
-                  width: 40,
-                ),
-                Text(
-                  'Information',
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 20)),
-                ),
-              ],
-            ),
+           Padding(
+             padding: const EdgeInsets.only(left:4.0),
+             child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        // color: Colors.black,
+                      )),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  Text(
+                    'Information',
+                    style: GoogleFonts.sanchez(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            // color: Colors.black,
+                            fontSize: 20)),
+                  ),
+                ],
+              ),
+           ),
           SizedBox(
             height: size.height * .01,
           ),

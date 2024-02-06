@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class MutagencityScreen extends StatefulWidget {
@@ -19,13 +19,15 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    bool result = true;
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
+    bool result = false;
     return Scaffold(
         body: SafeArea(
             child: Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
+             colors: [icolor,icolor, Colors.white,  icolor], 
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -34,33 +36,34 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: size.height * .02,
+            height: size.height * .03,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )),
-              SizedBox(
-                width: size.width * .2,
-              ),
-              Image.asset(
-                'assets/images/wepik-export-20240130123541Lkdr.png',
-                width: 190,
-                height: 100,
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left:4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back,
+                      // color: Colors.black,
+                    )),
+                SizedBox(
+                  width: size.width * .2,
+                ),
+                Image.asset(
+                  'assets/images/wepik-export-20240130123541Lkdr.png',
+                  width: 190,
+                  height: 100,
+                )
+              ],
+            ),
           ),
-          SizedBox(
-            height: size.height * .009,
-          ),
+        
           SizedBox(
             height: size.height * .02,
           ),
@@ -68,7 +71,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                 color: isDark?Colors.black:Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -154,7 +157,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                           decoration: BoxDecoration(
                             border: Border.all(color:icolor,width: 2 ),
                             
-                            color: result?icolor:Colors.white,
+                            color: result?icolor:isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
@@ -172,7 +175,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                           width: size.width * .4,
                           decoration: BoxDecoration(
                             border: Border.all(color:icolor,width: 2 ),
-                            color:!result?icolor:Colors.white,
+                            color:!result?icolor:isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(

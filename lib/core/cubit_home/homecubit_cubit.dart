@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sports_app/Features/home/presentation/view/home.dart';
-import 'package:sports_app/Features/settings/presentation/view/setting.dart';
+import 'package:Toxicon/Features/home/presentation/view/home.dart';
+import 'package:Toxicon/Features/settings/presentation/view/setting.dart';
 
 
 part 'homecubit_state.dart';

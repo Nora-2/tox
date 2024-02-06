@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class LiverScreen extends StatefulWidget {
@@ -18,14 +18,16 @@ class _LiverScreenState extends State<LiverScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     bool result = false;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
+      decoration:  const BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
+            colors: [icolor,icolor,  kcolor, Colors.white ,icolor], 
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -46,7 +48,7 @@ class _LiverScreenState extends State<LiverScreen> {
                   },
                   child: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    // color: Colors.black,
                   )),
               SizedBox(
                 width: size.width * .2,
@@ -58,9 +60,7 @@ class _LiverScreenState extends State<LiverScreen> {
               )
             ],
           ),
-          SizedBox(
-            height: size.height * .009,
-          ),
+          
           SizedBox(
             height: size.height * .02,
           ),
@@ -68,7 +68,8 @@ class _LiverScreenState extends State<LiverScreen> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                
+                 color: isDark?Colors.black:Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -154,7 +155,7 @@ class _LiverScreenState extends State<LiverScreen> {
                           decoration: BoxDecoration(
                             border: Border.all(color:icolor,width: 2 ),
                             
-                            color: result?icolor:Colors.white,
+                            color: result?icolor:isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
@@ -172,7 +173,7 @@ class _LiverScreenState extends State<LiverScreen> {
                           width: size.width * .4,
                           decoration: BoxDecoration(
                             border: Border.all(color:icolor,width: 2 ),
-                            color:!result?icolor:Colors.white,
+                            color:!result?icolor:isDark?Colors.black:Colors.white,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(

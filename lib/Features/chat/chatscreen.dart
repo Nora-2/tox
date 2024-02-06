@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class Message {
   final bool isSender;
@@ -90,6 +90,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -103,30 +105,33 @@ class _ChatScreenState extends State<ChatScreen> {
             const SizedBox(
               height: 8,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    )),
-                const SizedBox(
-                  width: 40,
-                ),
-                Text(
-                  'Mr-Tox',
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                          fontSize: 20)),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left:4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        // color: Colors.black,
+                      )),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  Text(
+                    'Mr-Tox',
+                    style: GoogleFonts.sanchez(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            // color: Colors.black,
+                            fontSize: 20)),
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: ListView.builder(
@@ -196,7 +201,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       width: double.infinity,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                         color: isDark?Colors.black:Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
@@ -229,10 +234,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       color: icolor,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Icon(
+                    child:  Icon(
                       Icons.send,
                       size: 15,
-                      color: Colors.white,
+                       color: isDark?Colors.black:Colors.white,
                     ),
                   ),
                 ),

@@ -1,9 +1,9 @@
+import 'package:Toxicon/Features/openeing/splash_screen.dart';
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sports_app/Features/settings/presentation/view/aboutus.dart';
-import 'package:sports_app/core/components/homelayout.dart';
-import 'package:sports_app/core/constants/constants.dart';
 
 int? isViewed;
 Future<void> main() async {
@@ -22,14 +22,23 @@ class SportsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          scaffoldBackgroundColor: kBackgroundColor,
-          appBarTheme: const AppBarTheme(
-              titleTextStyle:
-                  TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-      home: const HomeLayout(),
-    );
+    return BlocProvider(
+        create: (context) => AppCubit(),
+        child: BlocConsumer<AppCubit, AppState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                brightness: AppCubit.get(context).isdark?Brightness.dark:Brightness.light,
+              ),
+              darkTheme: ThemeData(
+                brightness: AppCubit.get(context).isdark?Brightness.dark:Brightness.light,
+              ),
+              themeMode: AppCubit.get(context).isdark?ThemeMode.dark:ThemeMode.light,
+              home: const SplashScreen(),
+            );
+          },
+        ));
   }
 }

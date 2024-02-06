@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sports_app/Features/chat/chatscreen.dart';
-import 'package:sports_app/Features/home/presentation/widgets/categoy.dart';
-import 'package:sports_app/Features/liver/liver.dart';
-import 'package:sports_app/Features/molecule/molecule.dart';
-import 'package:sports_app/Features/mutagenicity/mutagencity.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/chat/chatscreen.dart';
+import 'package:Toxicon/Features/home/presentation/widgets/categoy.dart';
+import 'package:Toxicon/Features/liver/liver.dart';
+import 'package:Toxicon/Features/molecule/molecule.dart';
+import 'package:Toxicon/Features/mutagenicity/mutagencity.dart';
+import 'package:Toxicon/core/constants/constants.dart';
+
 // ignore: camel_case_types
 class homeScreen extends StatelessWidget {
+  
   const homeScreen({super.key});
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
       GestureDetector(
@@ -31,11 +35,11 @@ class homeScreen extends StatelessWidget {
       GestureDetector(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const MoleculeScreen(),
-              ),
-            );
+            context,
+            MaterialPageRoute(
+              builder: (_) => const MoleculeScreen(),
+            ),
+          );
         },
         child: CustomContainerCtegory(
             titel: 'Toxicity\nof molecules',
@@ -61,7 +65,7 @@ class homeScreen extends StatelessWidget {
             child: Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor, Colors.white, icolor],
+            colors: [icolor,icolor, Colors.white, kcolor,  icolor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -86,7 +90,7 @@ class homeScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 30)),
                     ),
                     SizedBox(
@@ -97,7 +101,7 @@ class homeScreen extends StatelessWidget {
                       style: GoogleFonts.philosopher(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontSize: 17)),
                     ),
                   ],
@@ -106,11 +110,11 @@ class homeScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const ChatScreen(),
-              ),
-            );
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ChatScreen(),
+                    ),
+                  );
                 },
                 child: LottieBuilder.asset(
                   'assets/images/Animation - 1706420444089.json',
@@ -123,14 +127,14 @@ class homeScreen extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                 color: isDark?Colors.black:Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 5,
                     blurRadius: 9,
                     offset: const Offset(0, -8),
-                  ), //BoxShadow
+                  ),
                 ],
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),

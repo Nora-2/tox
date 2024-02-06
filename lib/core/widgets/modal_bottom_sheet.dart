@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
       builder: (BuildContext context) {
         return Container(
           height: 200,
-          color: Colors.white,
+          // color: Colors.white,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

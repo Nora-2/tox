@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/Authantication/changepass/view/resetpass.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class OtpVerify extends StatelessWidget {
   const OtpVerify({super.key});
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -34,7 +36,7 @@ class OtpVerify extends StatelessWidget {
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontSize: 24)),
             ),
             SizedBox(
@@ -99,9 +101,9 @@ fillColor: Colors.grey.withOpacity(.2),
                     child: Text(
                       'Verify',
                       style: GoogleFonts.sanchez(
-                          textStyle: const TextStyle(
+                          textStyle:  TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                              color: isDark?Colors.black:Colors.white,
                               fontSize: 18)),
                     ),
                   ),

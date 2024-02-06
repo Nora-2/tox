@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/Features/settings/presentation/widgets/custom%20textfield.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CustomProfileCard extends StatelessWidget {
@@ -22,6 +22,8 @@ class CustomProfileCard extends StatelessWidget {
   TextInputType input;
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(top: 5),
       child: Card(
@@ -29,7 +31,7 @@ class CustomProfileCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         color: icolor.withOpacity(0.95),
-        shadowColor: Colors.black,
+        shadowColor: isDark?Colors.white:Colors.black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
@@ -47,7 +49,7 @@ class CustomProfileCard extends StatelessWidget {
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        // color: Colors.black,
                         fontSize: 16)),
                           ),
               ),

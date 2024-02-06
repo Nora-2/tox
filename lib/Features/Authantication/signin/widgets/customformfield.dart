@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class CustomFormField extends StatefulWidget {
   const CustomFormField({
@@ -50,7 +50,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
             
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: Colors.black,
+              // color: Colors.black,
             ),
           ),
           focusedBorder: OutlineInputBorder(

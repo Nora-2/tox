@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 
 class CustomContainerCard extends StatelessWidget {
   const CustomContainerCard({
@@ -17,6 +17,8 @@ this.icontralling
  final IconData ?icontralling;
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Card(
@@ -24,7 +26,7 @@ this.icontralling
           borderRadius: BorderRadius.circular(15.0),
         ),
         color: icolor.withOpacity(0.95),
-        shadowColor: Colors.black,
+        shadowColor: isDark?Colors.white:Colors.black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,
@@ -35,16 +37,18 @@ this.icontralling
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                 Icon( icon,size:30,color: Colors.black, ) ,
+                 Icon( icon,size:30,
+                //  color: Colors.black,
+                  ) ,
                 Text(
                   titel,
                   style: GoogleFonts.acme(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontSize: 24)),
                 ),
-                 Icon( icontralling,size:30,color: Colors.black,) ,
+                 Icon( icontralling,size:30,) ,
                 ],
             ),
           ),

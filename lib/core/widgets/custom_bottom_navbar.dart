@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sports_app/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 import '../cubit_home/homecubit_cubit.dart';
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({
@@ -16,10 +16,12 @@ class CustomBottomNavBar extends StatefulWidget {
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return BlocConsumer<HomecubitCubit, HomecubitState>(
       builder: (context, state) => Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color:icolor,
           
           boxShadow:  [
             BoxShadow(
@@ -39,7 +41,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           unselectedLabelStyle:
               const TextStyle(color: Colors.grey, fontSize: 10),
           selectedLabelStyle:
-              const TextStyle(color: Colors.black, fontSize: 12),
+               TextStyle(
+                color: isDark?Colors.white:Colors.black,
+               fontSize: 12),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -102,12 +106,14 @@ final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = backgroundColor ?? (Theme.of(context).bottomAppBarTheme.color ?? Colors.white);
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
+    // final bgColor = backgroundColor ?? (Theme.of(context).bottomAppBarTheme.color ?? isDark?Colors.black:Colors.white,);
 
     return Container(
    
       decoration: BoxDecoration(
-        color: bgColor,
+        color: icolor,
         boxShadow: [
           if (showElevation)
             BoxShadow(
@@ -134,7 +140,7 @@ final int selectedIndex;
                   item: item,
                   iconSize: iconSize,
                   isSelected: index == selectedIndex,
-                  backgroundColor: bgColor,
+                  backgroundColor: isDark?Colors.black:Colors.white,
                   itemCornerRadius: itemCornerRadius,
                   animationDuration: animationDuration,
                   itemPadding: itemPadding,
@@ -173,6 +179,8 @@ class _ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+bool isDark = brightnessValue == Brightness.dark;
     return Semantics(
       container: true,
       selected: isSelected,
@@ -183,7 +191,7 @@ class _ItemWidget extends StatelessWidget {
         curve: curve,
         decoration: BoxDecoration(
           color:
-              isSelected ? Colors.white: item.activeColor.withOpacity(0.2),
+              isSelected ? isDark?Colors.black:Colors.white: item.activeColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(itemCornerRadius),
         ),
         child: SingleChildScrollView(
@@ -201,7 +209,7 @@ class _ItemWidget extends StatelessWidget {
                   data: IconThemeData(
                     size: iconSize,
                     color: isSelected
-                        ? Colors.black
+                        ? isDark?Colors.white:Colors.black
                         : item.inactiveColor ?? item.activeColor,
                   ),
                   child: item.icon,
@@ -211,9 +219,9 @@ class _ItemWidget extends StatelessWidget {
                     child: Container(
                       padding: itemPadding,
                       child: DefaultTextStyle.merge(
-                        style:const TextStyle(
+                        style: TextStyle(
 
-                          color: Colors.black,
+                          color: isDark?Colors.white:Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,
