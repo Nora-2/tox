@@ -11,6 +11,12 @@ class InfoScreen extends StatelessWidget {
 bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
+       Center(
+                            child: Image.asset(
+                            'assets/images/info.png',
+                            width: size.width * .9,
+                            height: size.height * .25,
+                          )),
       CustomInfoCard(
         titel: 'How can users utilize the program to research drug toxicity ?',
         subtitel:
@@ -72,8 +78,8 @@ bool isDark = brightnessValue == Brightness.dark;
             child: Container(
       decoration:  BoxDecoration(
         gradient: LinearGradient(colors: [
-         isDark?Colors.white:Colors.black,
-          isDark?Colors.white:Colors.black,
+         isDark?Colors.black:Colors.white,
+          isDark?Colors.black:Colors.white,
         ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(

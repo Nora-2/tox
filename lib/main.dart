@@ -1,4 +1,4 @@
-import 'package:Toxicon/Features/openeing/splash_screen.dart';
+import 'package:Toxicon/Features/liver/liver.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +36,7 @@ class SportsApp extends StatelessWidget {
                 brightness: AppCubit.get(context).isdark?Brightness.dark:Brightness.light,
               ),
               themeMode: AppCubit.get(context).isdark?ThemeMode.dark:ThemeMode.light,
-              home: const SplashScreen(),
+              home: const LiverScreen(),
             );
           },
         ));

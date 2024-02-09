@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,8 +10,9 @@ class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+     bool submit = true;
+//      final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+// bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
       CustomHistoryCard(
@@ -80,17 +83,23 @@ bool isDark = brightnessValue == Brightness.dark;
           Expanded(
             child: SizedBox(
               height: size.height * .98,
-              child: ListView.builder(
+              child: submit?ListView.builder(
                 padding: const EdgeInsets.only(top: 18, left: 8, right: 8),
                 itemCount: widgets.length,
                 itemBuilder: (context, index) {
                   return widgets[index];
                 },
-              ),
+              ): Center(
+                            child: Image.asset(
+                            'assets/images/history.png',
+                            width: size.width * .9,
+                            height: size.height * .8,
+                          ))
             ),
           ),
         ],
-      ),
+     
+      )
     )));
   }
 }

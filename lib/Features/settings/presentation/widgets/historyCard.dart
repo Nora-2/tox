@@ -25,8 +25,8 @@ bool isDark = brightnessValue == Brightness.dark;
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color:isDark?Colors.white:Colors.black,
-        shadowColor: isDark?Colors.white:Colors.black,
+        color:isDark?Colors.black:Colors.white,
+        shadowColor: isDark?Colors.black:Colors.white,
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
@@ -56,9 +56,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       input,
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: isDark?Colors.black54:Colors.white70,
-                              fontSize: 24)),
+                              fontWeight: FontWeight.w500,
+                              color: isDark?Colors.white70:Colors.black54,
+                              fontSize: 20)),
                     ),
                   ],
                 ),
@@ -84,9 +84,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       category,
                       style: GoogleFonts.acme(
                           textStyle:  TextStyle(
-                              fontWeight: FontWeight.w400,
-                               color: isDark?Colors.black54:Colors.white70,
-                              fontSize: 24)),
+                              fontWeight: FontWeight.w500,
+                               color: isDark?Colors.white70:Colors.black54,
+                              fontSize: 20)),
                     ),
                   ],
                 ),
@@ -112,9 +112,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       date,
                       style: GoogleFonts.acme(
                           textStyle:  TextStyle(
-                              fontWeight: FontWeight.w400,
-                             color: isDark?Colors.black54:Colors.white70,
-                              fontSize: 24)),
+                              fontWeight: FontWeight.w500,
+                             color: isDark?Colors.white70:Colors.black54,
+                              fontSize: 20)),
                     ),
                   ],
                 ),
@@ -140,9 +140,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       output,
                       style: GoogleFonts.acme(
                           textStyle:  TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: isDark?Colors.black54:Colors.white70,
-                              fontSize: 24)),
+                              fontWeight: FontWeight.w500,
+                              color: isDark?Colors.white70:Colors.black54,
+                              fontSize: 20)),
                     ),
                   ],
                 ),
