@@ -1,6 +1,7 @@
 // ignore_for_file: dead_code
 import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/mutresult.dart';
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,9 +22,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     bool result = false;
     return BlocProvider(
         create: (context) => LivercubitCubit(),
@@ -33,11 +34,13 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
             return Scaffold(
                 body: SafeArea(
                     child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [icolor, icolor, Colors.white, icolor],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  icolor,
+                  icolor,
+                  isDark ? icolor : Colors.white,
+                  icolor
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -56,9 +59,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: const Icon(
+                            child: Icon(
                               Icons.arrow_back,
-                              // color: Colors.black,
+                              color: isDark ? Colors.white :const Color(0xff0D0D0D),
                             )),
                         SizedBox(
                           width: size.width * .2,
@@ -78,7 +81,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.black : Colors.white,
+                        color: isDark ? const Color(0xff0D0D0D) : Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.3),
@@ -103,7 +106,6 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               style: GoogleFonts.sanchez(
                                   textStyle: const TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.black,
                                       fontSize: 24)),
                             ),
                             SizedBox(
@@ -124,7 +126,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                   LivercubitCubit.get(context).changemode();
+                                    LivercubitCubit.get(context).changemode();
                                   });
                                 },
                                 child: Container(
@@ -140,7 +142,6 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                       style: GoogleFonts.sanchez(
                                           textStyle: const TextStyle(
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.black,
                                               fontSize: 22)),
                                     ),
                                   ),

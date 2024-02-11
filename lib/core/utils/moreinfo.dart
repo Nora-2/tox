@@ -1,4 +1,6 @@
+// ignore_for_file: camel_case_types
 
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,10 +15,12 @@ class showdiloginfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-   
       decoration: const BoxDecoration(
         gradient: LinearGradient(
             colors: [icolor, Colors.white, kcolor],
@@ -24,7 +28,7 @@ class showdiloginfo extends StatelessWidget {
             end: Alignment.bottomRight),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 8,right: 5),
+        padding: const EdgeInsets.only(left: 8, right: 5),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -43,51 +47,50 @@ class showdiloginfo extends StatelessWidget {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back,
-                          // color: Colors.black,
+                          color: isDark ? Colors.white :const Color(0xff0D0D0D),
                         )),
                     const SizedBox(
                       width: 40,
                     ),
-                    
                   ],
                 ),
               ),
               SizedBox(
                 height: size.height * .01,
               ),
-              
               Text(
                 '2D Structer',
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 24)),
               ),
               SizedBox(
                 height: size.height * .01,
               ),
               Center(
-                      child: Container(
-                        width: 200,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.asset(
-                            'assets/images/wepik-export-20240131050749OHmR.png'),
-                      ),
-                    ),SizedBox(
+                child: Container(
+                  width: 200,
+                  height: 180,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset(
+                      'assets/images/wepik-export-20240131050749OHmR.png'),
+                ),
+              ),
+              SizedBox(
                 height: size.height * .02,
-              ), 
+              ),
               Text(
                 'Atomic Number',
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 24)),
               ),
               SizedBox(
@@ -98,7 +101,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 20)),
               ),
               SizedBox(height: size.height * .02),
@@ -107,7 +110,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 24)),
               ),
               SizedBox(
@@ -118,10 +121,10 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 20)),
-              )
-              ,SizedBox(
+              ),
+              SizedBox(
                 height: size.height * .02,
               ),
               Text(
@@ -129,7 +132,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 24)),
               ),
               SizedBox(
@@ -140,10 +143,9 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: Color(0xff0D0D0D),
                         fontSize: 16)),
               ),
-             
             ],
           ),
         ),

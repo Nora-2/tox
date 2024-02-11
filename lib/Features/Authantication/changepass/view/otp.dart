@@ -9,8 +9,9 @@ class OtpVerify extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -36,7 +37,7 @@ bool isDark = brightnessValue == Brightness.dark;
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      // color: Colors.black,
+                      // color: Color(0xff0D0D0D),
                       fontSize: 24)),
             ),
             SizedBox(
@@ -56,16 +57,15 @@ bool isDark = brightnessValue == Brightness.dark;
             OtpTextField(
               numberOfFields: 5,
               fieldWidth: 50,
-fillColor: Colors.grey.withOpacity(.2),
+              fillColor: Colors.grey.withOpacity(.2),
               borderColor: kcolor,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               enabledBorderColor: kcolor,
-              disabledBorderColor: Colors.black,
+              disabledBorderColor:const Color(0xff0D0D0D),
               focusedBorderColor: icolor,
               showFieldAsBox: true,
               borderRadius: BorderRadius.circular(15),
               onCodeChanged: (String code) {},
-
               onSubmit: (String verificationCode) {
                 showDialog(
                     context: context,
@@ -75,7 +75,7 @@ fillColor: Colors.grey.withOpacity(.2),
                         content: Text('Code entered is $verificationCode'),
                       );
                     });
-              }, 
+              },
             ),
             SizedBox(
               height: size.height * .04,
@@ -101,9 +101,9 @@ fillColor: Colors.grey.withOpacity(.2),
                     child: Text(
                       'Verify',
                       style: GoogleFonts.sanchez(
-                          textStyle:  TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: isDark?Colors.black:Colors.white,
+                              color: isDark ? const Color(0xff0D0D0D) : Colors.white,
                               fontSize: 18)),
                     ),
                   ),

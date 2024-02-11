@@ -7,6 +7,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
 import 'package:Toxicon/Features/openeing/custom_button.dart';
 import '../../core/constants/constants.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
   @override
@@ -51,7 +52,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        
         padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
         child: Column(
           children: [
@@ -73,30 +73,31 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: CustomButton(onTap: () async {
-                                        SharedPreferences perfs = await SharedPreferences.getInstance();
-                                        await perfs.setInt('onBoard', 1);
-                                    
-                                        // ignore: use_build_context_synchronously
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(builder: (context) =>  SignUp() ));
-                                            
-                                      }),
+                            SharedPreferences perfs =
+                                await SharedPreferences.getInstance();
+                            await perfs.setInt('onBoard', 1);
+
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUp()));
+                          }),
                         ),
-                         SizedBox(height: MediaQuery.of(context).size.height * 0.003,),
-                        
-                       Image.asset(
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.003,
+                        ),
+                        Image.asset(
                             screens[index % screens.length].lottieBuilder,
                             width: MediaQuery.of(context).size.width * 0.8,
-                            height:MediaQuery.of(context).size.height * 0.7),
-             
-                        
+                            height: MediaQuery.of(context).size.height * 0.7),
                         Text(
                           screens[index % screens.length].text,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 29.0,
                             fontWeight: FontWeight.bold,
-                            // color: Colors.black,
+                            // color: Color(0xff0D0D0D),
                           ),
                         ),
                         Text(
@@ -104,14 +105,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 16.0,
-                            // color: Colors.black,
+                            // color: Color(0xff0D0D0D),
                           ),
                         ),
                       ],
                     );
                   }),
             ),
-            const SizedBox(height:12),
+            const SizedBox(height: 12),
             SmoothPageIndicator(
               controller: _pageController,
               count: screens.length,
@@ -122,8 +123,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 dotColor: Colors.grey,
               ),
             ),
-              const SizedBox(height: 10,),
-            
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),

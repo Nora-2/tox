@@ -21,8 +21,9 @@ class CustomMainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -30,8 +31,8 @@ bool isDark = brightnessValue == Brightness.dark;
         minimumSize: Size(size.width, 50),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius!),
-          side:  BorderSide(
-            color: isDark?Colors.white:Colors.black,
+          side: BorderSide(
+            color: isDark ? Colors.white : const Color(0xff0D0D0D),
           ),
         ),
       ),

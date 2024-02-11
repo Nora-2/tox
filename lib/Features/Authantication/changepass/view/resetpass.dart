@@ -12,8 +12,9 @@ class ResetPassword extends StatelessWidget {
     TextEditingController password = TextEditingController();
     TextEditingController confirmpass = TextEditingController();
     final size = MediaQuery.of(context).size;
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -38,7 +39,7 @@ bool isDark = brightnessValue == Brightness.dark;
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      // color: Colors.black,
+                      // color: Color(0xff0D0D0D),
                       fontSize: 24)),
             ),
             SizedBox(
@@ -60,7 +61,7 @@ bool isDark = brightnessValue == Brightness.dark;
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w700,
-                      // color: Colors.black,
+                      // color: Color(0xff0D0D0D),
                       fontSize: 16)),
             ),
             SizedBox(
@@ -79,7 +80,7 @@ bool isDark = brightnessValue == Brightness.dark;
                   color: kcolor,
                 ),
                 controller: password),
-                 SizedBox(
+            SizedBox(
               height: size.height * .015,
             ),
             Text(
@@ -87,7 +88,7 @@ bool isDark = brightnessValue == Brightness.dark;
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w700,
-                      // color: Colors.black,
+                      // color: Color(0xff0D0D0D),
                       fontSize: 16)),
             ),
             SizedBox(
@@ -130,9 +131,9 @@ bool isDark = brightnessValue == Brightness.dark;
                     child: Text(
                       'Rest Password',
                       style: GoogleFonts.sanchez(
-                          textStyle:  TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color:isDark?Colors.black:Colors.white,
+                              color: isDark ?const Color(0xff0D0D0D) : Colors.white,
                               fontSize: 18)),
                     ),
                   ),

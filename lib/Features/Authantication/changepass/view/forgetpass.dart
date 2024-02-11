@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/otp.dart';
@@ -35,9 +37,9 @@ bool isDark = brightnessValue == Brightness.dark;
             Text(
               'Forget Password?',
               style: GoogleFonts.sanchez(
-                  textStyle:  TextStyle(
+                  textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      color: isDark?Colors.white:Colors.black,
+                  
                       fontSize: 24)),
             ),
             SizedBox(
@@ -57,9 +59,9 @@ bool isDark = brightnessValue == Brightness.dark;
             Text(
               'Email',
               style: GoogleFonts.sanchez(
-                  textStyle:  TextStyle(
+                  textStyle: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: isDark?Colors.white:Colors.black,
+                      
                       fontSize: 16)),
             ),
             SizedBox(
@@ -99,9 +101,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       child: Text(
                         'Send Code',
                         style: GoogleFonts.sanchez(
-                            textStyle:  TextStyle(
+                            textStyle: const TextStyle(
                                 fontWeight: FontWeight.w500,
-                              color:  isDark?Colors.black:Colors.white,
+                             
                                 fontSize: 18)),
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/Customaboutcard.dart';
@@ -7,16 +8,17 @@ class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
-       Center(
-                            child: Image.asset(
-                            'assets/images/info.png',
-                            width: size.width * .9,
-                            height: size.height * .25,
-                          )),
+      Center(
+          child: Image.asset(
+        'assets/images/info.png',
+        width: size.width * .9,
+        height: size.height * .25,
+      )),
       CustomInfoCard(
         titel: 'How can users utilize the program to research drug toxicity ?',
         subtitel:
@@ -76,47 +78,49 @@ bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-         isDark?Colors.black:Colors.white,
-          isDark?Colors.black:Colors.white,
+          isDark ?const Color(0xff0D0D0D) : Colors.white,
+          isDark ?const Color(0xff0D0D0D) : Colors.white,
+          isDark ?const Color(0xff0D0D0D) : Colors.white,
+          isDark ?const Color(0xff0D0D0D) : Colors.white,
         ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-             SizedBox(
+          SizedBox(
             height: size.height * .03,
           ),
-           Padding(
-             padding: const EdgeInsets.only(left:4.0),
-             child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        // color: Colors.black,
-                      )),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  Text(
-                    'Information',
-                    style: GoogleFonts.sanchez(
-                        textStyle: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            // color: Colors.black,
-                            fontSize: 20)),
-                  ),
-                ],
-              ),
-           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: isDark ? Colors.white : const Color(0xff0D0D0D),
+                    )),
+                const SizedBox(
+                  width: 40,
+                ),
+                Text(
+                  'Information',
+                  style: GoogleFonts.sanchez(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          // color: Color(0xff0D0D0D),
+                          fontSize: 20)),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
             height: size.height * .01,
           ),

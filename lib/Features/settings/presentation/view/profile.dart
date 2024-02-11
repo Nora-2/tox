@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
@@ -15,16 +16,21 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration:  BoxDecoration(
-        gradient: LinearGradient(
-             colors: [icolor,icolor, isDark?Colors.black:Colors.white, kcolor, isDark?Colors.white:Colors.black, icolor],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+          icolor,
+          icolor,
+          isDark ? icolor : Colors.white,
+          kcolor,
+          isDark ? Colors.white :const Color(0xff0D0D0D),
+          icolor
+        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +40,7 @@ bool isDark = brightnessValue == Brightness.dark;
             height: size.height * .03,
           ),
           Padding(
-            padding: const EdgeInsets.only(left:4.0),
+            padding: const EdgeInsets.only(left: 4.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,12 +49,10 @@ bool isDark = brightnessValue == Brightness.dark;
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_back,
-                      // color: Colors.black,
+                      color: isDark ? Colors.white :const Color(0xff0D0D0D),
                     )),
-                   
-                
               ],
             ),
           ),
@@ -62,8 +66,8 @@ bool isDark = brightnessValue == Brightness.dark;
               Container(
                 height: 150,
                 width: 150,
-                decoration:const BoxDecoration(
-                    image:  DecorationImage(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
                         image: AssetImage(
                           'assets/images/profile.png',
                         ),
@@ -74,7 +78,7 @@ bool isDark = brightnessValue == Brightness.dark;
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: Colors.black,
+                        // color: Color(0xff0D0D0D),
                         fontSize: 24)),
               ),
               Text(
@@ -82,7 +86,7 @@ bool isDark = brightnessValue == Brightness.dark;
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: Colors.black,
+                        // color: Color(0xff0D0D0D),
                         fontSize: 20)),
               ),
             ],
@@ -94,7 +98,7 @@ bool isDark = brightnessValue == Brightness.dark;
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: isDark?Colors.black:Colors.white,
+                color: isDark ? const Color(0xff0D0D0D) : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),

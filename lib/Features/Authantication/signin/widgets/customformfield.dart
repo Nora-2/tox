@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
@@ -31,33 +30,27 @@ class _CustomFormFieldState extends State<CustomFormField> {
     return SizedBox(
       height: 45,
       width: double.infinity,
-      
       child: TextFormField(
         maxLines: 1,
-        
         controller: widget.controller,
         decoration: InputDecoration(
-          
           hintText: widget.hint,
           hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
           prefixIcon: widget.preicon,
           suffixIcon: widget.suffix,
           enabledBorder: OutlineInputBorder(
-          
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Colors.grey)),
           border: OutlineInputBorder(
-            
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              // color: Colors.black,
-            ),
+                // color: Color(0xff0D0D0D),
+                ),
           ),
           focusedBorder: OutlineInputBorder(
-
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color:  kcolor,
+              color: kcolor,
             ),
           ),
         ),

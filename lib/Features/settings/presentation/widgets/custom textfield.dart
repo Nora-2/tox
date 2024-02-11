@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
@@ -24,8 +25,9 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-         final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return TextFormField(
       controller: widget.controller,
       keyboardType: widget.input,
@@ -34,19 +36,13 @@ bool isDark = brightnessValue == Brightness.dark;
       decoration: InputDecoration(
         iconColor: icolor,
         hintText: widget.subtitel,
-        hintStyle:  TextStyle(
-           color: isDark?Colors.white:Colors.black,
-           fontSize: 20),
+        hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         suffixIcon: IconButton(
-           color: isDark?Colors.white:Colors.black,
             onPressed: () {
-              
               setState(() {
                 widget.reedonly = false;
-                
               });
             },
-
             icon: Icon(widget.icon)),
         enabledBorder: OutlineInputBorder(
             gapPadding: 2,
@@ -57,8 +53,8 @@ bool isDark = brightnessValue == Brightness.dark;
         border: OutlineInputBorder(
           gapPadding: 2,
           borderRadius: BorderRadius.circular(10),
-          borderSide:  BorderSide(
-           color: isDark?Colors.white:Colors.black,
+          borderSide: BorderSide(
+            color: isDark ? Colors.white :const Color(0xff0D0D0D),
           ),
         ),
         focusedBorder: OutlineInputBorder(

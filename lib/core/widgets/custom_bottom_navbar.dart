@@ -1,68 +1,67 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/core/constants/constants.dart';
-import '../cubit_home/homecubit_cubit.dart';
-class CustomBottomNavBar extends StatefulWidget {
-  const CustomBottomNavBar({
-    super.key,
-  });
+// class CustomBottomNavBar extends StatefulWidget {
+//   const CustomBottomNavBar({
+//     super.key,
+//   });
 
-  @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
-}
+//   @override
+//   State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
+// }
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  @override
-  Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
-    return BlocConsumer<HomecubitCubit, HomecubitState>(
-      builder: (context, state) => Container(
-        decoration: const BoxDecoration(
-          color:icolor,
+// class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+//   @override
+//   Widget build(BuildContext context) {
+//      final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
+// bool isDark = brightnessValue == Brightness.dark;
+//     return BlocConsumer<HomecubitCubit, HomecubitState>(
+//       builder: (context, state) => Container(
+//         decoration: const BoxDecoration(
+//           color:icolor,
           
-          boxShadow:  [
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: Offset(0, 5),
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: HomecubitCubit.get(context).indexBottomNavBar,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor:kcolor,
-          unselectedItemColor: Colors.grey,
-          unselectedLabelStyle:
-              const TextStyle(color: Colors.grey, fontSize: 10),
-          selectedLabelStyle:
-               TextStyle(
-                color: isDark?Colors.white:Colors.black,
-               fontSize: 12),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'setting',
-            ),
-          ],
-          onTap: (value) {
-            HomecubitCubit.get(context).changeIndexBottom(value);
-          },
-        ),
-      ),
-      listener: (BuildContext context, HomecubitState state) {},
-    );
-  }
-}
+//           boxShadow:  [
+//             BoxShadow(
+//               color: Colors.grey,
+//               spreadRadius: 1,
+//               blurRadius: 10,
+//               offset: Offset(0, 5),
+//             ),
+//           ],
+//         ),
+//         child: BottomNavigationBar(
+//           currentIndex: HomecubitCubit.get(context).indexBottomNavBar,
+//           showUnselectedLabels: true,
+//           type: BottomNavigationBarType.fixed,
+//           selectedItemColor:kcolor,
+//           unselectedItemColor: Colors.grey,
+//           unselectedLabelStyle:
+//               const TextStyle(color: Colors.grey, fontSize: 10),
+//           selectedLabelStyle:
+//                TextStyle(
+//               color:  isDark?Color(0xff0D0D0D):Color.fromARGB(179, 204, 122, 0),
+//                fontSize: 12),
+//           items: const [
+//             BottomNavigationBarItem(
+//               icon: Icon(Icons.home),
+//               label: 'Home',
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(Icons.settings),
+//               label: 'setting',
+//             ),
+//           ],
+//           onTap: (value) {
+//             HomecubitCubit.get(context).changeIndexBottom(value);
+//           },
+//         ),
+//       ),
+//       listener: (BuildContext context, HomecubitState state) {},
+//     );
+//   }
+// }
 
 class BottomNavyBar extends StatelessWidget {
   BottomNavyBar({
@@ -71,11 +70,11 @@ class BottomNavyBar extends StatelessWidget {
     this.showElevation = true,
     this.iconSize = 24,
     this.backgroundColor,
-    this.shadowColor = Colors.black12,
+    this.shadowColor = icolor,
     this.itemCornerRadius = 50,
     this.containerHeight = 56,
-    this.blurRadius = 2,
-    this.spreadRadius = 0,
+    this.blurRadius = 10,
+    this.spreadRadius = 3,
     this.borderRadius,
     this.shadowOffset = Offset.zero,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 4),
@@ -106,10 +105,9 @@ final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
-    // final bgColor = backgroundColor ?? (Theme.of(context).bottomAppBarTheme.color ?? isDark?Colors.black:Colors.white,);
-
+   final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Container(
    
       decoration: BoxDecoration(
@@ -123,10 +121,11 @@ bool isDark = brightnessValue == Brightness.dark;
               offset: shadowOffset,
             ),
         ],
-        borderRadius: BorderRadius.circular(itemCornerRadius),
+        // borderRadius: BorderRadius.circular(itemCornerRadius),
       ),
       child: SafeArea(
         child: Container(
+          color:isDark?const Color(0xff0D0D0D):icolor ,
           width: double.infinity,
           height: containerHeight,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
@@ -140,7 +139,7 @@ bool isDark = brightnessValue == Brightness.dark;
                   item: item,
                   iconSize: iconSize,
                   isSelected: index == selectedIndex,
-                  backgroundColor: isDark?Colors.black:Colors.white,
+                  backgroundColor:isDark?const Color(0xff0D0D0D):icolor,
                   itemCornerRadius: itemCornerRadius,
                   animationDuration: animationDuration,
                   itemPadding: itemPadding,
@@ -185,14 +184,15 @@ bool isDark = brightnessValue == Brightness.dark;
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
+       
         width: isSelected ? 130 : 50,
         height: double.maxFinite,
         duration: animationDuration,
         curve: curve,
         decoration: BoxDecoration(
-          color:
-              isSelected ? isDark?Colors.black:Colors.white: item.activeColor.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(itemCornerRadius),
+          color: 
+              isSelected ? isDark?const Color(0xff0D0D0D):Colors.white: item.activeColor?.withOpacity(0.01),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -209,8 +209,8 @@ bool isDark = brightnessValue == Brightness.dark;
                   data: IconThemeData(
                     size: iconSize,
                     color: isSelected
-                        ? isDark?Colors.white:Colors.black
-                        : item.inactiveColor ?? item.activeColor,
+                        ? isDark?const Color(0xff0D0D0D):kcolor
+                        : item.inactiveColor
                   ),
                   child: item.icon,
                 ),
@@ -221,7 +221,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       child: DefaultTextStyle.merge(
                         style: TextStyle(
 
-                          color: isDark?Colors.white:Colors.black,
+                          color: isDark?const Color(0xff0D0D0D):kcolor,
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,
@@ -244,13 +244,13 @@ class BottomNavyBarItem {
   BottomNavyBarItem({
     required this.icon,
     required this.title,
-    this.activeColor = Colors.blue,
+    this.activeColor ,
     this.textAlign,
     this.inactiveColor,
   });
  final Widget icon;
  final Widget title;
- final Color activeColor;
+ final Color ?activeColor;
  final Color? inactiveColor;
  final TextAlign? textAlign;
 }

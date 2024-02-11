@@ -1,4 +1,5 @@
 
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +14,9 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+     final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return BlocProvider(
       create: (context) => HomecubitCubit(),
       child: BlocConsumer<HomecubitCubit, HomecubitState>(
@@ -23,49 +25,40 @@ bool isDark = brightnessValue == Brightness.dark;
                   
             body: HomecubitCubit.get(context)
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.only(bottom:8.0),
-              child: ClipRRect(
-                borderRadius:const BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                   ),
-                child: BottomNavyBar(
-                  backgroundColor: icolor,
-                  curve: Curves.easeIn,
-                  selectedIndex:
-                      HomecubitCubit.get(context).indexBottomNavBar,
-                  showElevation: true,
-                  onItemSelected: (index) =>
-                      HomecubitCubit.get(context).changeIndexBottom(index),
-                  items: [
-                    BottomNavyBarItem(
-                      
-                        icon: const Icon(
-                          CupertinoIcons.home,
-                        ),
-                        title:  Text(
-                          'Home',style: GoogleFonts.acme(
-                  textStyle:  TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: isDark?Colors.white:Colors.black,
+            bottomNavigationBar: BottomNavyBar(
+              backgroundColor:isDark?Colors.black:icolor,
+              curve: Curves.easeIn,
+              selectedIndex:
+                  HomecubitCubit.get(context).indexBottomNavBar,
+              showElevation: true,
+              onItemSelected: (index) =>
+                  HomecubitCubit.get(context).changeIndexBottom(index),
+              items: [
+                BottomNavyBarItem(
+                  
+                    icon: const Icon(
+                      CupertinoIcons.home,
+                    ),
+                    title:  Text(
+                      'Home',style: GoogleFonts.acme(
+              textStyle: const TextStyle(
+                  fontWeight: FontWeight.w400,
                       fontSize: 20)),
-                        ),
-                        activeColor: isDark?Colors.black:Colors.white,
-                        inactiveColor: isDark?Colors.black:Colors.white,),
-                    BottomNavyBarItem(
-                        icon: const Icon(Icons.settings),
-                        title:  Text('Settings',style: GoogleFonts.acme(
-                  textStyle:  TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: isDark?Colors.white:Colors.black,
-                      fontSize: 20)),
+                    ),
+                    activeColor: isDark?Colors.black:Colors.white,
+                    inactiveColor: Colors.white
+                    ),
+                        BottomNavyBarItem(
+                    icon: const Icon(Icons.settings),
+                    title:  Text('Settings',style: GoogleFonts.acme(
+              textStyle:const  TextStyle(
+                  fontWeight: FontWeight.w400,
+                    fontSize: 20)),
             ),
-                        activeColor: isDark?Colors.black:Colors.white,
-                        inactiveColor: isDark?Colors.black:Colors.white,),
-                  ],
-                ),
-              ),
+                    activeColor: isDark?Colors.black:Colors.white,
+                    inactiveColor:Colors.white,
+                    ),
+              ],
             )),
         listener: (context, state) {},
       ),

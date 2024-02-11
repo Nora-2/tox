@@ -13,9 +13,9 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -23,9 +23,8 @@ class SettingScreen extends StatelessWidget {
         gradient: LinearGradient(colors: [
           icolor,
           icolor,
-          isDark ? Colors.white : Colors.white ,
+          isDark ? icolor : Colors.white,
           kcolor,
-          isDark ? Colors.white : Colors.white ,
           icolor
         ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
@@ -70,7 +69,7 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 24)),
                     ),
                     Text(
@@ -78,7 +77,7 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
@@ -109,7 +108,7 @@ class SettingScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: isDark ? Colors.black : Colors.white,
+                color: isDark ?const Color(0xff0D0D0D) : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),

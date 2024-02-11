@@ -12,17 +12,20 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: Stack(
         children: [
           Container(
-              decoration:  BoxDecoration( gradient: LinearGradient(
-              colors: [icolor,isDark?Colors.black:Colors.white,kcolor,],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
-        ),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                icolor,
+                isDark ? const Color(0xff0D0D0D) : Colors.white,
+                kcolor,
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            ),
           ),
           Container(
             padding: EdgeInsets.only(
@@ -49,18 +52,15 @@ bool isDark = brightnessValue == Brightness.dark;
           ),
           Container(
             padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width *
-                  0.1, 
-              right: MediaQuery.of(context).size.width *
-                  0.1, 
-top:MediaQuery.of(context).size.width *
-                  0.01 ,
-              bottom: MediaQuery.of(context).size.width * 0.65, //
+              left: MediaQuery.of(context).size.width * 0.1,
+              right: MediaQuery.of(context).size.width * 0.1,
+              top: MediaQuery.of(context).size.width * 0.01,
+              bottom: MediaQuery.of(context).size.width * 0.7, //
             ),
             alignment: Alignment.bottomCenter,
             child: TextAnimator('TOXIKON',
                 initialDelay: const Duration(seconds: 1),
-                characterDelay:const  Duration(milliseconds: 100),
+                characterDelay: const Duration(milliseconds: 250),
                 incomingEffect: WidgetTransitionEffects.incomingScaleDown(),
                 atRestEffect: WidgetRestingEffects.bounce(),
                 outgoingEffect: WidgetTransitionEffects.outgoingScaleUp(),
@@ -68,7 +68,7 @@ top:MediaQuery.of(context).size.width *
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Color(0xffB5A1B7),
-                        letterSpacing: -2,
+                        
                         fontSize: 18))),
           ),
         ],

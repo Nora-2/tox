@@ -11,12 +11,12 @@ class CustomPhoneVerifyTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top:12),
+      padding: const EdgeInsets.only(top: 12),
       width: size.width * 0.7,
       height: size.height * 0.065,
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
-        // color: Colors.black,
+        // color: Color(0xff0D0D0D),
         borderRadius: BorderRadius.all(Radius.circular(30)),
       ),
       child: const Text(

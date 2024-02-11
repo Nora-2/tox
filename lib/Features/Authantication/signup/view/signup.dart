@@ -14,8 +14,9 @@ class SignUp extends StatelessWidget {
   TextEditingController username = TextEditingController();
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -38,14 +39,14 @@ bool isDark = brightnessValue == Brightness.dark;
               style: GoogleFonts.sanchez(
                   textStyle: const TextStyle(
                       fontWeight: FontWeight.w900,
-                      // color: Colors.black,
+                      // color: Color(0xff0D0D0D),
                       fontSize: 24)),
             ),
             SizedBox(
               height: size.height * .003,
             ),
             Card(
-              shadowColor: isDark?Colors.white:Colors.black,
+              shadowColor: isDark ? Colors.white :const Color(0xff0D0D0D),
               elevation: 8,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -58,7 +59,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.sanchez(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 16)),
                     ),
                     SizedBox(
@@ -80,7 +81,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.sanchez(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 16)),
                     ),
                     SizedBox(
@@ -102,7 +103,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.sanchez(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 16)),
                     ),
                     SizedBox(
@@ -130,29 +131,28 @@ bool isDark = brightnessValue == Brightness.dark;
             ),
             Center(
               child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const HomeLayout(),
-                      ),
-                    );
-                  },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const HomeLayout(),
+                    ),
+                  );
+                },
                 child: Container(
                   height: 38,
                   width: size.width * .8,
                   decoration: BoxDecoration(
-                    color:  kcolor,
+                    color: kcolor,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
                     child: Text(
                       'Sign Up',
                       style: GoogleFonts.sanchez(
-                          textStyle:  TextStyle(
-                              fontWeight: FontWeight.w500,
-                               color: isDark?Colors.white:Colors.black,
-                              fontSize: 18)),
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                              fontWeight: FontWeight.w500, fontSize: 18)),
                     ),
                   ),
                 ),
@@ -177,7 +177,7 @@ bool isDark = brightnessValue == Brightness.dark;
                   style: GoogleFonts.sanchez(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          // color: Colors.black,
+                          // color: Color(0xff0D0D0D),
                           fontSize: 16)),
                 ),
                 Container(
@@ -242,7 +242,7 @@ bool isDark = brightnessValue == Brightness.dark;
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>  SignIn(),
+                        builder: (_) => SignIn(),
                       ),
                     );
                   },

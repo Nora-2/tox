@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void sendMsg() async {
     String text = controller.text;
-    
+
     String apiKey = "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";
     controller.clear();
     try {
@@ -90,15 +91,16 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              colors: [icolor, Colors.white, kcolor, ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            isDark ?const Color(0xff0D0D0D) : Colors.white,
+            isDark ?const Color(0xff0D0D0D) : Colors.white,
+          ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(
           children: [
@@ -106,7 +108,7 @@ bool isDark = brightnessValue == Brightness.dark;
               height: 8,
             ),
             Padding(
-              padding: const EdgeInsets.only(left:4.0),
+              padding: const EdgeInsets.only(left: 4.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,9 +117,9 @@ bool isDark = brightnessValue == Brightness.dark;
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: const Icon(
+                      child: Icon(
                         Icons.arrow_back,
-                        // color: Colors.black,
+                        color: isDark ? Colors.white :const Color(0xff0D0D0D),
                       )),
                   const SizedBox(
                     width: 40,
@@ -127,7 +129,7 @@ bool isDark = brightnessValue == Brightness.dark;
                     style: GoogleFonts.sanchez(
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w500,
-                            // color: Colors.black,
+                            // color: Color(0xff0D0D0D),
                             fontSize: 20)),
                   ),
                 ],
@@ -151,7 +153,8 @@ bool isDark = brightnessValue == Brightness.dark;
                                 color: Colors.blue.shade100,
                               ),
                               Padding(
-                                padding:const EdgeInsets.only(left: 16, top: 4),
+                                padding:
+                                    const EdgeInsets.only(left: 16, top: 4),
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Lottie.asset(
@@ -171,8 +174,11 @@ bool isDark = brightnessValue == Brightness.dark;
                             children: [
                               msgs[index].isSender
                                   ? const SizedBox()
-                                  :   Image.asset(
-                                          'assets/images/robotchat.png',width: 50,height: 50,),
+                                  : Image.asset(
+                                      'assets/images/robotchat.png',
+                                      width: 50,
+                                      height: 50,
+                                    ),
                               const SizedBox(width: 3),
                               Expanded(
                                 child: BubbleNormal(
@@ -183,9 +189,13 @@ bool isDark = brightnessValue == Brightness.dark;
                                       : Colors.grey.shade200,
                                 ),
                               ),
-                              msgs[index].isSender? 
-                                       Image.asset(
-                                          'assets/images/profile.png',width: 50,height: 50,): const SizedBox(),
+                              msgs[index].isSender
+                                  ? Image.asset(
+                                      'assets/images/profile.png',
+                                      width: 50,
+                                      height: 50,
+                                    )
+                                  : const SizedBox(),
                             ],
                           ),
                   );
@@ -201,7 +211,8 @@ bool isDark = brightnessValue == Brightness.dark;
                       width: double.infinity,
                       height: 40,
                       decoration: BoxDecoration(
-                         color: isDark?Colors.black:Colors.white,
+                        color:
+                            isDark ? Colors.white : Colors.grey.withOpacity(.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
@@ -214,10 +225,13 @@ bool isDark = brightnessValue == Brightness.dark;
                           },
                           textInputAction: TextInputAction.send,
                           showCursor: true,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Enter text",
-                          ),
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Enter text",
+                              hintStyle: TextStyle(
+                                color:
+                                    isDark ? const Color(0xff0D0D0D) : Colors.white,
+                              )),
                         ),
                       ),
                     ),
@@ -234,10 +248,10 @@ bool isDark = brightnessValue == Brightness.dark;
                       color: icolor,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child:  Icon(
+                    child: Icon(
                       Icons.send,
                       size: 15,
-                       color: isDark?Colors.black:Colors.white,
+                      color: isDark ? Colors.white : Colors.white,
                     ),
                   ),
                 ),

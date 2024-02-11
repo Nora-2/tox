@@ -1,5 +1,5 @@
-import 'package:Toxicon/Features/liver/liver.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/components/homelayout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,13 +30,32 @@ class SportsApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
-                brightness: AppCubit.get(context).isdark?Brightness.dark:Brightness.light,
+                primaryColor: AppCubit().isdark
+                    ? const Color(0xff0D0D0D)
+                    : const Color.fromARGB(179, 204, 122, 0),
+                brightness: AppCubit.get(context).isdark
+                    ? Brightness.dark
+                    : Brightness.light,
               ),
               darkTheme: ThemeData(
-                brightness: AppCubit.get(context).isdark?Brightness.dark:Brightness.light,
+                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                  selectedItemColor: AppCubit.get(context).isdark
+                      ? const Color(0xff0D0D0D)
+                      : const Color.fromARGB(179, 204, 122, 0),
+                ),
+                iconTheme: IconThemeData(
+                  color: AppCubit().isdark
+                      ?const Color.fromARGB(179, 204, 122, 0):const Color(0xff0D0D0D)
+                      
+                ),
+                brightness: AppCubit.get(context).isdark
+                    ? Brightness.dark
+                    : Brightness.light,
               ),
-              themeMode: AppCubit.get(context).isdark?ThemeMode.dark:ThemeMode.light,
-              home: const LiverScreen(),
+              themeMode: AppCubit.get(context).isdark
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              home: const HomeLayout(),
             );
           },
         ));

@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -10,12 +11,12 @@ import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: camel_case_types
 class homeScreen extends StatelessWidget {
-  
   const homeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
       GestureDetector(
@@ -63,11 +64,14 @@ bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            colors: [icolor,icolor, Colors.white, kcolor,  icolor],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+          icolor,
+          icolor,
+          isDark ? icolor : Colors.white,
+          kcolor,
+          icolor
+        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +94,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              //  color:isDark?Color.fromARGB(179, 204, 122, 0):Color(0xff0D0D0D),
                               fontSize: 30)),
                     ),
                     SizedBox(
@@ -101,7 +105,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.philosopher(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              //  color:   isDark?Color.fromARGB(179, 204, 122, 0):Color(0xff0D0D0D),
                               fontSize: 17)),
                     ),
                   ],
@@ -127,7 +131,7 @@ bool isDark = brightnessValue == Brightness.dark;
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                 color: isDark?Colors.black:Colors.white,
+                color: isDark ?const Color(0xff0D0D0D) : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),

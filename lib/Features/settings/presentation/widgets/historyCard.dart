@@ -1,3 +1,5 @@
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,16 +19,17 @@ class CustomHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color:isDark?Colors.black:Colors.white,
-        shadowColor: isDark?Colors.black:Colors.white,
+        color: isDark ? icolor: Colors.white,
+        shadowColor: isDark ?const Color(0xff0D0D0D) : Colors.white,
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
@@ -43,10 +46,10 @@ bool isDark = brightnessValue == Brightness.dark;
                   children: [
                     Text(
                       'Input',
-                      style: GoogleFonts.lakkiReddy(
+                      style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color:  isDark?Colors.white70:Color(0xff0D0D0D),
                               fontSize: 24)),
                     ),
                     SizedBox(
@@ -57,7 +60,8 @@ bool isDark = brightnessValue == Brightness.dark;
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: isDark?Colors.white70:Colors.black54,
+                              color:
+                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
@@ -71,10 +75,10 @@ bool isDark = brightnessValue == Brightness.dark;
                   children: [
                     Text(
                       'Section',
-                      style: GoogleFonts.lakkiReddy(
+                      style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color:  isDark?Color(0xff0D0D0D):Colors.white,
                               fontSize: 20)),
                     ),
                     SizedBox(
@@ -83,9 +87,10 @@ bool isDark = brightnessValue == Brightness.dark;
                     Text(
                       category,
                       style: GoogleFonts.acme(
-                          textStyle:  TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                               color: isDark?Colors.white70:Colors.black54,
+                              color:
+                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
@@ -99,10 +104,10 @@ bool isDark = brightnessValue == Brightness.dark;
                   children: [
                     Text(
                       'Date',
-                      style: GoogleFonts.lakkiReddy(
+                      style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color:  isDark?Color(0xff0D0D0D):Colors.white,
                               fontSize: 26)),
                     ),
                     SizedBox(
@@ -111,9 +116,10 @@ bool isDark = brightnessValue == Brightness.dark;
                     Text(
                       date,
                       style: GoogleFonts.acme(
-                          textStyle:  TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                             color: isDark?Colors.white70:Colors.black54,
+                              color:
+                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
@@ -127,10 +133,10 @@ bool isDark = brightnessValue == Brightness.dark;
                   children: [
                     Text(
                       'Result',
-                      style: GoogleFonts.lakkiReddy(
+                      style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Colors.black,
+                              // color: Color(0xff0D0D0D),
                               fontSize: 24)),
                     ),
                     SizedBox(
@@ -139,9 +145,10 @@ bool isDark = brightnessValue == Brightness.dark;
                     Text(
                       output,
                       style: GoogleFonts.acme(
-                          textStyle:  TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: isDark?Colors.white70:Colors.black54,
+                              color:
+                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
