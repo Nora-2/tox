@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/core/constants/constants.dart';
@@ -32,36 +34,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       keyboardType: widget.input,
       readOnly: widget.reedonly,
-      cursorColor: icolor,
+      cursorColor: Colors.white,
       decoration: InputDecoration(
-        iconColor: icolor,
+        iconColor: isDark ? darkcolor : icolor,
         hintText: widget.subtitel,
         hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         suffixIcon: IconButton(
+            color: isDark ? Colors.white : black,
             onPressed: () {
               setState(() {
                 widget.reedonly = false;
               });
             },
             icon: Icon(widget.icon)),
+        disabledBorder: OutlineInputBorder(
+            gapPadding: 2,
+            // borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: isDark ? darkcolor : icolor.withOpacity(.95),
+            )),
         enabledBorder: OutlineInputBorder(
             gapPadding: 2,
-            borderRadius: BorderRadius.circular(10),
+            // borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: icolor.withOpacity(0.95),
+              color: isDark ? darkcolor : icolor.withOpacity(.95),
             )),
         border: OutlineInputBorder(
           gapPadding: 2,
-          borderRadius: BorderRadius.circular(10),
+          // borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: isDark ? Colors.white :const Color(0xff0D0D0D),
+            color: isDark ? Colors.white :  black,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           gapPadding: 2,
-          borderRadius: BorderRadius.circular(10),
+          // borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: icolor.withOpacity(0.95),
+            color: isDark ? darkcolor : icolor.withOpacity(.95),
           ),
         ),
       ),

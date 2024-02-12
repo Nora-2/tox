@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,8 +99,8 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            isDark ?const Color(0xff0D0D0D) : Colors.white,
-            isDark ?const Color(0xff0D0D0D) : Colors.white,
+            isDark ?  black : Colors.white,
+            isDark ?  black : Colors.white,
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(
@@ -113,23 +114,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: isDark ? Colors.white :const Color(0xff0D0D0D),
-                      )),
+                  arrowpop(isDark: isDark),
                   const SizedBox(
                     width: 40,
                   ),
+                  
                   Text(
                     'Mr-Tox',
                     style: GoogleFonts.sanchez(
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w500,
-                            // color: Color(0xff0D0D0D),
+                            // color: black,
                             fontSize: 20)),
                   ),
                 ],
@@ -174,8 +169,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             children: [
                               msgs[index].isSender
                                   ? const SizedBox()
-                                  : Image.asset(
-                                      'assets/images/robotchat.png',
+                                  : Image.asset(ImageConstant.robotchat,
                                       width: 50,
                                       height: 50,
                                     ),
@@ -191,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                               msgs[index].isSender
                                   ? Image.asset(
-                                      'assets/images/profile.png',
+                                      ImageConstant.profile,
                                       width: 50,
                                       height: 50,
                                     )
@@ -229,8 +223,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               border: InputBorder.none,
                               hintText: "Enter text",
                               hintStyle: TextStyle(
-                                color:
-                                    isDark ? const Color(0xff0D0D0D) : Colors.white,
+                                color: isDark
+                                    ?  black
+                                    : Colors.white,
                               )),
                         ),
                       ),
@@ -245,7 +240,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: icolor,
+                      color: isDark ? darkcolor : icolor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Icon(

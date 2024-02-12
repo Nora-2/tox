@@ -1,9 +1,9 @@
 // ignore_for_file: camel_case_types
 
 import 'package:Toxicon/core/constants/constants.dart';
-import 'package:Toxicon/core/utils/moreinfo.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class dnaresult extends StatelessWidget {
   const dnaresult({
@@ -23,74 +23,28 @@ class dnaresult extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Result',
-          style: GoogleFonts.sanchez(
-              textStyle:
-                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 24)),
-        ),
+        CustomTextfont24_600(text: 'Result'),
         SizedBox(height: size.height * .04),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              height: 42,
-              width: size.width * .44,
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color:  icolor, width: 2),
-                color: result
-                    ? icolor
-                    : isDark
-                        ? const Color(0xff0D0D0D)
-                        : Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Center(
-                child: Text(
-                  'Mutagenic',
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 20)),
-                ),
-              ),
-            ),
-            Container(
-              height: 42,
-              width: size.width * .4,
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color:  icolor, width: 2),
-                color: !result
-                    ? icolor
-                    : isDark
-                        ?const Color(0xff0D0D0D)
-                        : Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Center(
-                child: Text(
-                  'Non-Mutagenic',
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 20)),
-                ),
-              ),
-            ),
+            resultwidgetcontainer(size: size, isDark: isDark, result: result,text: 'Mutagenic',),
+            resultwidgetcontainer(size: size, isDark: isDark, result: !result,text: 'Non-Mutagenic',),
+           
           ],
         ),
         SizedBox(height: size.height * .04),
         result
             ? Center(
                 child: Image.asset(
-                'assets/images/sad.png',
+                ImageConstant.dnasad,
                 width: 200,
                 height: 300,
                 fit: BoxFit.cover,
               ))
             : Center(
                 child: Image.asset(
-                'assets/images/happy.png',
+                ImageConstant.dnahappy,
                 width: 200,
                 height: 300,
                 fit: BoxFit.cover,
@@ -100,29 +54,8 @@ class dnaresult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'More Info',
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 24)),
-            ),
-            GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: showdiloginfo(size: size),
-                      );
-                    },
-                  );
-                },
-                child: Icon(
-                  Icons.arrow_drop_down,
-                  color: isDark ? Colors.white :const  Color(0xff0D0D0D),
-                  size: 30,
-                ))
+            CustomTextfont24_600(text: 'More Info'),
+            morinformation(size: size, isDark: isDark)
           ],
         )
       ],

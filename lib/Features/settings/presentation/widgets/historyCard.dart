@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +30,8 @@ class CustomHistoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? icolor: Colors.white,
-        shadowColor: isDark ?const Color(0xff0D0D0D) : Colors.white,
+        color: isDark ? darkcolor : Colors.white,
+        shadowColor: isDark ? black : Colors.white,
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
@@ -49,7 +51,7 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color:  isDark?Colors.white70:Color(0xff0D0D0D),
+                              // color:  isDark?Colors.white70:black,
                               fontSize: 24)),
                     ),
                     SizedBox(
@@ -60,8 +62,9 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color:
-                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
+                              color: isDark
+                                  ? Colors.white70
+                                  : black,
                               fontSize: 20)),
                     ),
                   ],
@@ -78,7 +81,7 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color:  isDark?Color(0xff0D0D0D):Colors.white,
+                              // color:  isDark?black:Colors.white,
                               fontSize: 20)),
                     ),
                     SizedBox(
@@ -89,8 +92,9 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color:
-                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
+                              color: isDark
+                                  ? Colors.white70
+                                  : black,
                               fontSize: 20)),
                     ),
                   ],
@@ -107,7 +111,7 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color:  isDark?Color(0xff0D0D0D):Colors.white,
+                              // color:  isDark?black:Colors.white,
                               fontSize: 26)),
                     ),
                     SizedBox(
@@ -118,8 +122,9 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color:
-                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
+                              color: isDark
+                                  ? Colors.white70
+                                  : black,
                               fontSize: 20)),
                     ),
                   ],
@@ -136,7 +141,7 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: Color(0xff0D0D0D),
+                              // color: black,
                               fontSize: 24)),
                     ),
                     SizedBox(
@@ -147,8 +152,9 @@ class CustomHistoryCard extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color:
-                                  isDark ? Colors.white70 :const Color(0xff0D0D0D),
+                              color: isDark
+                                  ? Colors.white70
+                                  : black,
                               fontSize: 20)),
                     ),
                   ],

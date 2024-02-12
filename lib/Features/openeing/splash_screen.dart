@@ -21,8 +21,8 @@ class SplashScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-                icolor,
-                isDark ? const Color(0xff0D0D0D) : Colors.white,
+                isDark ? darkcolor : icolor,
+                isDark ?  black : Colors.white,
                 kcolor,
               ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             ),
@@ -68,7 +68,6 @@ class SplashScreen extends StatelessWidget {
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Color(0xffB5A1B7),
-                        
                         fontSize: 18))),
           ),
         ],

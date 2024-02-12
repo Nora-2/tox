@@ -1,6 +1,8 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/Customaboutcard.dart';
 
 // ignore: camel_case_types
@@ -15,7 +17,7 @@ class InfoScreen extends StatelessWidget {
     List widgets = [
       Center(
           child: Image.asset(
-        'assets/images/info.png',
+        ImageConstant.information,
         width: size.width * .9,
         height: size.height * .25,
       )),
@@ -79,12 +81,7 @@ class InfoScreen extends StatelessWidget {
         body: SafeArea(
             child: Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          isDark ?const Color(0xff0D0D0D) : Colors.white,
-          isDark ?const Color(0xff0D0D0D) : Colors.white,
-          isDark ?const Color(0xff0D0D0D) : Colors.white,
-          isDark ?const Color(0xff0D0D0D) : Colors.white,
-        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        color: isDark ? black : Colors.white,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -99,25 +96,11 @@ class InfoScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: isDark ? Colors.white : const Color(0xff0D0D0D),
-                    )),
+                arrowpop(isDark: isDark),
                 const SizedBox(
                   width: 40,
                 ),
-                Text(
-                  'Information',
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          // color: Color(0xff0D0D0D),
-                          fontSize: 20)),
-                ),
+              const customtext60020(text: 'Information')
               ],
             ),
           ),

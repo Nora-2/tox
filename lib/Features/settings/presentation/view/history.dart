@@ -2,8 +2,9 @@
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/historyCard.dart';
 
 // ignore: camel_case_types
@@ -11,7 +12,7 @@ class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    bool submit = false;
+    bool submit = true;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -35,14 +36,7 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                  isDark ?const Color(0xff0D0D0D) :  icolor,
-                   isDark ?const Color(0xff0D0D0D) : icolor,
-                    isDark ?const Color(0xff0D0D0D) : Colors.white,
-                  isDark ?const Color(0xff0D0D0D) :  kcolor,
-                  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                ),
+                decoration: BoxDecoration(gradient: gradientTop(isDark)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,26 +50,11 @@ class HistoryScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Icon(
-                                Icons.arrow_back,
-                                color:
-                                    isDark ? Colors.white :const Color(0xff0D0D0D),
-                              )),
+                          arrowpop(isDark: isDark),
                           const SizedBox(
                             width: 40,
                           ),
-                          Text(
-                            'History',
-                            style: GoogleFonts.acme(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    // color: Color(0xff0D0D0D),
-                                    fontSize: 20)),
-                          ),
+                         const customtext60020(text:'History'),
                         ],
                       ),
                     ),
@@ -96,7 +75,7 @@ class HistoryScreen extends StatelessWidget {
                                 )
                               : Center(
                                   child: Image.asset(
-                                  'assets/images/history.png',
+                                  ImageConstant.history,
                                   width: size.width * .9,
                                   height: size.height * .8,
                                 ))),

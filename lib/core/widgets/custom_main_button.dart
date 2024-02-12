@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -32,7 +33,7 @@ class CustomMainButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius!),
           side: BorderSide(
-            color: isDark ? Colors.white : const Color(0xff0D0D0D),
+            color: isDark ? Colors.white :  black,
           ),
         ),
       ),

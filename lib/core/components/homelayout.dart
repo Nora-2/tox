@@ -21,12 +21,12 @@ class HomeLayout extends StatelessWidget {
       create: (context) => HomecubitCubit(),
       child: BlocConsumer<HomecubitCubit, HomecubitState>(
         builder: (context, state) => Scaffold(
-          backgroundColor:isDark?Colors.black:Colors.white,
+          backgroundColor:isDark?black:Colors.white,
                   
             body: HomecubitCubit.get(context)
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],
             bottomNavigationBar: BottomNavyBar(
-              backgroundColor:isDark?Colors.black:icolor,
+              backgroundColor:isDark?black:icolor,
               curve: Curves.easeIn,
               selectedIndex:
                   HomecubitCubit.get(context).indexBottomNavBar,
@@ -58,7 +58,7 @@ class HomeLayout extends StatelessWidget {
                     activeColor: isDark?Colors.black:Colors.white,
                     inactiveColor:Colors.white,
                     ),
-              ],
+              ], shadowColor: isDark?Colors.grey.withOpacity(0.4):icolor,
             )),
         listener: (context, state) {},
       ),

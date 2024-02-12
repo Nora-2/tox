@@ -1,4 +1,6 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
@@ -23,14 +25,7 @@ class ProfileScreen extends StatelessWidget {
         body: SafeArea(
             child: Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          icolor,
-          icolor,
-          isDark ? icolor : Colors.white,
-          kcolor,
-          isDark ? Colors.white :const Color(0xff0D0D0D),
-          icolor
-        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: gradientTop(isDark)
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.arrow_back,
-                      color: isDark ? Colors.white :const Color(0xff0D0D0D),
+                      color: isDark ? Colors.white : black,
                     )),
               ],
             ),
@@ -66,10 +61,10 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 height: 150,
                 width: 150,
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          'assets/images/profile.png',
+                          ImageConstant.profile,
                         ),
                         fit: BoxFit.cover)),
               ),
@@ -78,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: Color(0xff0D0D0D),
+                        // color: black,
                         fontSize: 24)),
               ),
               Text(
@@ -86,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                 style: GoogleFonts.acme(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: Color(0xff0D0D0D),
+                        // color: black,
                         fontSize: 20)),
               ),
             ],
@@ -98,11 +93,11 @@ class ProfileScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: isDark ? const Color(0xff0D0D0D) : Colors.white,
+                color: isDark ? black : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 5,
+                    spreadRadius:3,
                     blurRadius: 9,
                     offset: const Offset(0, -8),
                   ),

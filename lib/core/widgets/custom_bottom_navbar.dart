@@ -3,65 +3,6 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/core/constants/constants.dart';
-// class CustomBottomNavBar extends StatefulWidget {
-//   const CustomBottomNavBar({
-//     super.key,
-//   });
-
-//   @override
-//   State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
-// }
-
-// class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-//   @override
-//   Widget build(BuildContext context) {
-//      final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-// bool isDark = brightnessValue == Brightness.dark;
-//     return BlocConsumer<HomecubitCubit, HomecubitState>(
-//       builder: (context, state) => Container(
-//         decoration: const BoxDecoration(
-//           color:icolor,
-          
-//           boxShadow:  [
-//             BoxShadow(
-//               color: Colors.grey,
-//               spreadRadius: 1,
-//               blurRadius: 10,
-//               offset: Offset(0, 5),
-//             ),
-//           ],
-//         ),
-//         child: BottomNavigationBar(
-//           currentIndex: HomecubitCubit.get(context).indexBottomNavBar,
-//           showUnselectedLabels: true,
-//           type: BottomNavigationBarType.fixed,
-//           selectedItemColor:kcolor,
-//           unselectedItemColor: Colors.grey,
-//           unselectedLabelStyle:
-//               const TextStyle(color: Colors.grey, fontSize: 10),
-//           selectedLabelStyle:
-//                TextStyle(
-//               color:  isDark?Color(0xff0D0D0D):Color.fromARGB(179, 204, 122, 0),
-//                fontSize: 12),
-//           items: const [
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.home),
-//               label: 'Home',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.settings),
-//               label: 'setting',
-//             ),
-//           ],
-//           onTap: (value) {
-//             HomecubitCubit.get(context).changeIndexBottom(value);
-//           },
-//         ),
-//       ),
-//       listener: (BuildContext context, HomecubitState state) {},
-//     );
-//   }
-// }
 
 class BottomNavyBar extends StatelessWidget {
   BottomNavyBar({
@@ -70,13 +11,13 @@ class BottomNavyBar extends StatelessWidget {
     this.showElevation = true,
     this.iconSize = 24,
     this.backgroundColor,
-    this.shadowColor = icolor,
+    required this.shadowColor ,
     this.itemCornerRadius = 50,
     this.containerHeight = 56,
     this.blurRadius = 10,
     this.spreadRadius = 3,
     this.borderRadius,
-    this.shadowOffset = Offset.zero,
+    this.shadowOffset = const Offset(0, -8),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 4),
     this.animationDuration = const Duration(milliseconds: 270),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
@@ -85,33 +26,32 @@ class BottomNavyBar extends StatelessWidget {
     this.curve = Curves.linear,
   })  : assert(items.length >= 2 && items.length <= 5),
         super(key: key);
-final int selectedIndex;
- final double iconSize;
-   final Color? backgroundColor;
- final Color shadowColor;
- final bool showElevation;
+  final int selectedIndex;
+  final double iconSize;
+  final Color? backgroundColor;
+  final Color shadowColor;
+  final bool showElevation;
   final Duration animationDuration;
- final List<BottomNavyBarItem> items;
- final ValueChanged<int> onItemSelected;
+  final List<BottomNavyBarItem> items;
+  final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
   final double containerHeight;
- final double blurRadius;
- final double spreadRadius;
- final Offset shadowOffset;
- final BorderRadius? borderRadius;
+  final double blurRadius;
+  final double spreadRadius;
+  final Offset shadowOffset;
+  final BorderRadius? borderRadius;
   final EdgeInsets itemPadding;
   final Curve curve;
 
   @override
   Widget build(BuildContext context) {
-   final ThemeMode brightnessValue =
+    final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     return Container(
-   
       decoration: BoxDecoration(
-        color: icolor,
+        color: isDark ? black : icolor,
         boxShadow: [
           if (showElevation)
             BoxShadow(
@@ -125,7 +65,7 @@ final int selectedIndex;
       ),
       child: SafeArea(
         child: Container(
-          color:isDark?const Color(0xff0D0D0D):icolor ,
+          color: isDark ?  black : icolor,
           width: double.infinity,
           height: containerHeight,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
@@ -139,7 +79,7 @@ final int selectedIndex;
                   item: item,
                   iconSize: iconSize,
                   isSelected: index == selectedIndex,
-                  backgroundColor:isDark?const Color(0xff0D0D0D):icolor,
+                  backgroundColor: isDark ?  black : icolor,
                   itemCornerRadius: itemCornerRadius,
                   animationDuration: animationDuration,
                   itemPadding: itemPadding,
@@ -178,20 +118,23 @@ class _ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-bool isDark = brightnessValue == Brightness.dark;
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
     return Semantics(
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-       
         width: isSelected ? 130 : 50,
         height: double.maxFinite,
         duration: animationDuration,
         curve: curve,
         decoration: BoxDecoration(
-          color: 
-              isSelected ? isDark?const Color(0xff0D0D0D):Colors.white: item.activeColor?.withOpacity(0.01),
+          color: isSelected
+              ? isDark
+                  ?  black
+                  : Colors.white
+              : item.activeColor?.withOpacity(0.01),
           borderRadius: BorderRadius.circular(10),
         ),
         child: SingleChildScrollView(
@@ -207,11 +150,12 @@ bool isDark = brightnessValue == Brightness.dark;
               children: [
                 IconTheme(
                   data: IconThemeData(
-                    size: iconSize,
-                    color: isSelected
-                        ? isDark?const Color(0xff0D0D0D):kcolor
-                        : item.inactiveColor
-                  ),
+                      size: iconSize,
+                      color: isSelected
+                          ? isDark
+                              ?  black
+                              : kcolor
+                          : item.inactiveColor),
                   child: item.icon,
                 ),
                 if (isSelected)
@@ -220,8 +164,7 @@ bool isDark = brightnessValue == Brightness.dark;
                       padding: itemPadding,
                       child: DefaultTextStyle.merge(
                         style: TextStyle(
-
-                          color: isDark?const Color(0xff0D0D0D):kcolor,
+                          color: isDark ?  black : kcolor,
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,
@@ -244,13 +187,13 @@ class BottomNavyBarItem {
   BottomNavyBarItem({
     required this.icon,
     required this.title,
-    this.activeColor ,
+    this.activeColor,
     this.textAlign,
     this.inactiveColor,
   });
- final Widget icon;
- final Widget title;
- final Color ?activeColor;
- final Color? inactiveColor;
- final TextAlign? textAlign;
+  final Widget icon;
+  final Widget title;
+  final Color? activeColor;
+  final Color? inactiveColor;
+  final TextAlign? textAlign;
 }

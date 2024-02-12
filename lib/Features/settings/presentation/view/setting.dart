@@ -1,5 +1,7 @@
 import 'package:Toxicon/Features/settings/presentation/view/history.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/view/aboutus.dart';
@@ -20,23 +22,15 @@ class SettingScreen extends StatelessWidget {
         body: SafeArea(
             child: Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          icolor,
-          icolor,
-          isDark ? icolor : Colors.white,
-          kcolor,
-          icolor
-        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: gradientTop(isDark)
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+         
           SizedBox(
-            height: size.height * .02,
-          ),
-          SizedBox(
-            height: size.height * .07,
+            height: size.height * .09,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -51,9 +45,9 @@ class SettingScreen extends StatelessWidget {
                   width: 90,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      image: const DecorationImage(
+                      image:  DecorationImage(
                           image: AssetImage(
-                            'assets/images/profile.png',
+                           ImageConstant.profile,
                           ),
                           fit: BoxFit.cover)),
                 ),
@@ -69,7 +63,6 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              // color: Color(0xff0D0D0D),
                               fontSize: 24)),
                     ),
                     Text(
@@ -77,7 +70,6 @@ class SettingScreen extends StatelessWidget {
                       style: GoogleFonts.acme(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.w400,
-                              // color: Color(0xff0D0D0D),
                               fontSize: 20)),
                     ),
                   ],
@@ -108,11 +100,11 @@ class SettingScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: isDark ?const Color(0xff0D0D0D) : Colors.white,
+                color: isDark ?  black : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 5,
+                    spreadRadius: 3,
                     blurRadius: 9,
                     offset: const Offset(0, -8),
                   ),
@@ -153,7 +145,7 @@ class SettingScreen extends StatelessWidget {
                     },
                     child: CustomContainerCard(
                       titel: 'Dark Mode',
-                      icon: Icons.dark_mode,
+                      icon: Icons.brightness_4,
                       size: size,
                       icontralling: Icons.arrow_forward,
                     ),

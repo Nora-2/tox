@@ -97,7 +97,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           style: const TextStyle(
                             fontSize: 29.0,
                             fontWeight: FontWeight.bold,
-                            // color: Color(0xff0D0D0D),
+                            // color: black,
                           ),
                         ),
                         Text(
@@ -105,7 +105,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 16.0,
-                            // color: Color(0xff0D0D0D),
+                            // color: black,
                           ),
                         ),
                       ],

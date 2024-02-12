@@ -1,3 +1,6 @@
+// ignore_for_file: file_names
+
+import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/core/constants/constants.dart';
@@ -15,17 +18,17 @@ class CustomInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+    final ThemeMode brightnessValue =
+        AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
+    bool isDark = brightnessValue == ThemeMode.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: icolor.withOpacity(0.95),
-        shadowColor: isDark ? Colors.white :const Color(0xff0D0D0D),
+        color: isDark ? darkcolor : icolor.withOpacity(.95),
+        shadowColor: isDark ? Colors.grey :  black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,
@@ -41,7 +44,7 @@ class CustomInfoCard extends StatelessWidget {
                   style: GoogleFonts.acme(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w600,
-                          // color: Color(0xff0D0D0D),
+                          // color: black,
                           fontSize: 18)),
                 ),
                 SizedBox(
@@ -52,7 +55,7 @@ class CustomInfoCard extends StatelessWidget {
                   style: GoogleFonts.acme(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          // color: Color(0xff0D0D0D),
+                          // color: black,
                           fontSize: 16)),
                 ),
               ],

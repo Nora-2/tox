@@ -21,9 +21,9 @@ class showdiloginfo extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [icolor, Colors.white, kcolor],
+            colors: [isDark ? darkcolor : icolor, Colors.white, kcolor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -49,7 +49,8 @@ class showdiloginfo extends StatelessWidget {
                         },
                         child: Icon(
                           Icons.arrow_back,
-                          color: isDark ? Colors.white :const Color(0xff0D0D0D),
+                          color:
+                              isDark ? Colors.white :  black,
                         )),
                     const SizedBox(
                       width: 40,
@@ -65,7 +66,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 24)),
               ),
               SizedBox(
@@ -90,7 +91,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 24)),
               ),
               SizedBox(
@@ -101,7 +102,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 20)),
               ),
               SizedBox(height: size.height * .02),
@@ -110,7 +111,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 24)),
               ),
               SizedBox(
@@ -121,7 +122,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 20)),
               ),
               SizedBox(
@@ -132,7 +133,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 24)),
               ),
               SizedBox(
@@ -143,7 +144,7 @@ class showdiloginfo extends StatelessWidget {
                 style: GoogleFonts.sanchez(
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff0D0D0D),
+                        color: black,
                         fontSize: 16)),
               ),
             ],

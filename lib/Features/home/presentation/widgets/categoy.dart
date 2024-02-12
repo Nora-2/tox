@@ -24,8 +24,8 @@ class CustomContainerCtegory extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: icolor.withOpacity(0.95),
-        shadowColor: isDark ? Colors.white :const Color(0xff0D0D0D),
+        color: isDark ? darkcolor : icolor.withOpacity(.95),
+        shadowColor: isDark ? Colors.white :  black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .89,
@@ -41,7 +41,7 @@ class CustomContainerCtegory extends StatelessWidget {
                   style: GoogleFonts.lakkiReddy(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          //  color:   isDark?Color.fromARGB(179, 204, 122, 0):Color(0xff0D0D0D),
+                          //  color:   isDark?Color.fromARGB(179, 204, 122, 0):black,
                           fontSize: 24)),
                 ),
                 Image(

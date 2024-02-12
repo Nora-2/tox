@@ -1,6 +1,8 @@
+import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
@@ -25,33 +27,19 @@ class OtpVerify extends StatelessWidget {
             ),
             Center(
                 child: Image.asset(
-              'assets/images/Enter OTP-rafiki.png',
+              ImageConstant.otp,
               width: 300,
               height: 300,
             )),
             SizedBox(
               height: size.height * .05,
             ),
-            Text(
-              'Code Verification',
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w900,
-                      // color: Color(0xff0D0D0D),
-                      fontSize: 24)),
-            ),
+           CustomTextfont24_900(text: 'Code Verification'),
             SizedBox(
               height: size.height * .005,
             ),
-            Text(
-              "Enter your verification code we just sent on your email address",
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey,
-                      fontSize: 12)),
-            ),
-            SizedBox(
+          const  customtext400_12(text: "Enter your verification code we just sent on your email address")
+          ,  SizedBox(
               height: size.height * .04,
             ),
             OtpTextField(
@@ -61,8 +49,8 @@ class OtpVerify extends StatelessWidget {
               borderColor: kcolor,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               enabledBorderColor: kcolor,
-              disabledBorderColor:const Color(0xff0D0D0D),
-              focusedBorderColor: icolor,
+              disabledBorderColor:  black,
+              focusedBorderColor: isDark ? darkcolor : icolor,
               showFieldAsBox: true,
               borderRadius: BorderRadius.circular(15),
               onCodeChanged: (String code) {},
@@ -90,24 +78,7 @@ class OtpVerify extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
-                  height: 38,
-                  width: size.width * .85,
-                  decoration: BoxDecoration(
-                    color: kcolor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Verify',
-                      style: GoogleFonts.sanchez(
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: isDark ? const Color(0xff0D0D0D) : Colors.white,
-                              fontSize: 18)),
-                    ),
-                  ),
-                ),
+                child: customButtonContainer(size: size, text: 'Verify')
               ),
             ),
             SizedBox(
@@ -117,27 +88,13 @@ class OtpVerify extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Did't recived code?",
-                  style: GoogleFonts.sanchez(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
-                          fontSize: 14)),
-                ),
-                SizedBox(
+              const customtext50014(text: "Did't recived code?",)
+                ,SizedBox(
                   width: size.width * .009,
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child: Text(
-                    'Resend',
-                    style: GoogleFonts.sanchez(
-                        textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: kcolor,
-                            fontSize: 12)),
-                  ),
+                  child: CustomTextfont12_700(text: 'Resend',)
                 ),
               ],
             ),

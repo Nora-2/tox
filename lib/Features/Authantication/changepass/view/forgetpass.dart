@@ -1,8 +1,9 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/otp.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/utils/styles.dart';
+import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
@@ -27,43 +28,24 @@ bool isDark = brightnessValue == Brightness.dark;
             ),
             Center(
                 child: Image.asset(
-              'assets/images/Forgot password-amico.png',
+              ImageConstant.forgetpass,
               width: 300,
               height: 300,
             )),
             SizedBox(
               height: size.height * .15,
             ),
-            Text(
-              'Forget Password?',
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w900,
-                  
-                      fontSize: 24)),
-            ),
+            CustomTextfont24_900(text: 'Forget Password?'),
             SizedBox(
               height: size.height * .003,
             ),
-            Text(
-              "Don't worry! it occurs.please enter the email address\nlinked with your account",
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey,
-                      fontSize: 12)),
-            ),
-            SizedBox(
+           const customtext400_12(text:  "Don't worry! it occurs.please enter the email address\nlinked with your account")
+            ,SizedBox(
               height: size.height * .018,
             ),
-            Text(
-              'Email',
-              style: GoogleFonts.sanchez(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      
-                      fontSize: 16)),
-            ),
+             CustomTextfont16_700(
+                      text: 'Email',
+                    ),
             SizedBox(
               height: size.height * .015,
             ),
@@ -80,35 +62,15 @@ bool isDark = brightnessValue == Brightness.dark;
             ),
             Center(
               child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 38,
-                  width: size.width * .85,
-                  decoration: BoxDecoration(
-                    color:  kcolor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const OtpVerify(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Send Code',
-                        style: GoogleFonts.sanchez(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                             
-                                fontSize: 18)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const OtpVerify(),
                       ),
-                    ),
-                  ),
-                ),
+                    );
+                },
+                child: customButtonContainer(size: size, text: 'Send Code')
               ),
             ),
           ],

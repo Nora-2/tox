@@ -1,12 +1,7 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/utils/homeutilis.dart';
+import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:Toxicon/Features/chat/chatscreen.dart';
-import 'package:Toxicon/Features/home/presentation/widgets/categoy.dart';
-import 'package:Toxicon/Features/liver/liver.dart';
-import 'package:Toxicon/Features/molecule/molecule.dart';
-import 'package:Toxicon/Features/mutagenicity/mutagencity.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: camel_case_types
@@ -19,66 +14,21 @@ class homeScreen extends StatelessWidget {
     bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
     List widgets = [
-      GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const LiverScreen(),
-              ),
-            );
-          },
-          child: CustomContainerCtegory(
-            size: size,
-            image: 'assets/images/liverhome.png',
-            titel: 'Liver Toxicity',
-          )),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const MoleculeScreen(),
-            ),
-          );
-        },
-        child: CustomContainerCtegory(
-            titel: 'Toxicity\nof molecules',
-            size: size,
-            image: 'assets/images/molechome.png'),
-      ),
-      GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const MutagencityScreen(),
-              ),
-            );
-          },
-          child: CustomContainerCtegory(
-              titel: 'Mutagenicity',
-              size: size,
-              image: 'assets/images/wepik-export-20240127181104M5Ff.png'))
+      homewidgetliver(size:size,),
+      homewidgetmol(size: size),
+      homewidgetdna(size: size)
     ];
     return Scaffold(
         body: SafeArea(
             child: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          icolor,
-          icolor,
-          isDark ? icolor : Colors.white,
-          kcolor,
-          icolor
-        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-      ),
+      decoration: BoxDecoration(gradient: gradientTop(isDark)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: size.height * .08,
+          customsizebox(
+            size: size,
+            height: .08,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,53 +39,32 @@ class homeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Hi,Nora!',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              //  color:isDark?Color.fromARGB(179, 204, 122, 0):Color(0xff0D0D0D),
-                              fontSize: 30)),
+                    CustomText(
+                      text: 'Hi,Nora!',
+                      style: Styles.textStyleacme30,
                     ),
-                    SizedBox(
-                      height: size.height * .01,
+                    customsizebox(
+                      size: size,
+                      height: .01,
                     ),
-                    Text(
-                      "Find out your desierd answer ",
-                      style: GoogleFonts.philosopher(
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              //  color:   isDark?Color.fromARGB(179, 204, 122, 0):Color(0xff0D0D0D),
-                              fontSize: 17)),
+                    CustomText(
+                      text: "Find out your desierd answer ",
+                      style: Styles.textStyphilosopher17,
                     ),
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ChatScreen(),
-                    ),
-                  );
-                },
-                child: LottieBuilder.asset(
-                  'assets/images/Animation - 1706420444089.json',
-                  width: size.width * .35,
-                  height: size.width * .4,
-                ),
-              )
+              robot(size: size)
             ],
           ),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: isDark ?const Color(0xff0D0D0D) : Colors.white,
+                color: isDark ? black : Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 5,
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3,
                     blurRadius: 9,
                     offset: const Offset(0, -8),
                   ),

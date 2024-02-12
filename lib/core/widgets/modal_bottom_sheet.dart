@@ -1,3 +1,4 @@
+import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 void show(BuildContext context) {
@@ -40,7 +41,7 @@ void show(BuildContext context) {
                       onPressed: () {},
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(const Color(0xff0D0D0D)),
+                            MaterialStateProperty.all( black),
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
                         padding: MaterialStateProperty.all(
