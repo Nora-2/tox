@@ -1,8 +1,8 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/constants.dart';
 import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: camel_case_types
 class homeScreen extends StatelessWidget {
@@ -60,13 +60,13 @@ class homeScreen extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: isDark ? black : Colors.white,
+                color: isDark ?black: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 9,
-                    offset: const Offset(0, -8),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, -2),
                   ),
                 ],
                 borderRadius: const BorderRadius.only(

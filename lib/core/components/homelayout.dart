@@ -21,7 +21,7 @@ class HomeLayout extends StatelessWidget {
       create: (context) => HomecubitCubit(),
       child: BlocConsumer<HomecubitCubit, HomecubitState>(
         builder: (context, state) => Scaffold(
-          backgroundColor:isDark?black:Colors.white,
+          backgroundColor:isDark?Colors.transparent.withOpacity(0):Colors.white,
                   
             body: HomecubitCubit.get(context)
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],

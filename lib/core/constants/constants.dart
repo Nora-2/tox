@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/core/utils/moreinfo.dart';
 import 'package:circular/circular.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ const kcolor = Color(0xff6FA9CB);
 const icolor = Color.fromARGB(222, 164, 215, 244);
 final darkcolor = kcolor.withAlpha(200);
 const blackcolor = Color(0xff0D0D0D);
-const black = Colors.black54;
+final black =  Colors.black54.withOpacity(.4);
 List<OnboardModel> screens = <OnboardModel>[
   OnboardModel(
     lottieBuilder: 'assets/images/dna.png',
@@ -128,6 +129,7 @@ class resultwidgetcontainer extends StatelessWidget {
       required this.result,
       required this.text});
 
+
   final Size size;
   final bool isDark;
   final bool result;
@@ -145,7 +147,7 @@ class resultwidgetcontainer extends StatelessWidget {
                 ? darkcolor
                 : icolor
             : isDark
-                ? black
+                ? Colors.transparent.withOpacity(0)
                 : Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
@@ -222,6 +224,59 @@ class customButtonContainer extends StatelessWidget {
               textStyle:
                   const TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
         ),
+      ),
+    );
+  }
+}
+
+
+class customtext50014 extends StatelessWidget {
+  const customtext50014({super.key, required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.sanchez(
+          textStyle: const TextStyle(
+              fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 14)),
+    );
+  }
+}
+bool _validate(
+          String name, String email, String password, String rePassword) =>
+      Checker.checkName(name) &&
+      Checker.checkEmail(email) &&
+      Checker.checkPassword(password) &&
+      password == rePassword;
+
+  void _wrongCase(BuildContext context, String name, String email,
+      String password, String rePassword) {
+    if (!Checker.checkName(name) || name.isEmpty) {
+      AppMessage.customSnackBar(context: context, content: "Invalid name");
+    } else if (!Checker.checkEmail(email) || email.isEmpty) {
+      AppMessage.customSnackBar(context: context, content: "Invalid email");
+    } else if (!Checker.checkPassword(password) || password.isEmpty) {
+      AppMessage.customSnackBar(context: context, content: "Invalid password");
+    } else if (!(password == rePassword) || rePassword.isEmpty) {
+      AppMessage.customSnackBar(
+          context: context, content: "Password must match");
+    }
+  }
+
+
+class AppMessage {
+  AppMessage._();
+
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      customSnackBar(
+          {required BuildContext context,
+          required String content,
+          Color backgroundColor = Colors.blue}) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(content),
+        backgroundColor: backgroundColor,
       ),
     );
   }

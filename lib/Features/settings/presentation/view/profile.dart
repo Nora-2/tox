@@ -1,26 +1,55 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
+  
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+  
+class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController name = TextEditingController();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController mobile = TextEditingController();
+
   TextEditingController birth = TextEditingController();
+
   TextEditingController jop = TextEditingController();
+
   TextEditingController country = TextEditingController();
+  String _fileName = "";
+  Uint8List _imageBytes = Uint8List(0);
+void _pickImage() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.image,
+  );
+  if (result != null) {
+    setState(() {
+      _fileName = result.files.single.name;
+      _imageBytes = result.files.single.bytes ?? Uint8List(0);
+    });
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+  
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
+    
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -58,16 +87,49 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 150,
-                width: 150,
-                decoration:  BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          ImageConstant.profile,
-                        ),
-                        fit: BoxFit.cover)),
+              Center(
+      child: SizedBox(
+        height: 150,
+        width: 150,
+        child: Stack(
+          fit: StackFit.expand,
+          clipBehavior: Clip.none,
+          children: [
+              if (_fileName.isNotEmpty)
+         
+             
+         
+                 CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:MemoryImage(_imageBytes) ,)
+
+                 else
+                 CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:AssetImage( ImageConstant.profile,),),
+         
+            Positioned(
+              right: 10,
+              bottom: 10,
+              child: GestureDetector(
+                onTap:  _pickImage,
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.7),
+                          blurRadius: 0.3,
+                        )
+                      ],
+                    ),
+                    height: 30,
+                    width: 30,
+                    child: const Icon(Icons.camera_alt_rounded,color: Colors.black,size: 20,)),
               ),
+            )
+          ],
+        ),
+      ),
+    ),
+            
               Text(
                 'Nora Mohamed',
                 style: GoogleFonts.acme(
@@ -97,9 +159,9 @@ class ProfileScreen extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
-                    spreadRadius:3,
+                    spreadRadius:1,
                     blurRadius: 9,
-                    offset: const Offset(0, -8),
+                    offset: const Offset(0, -2),
                   ),
                 ],
                 borderRadius: const BorderRadius.only(

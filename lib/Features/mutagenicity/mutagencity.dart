@@ -74,9 +74,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 3,
+                            spreadRadius: 1,
                             blurRadius: 9,
-                            offset: const Offset(0, -8),
+                            offset: const Offset(0, -2),
                           ),
                         ],
                         borderRadius: const BorderRadius.only(
@@ -95,6 +95,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               height: size.height * .015,
                             ),
                             CustomFormField(
+                              ispass: false,
                                 hint: 'Enter your Smile',
                                 preicon: const Icon(
                                   Icons.edit,

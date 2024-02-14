@@ -13,6 +13,11 @@ class AppCubit extends Cubit<AppState> {
   void changemode() {
     isdark = !isdark;
     emit(changemodestate());
+
   }
+
+ 
+
+  
 }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:Toxicon/Features/Authantication/changepass/view/otp.dart';
+import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class ForgetPassword extends StatelessWidget {
 bool isDark = brightnessValue == Brightness.dark;
     TextEditingController email = TextEditingController();
     final size = MediaQuery.of(context).size;
+     final FormKey = GlobalKey<FormState>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -49,26 +51,41 @@ bool isDark = brightnessValue == Brightness.dark;
             SizedBox(
               height: size.height * .015,
             ),
-            CustomFormField(
-                hint: 'Enter your Email',
-                preicon: const Icon(
-                  Icons.email,
-                  size: 19,
-                  color: kcolor,
-                ),
-                controller: email),
+            Form(
+              key:FormKey ,
+              child: CustomFormField(
+                ispass: false,
+                  hint: 'Enter your Email',
+                  preicon: const Icon(
+                    Icons.email,
+                    size: 19,
+                    color: kcolor,
+                  ),
+                  val: (email) {
+                                    if (email == null ||
+                                        email.isEmpty ||
+                                        !Checker.checkEmail(email)) {
+                                      return 'Invalid email';
+                                    }
+                                    return null;
+                                  },
+                  controller: email),
+            ),
             SizedBox(
               height: size.height * .06,
             ),
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const OtpVerify(),
-                      ),
-                    );
+               
+                          if (FormKey.currentState!.validate()) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const OtpVerify(),
+                              ),
+                            );
+                          } 
                 },
                 child: customButtonContainer(size: size, text: 'Send Code')
               ),

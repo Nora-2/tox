@@ -17,7 +17,7 @@ class BottomNavyBar extends StatelessWidget {
     this.blurRadius = 10,
     this.spreadRadius = 3,
     this.borderRadius,
-    this.shadowOffset = const Offset(0, -8),
+    this.shadowOffset = const Offset(0, -2),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 4),
     this.animationDuration = const Duration(milliseconds: 270),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
@@ -65,7 +65,7 @@ class BottomNavyBar extends StatelessWidget {
       ),
       child: SafeArea(
         child: Container(
-          color: isDark ?  black : icolor,
+          color: isDark ?  darkcolor : icolor,
           width: double.infinity,
           height: containerHeight,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),

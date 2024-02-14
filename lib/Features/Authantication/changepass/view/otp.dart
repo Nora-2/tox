@@ -1,4 +1,3 @@
-import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';

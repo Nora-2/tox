@@ -36,11 +36,11 @@ abstract class Styles {
 
 dynamic gradientTop(isDark) {
   return LinearGradient(colors: [
-    isDark ? black : icolor,
-    isDark ? black : icolor,
-    isDark ? black : Colors.white,
-    isDark ? black : kcolor,
-    isDark ? black : icolor,
+    isDark ? darkcolor : icolor,
+    isDark ? darkcolor : icolor,
+    isDark ? darkcolor : Colors.white,
+    isDark ? darkcolor : kcolor,
+    isDark ? darkcolor : icolor,
   ], begin: Alignment.topLeft, end: Alignment.bottomRight);
 }
 

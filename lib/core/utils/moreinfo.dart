@@ -49,8 +49,7 @@ class showdiloginfo extends StatelessWidget {
                         },
                         child: Icon(
                           Icons.arrow_back,
-                          color:
-                              isDark ? Colors.white :  black,
+                          color: isDark ? Colors.white : black,
                         )),
                     const SizedBox(
                       width: 40,
@@ -64,7 +63,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 '2D Structer',
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: black,
                         fontSize: 24)),
@@ -89,7 +88,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 'Atomic Number',
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: black,
                         fontSize: 24)),
@@ -100,7 +99,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 'Atom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6',
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: black,
                         fontSize: 20)),
@@ -109,7 +108,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 'Bond Type',
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle:  TextStyle(
                         fontWeight: FontWeight.w600,
                         color: black,
                         fontSize: 24)),
@@ -120,7 +119,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 "Bond between atoms 0 and 1\nBond Type: SINGLE\nBond between atoms 1,and 2\nBond Type: AROMATIC\nBond between atoms 2 and 3\nBond Type: AROMATIC\nBond between atoms 3 and 4\nBond Type: AROMATIC\nBond between atoms 4 and 5\nBond Type: AROMATIC\nBond between atoms 5 and 6\nBond Type: AROMATIC\nBond between atoms 6 and 1 \nBond Type: AROMATIC",
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle:  TextStyle(
                         fontWeight: FontWeight.w500,
                         color: black,
                         fontSize: 20)),
@@ -131,7 +130,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 'Gasteiger charges',
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle:  TextStyle(
                         fontWeight: FontWeight.w600,
                         color: black,
                         fontSize: 24)),
@@ -142,7 +141,7 @@ class showdiloginfo extends StatelessWidget {
               Text(
                 "Atom Index: 0, Symbol: C,\nGasteiger Charge: -0.039774526323627504\nAtom Index: 1, Symbol: C\nGasteiger Charge: -0.05113326481434698\nAtom Index: 2, Symbol: C\nGasteiger Charge: -0.059326411981218706\nAtom Index: 3, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 4, Symbol: C\nGasteiger Charge: -0.06224908578199481\nAtom Index: 5, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 6, Symbol: C\nGasteiger Charge: -0.059326411981218706",
                 style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                    textStyle:  TextStyle(
                         fontWeight: FontWeight.w500,
                         color: black,
                         fontSize: 16)),

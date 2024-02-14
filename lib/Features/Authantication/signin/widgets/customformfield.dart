@@ -8,10 +8,13 @@ class CustomFormField extends StatefulWidget {
     this.text,
     this.sign,
     this.massege,
+    this.val,
+   required this.ispass,
     this.suffix,
     required this.controller,
     super.key,
   });
+  final bool ispass;
   final String hint;
   final Widget preicon;
   final TextInputType? text;
@@ -19,6 +22,7 @@ class CustomFormField extends StatefulWidget {
   final String? massege;
   final Widget? suffix;
   final TextEditingController? controller;
+  final String? Function(String?)? val;
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -27,12 +31,12 @@ class CustomFormField extends StatefulWidget {
 class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      width: double.infinity,
-      child: TextFormField(
+    return TextFormField(
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.start,
         maxLines: 1,
         controller: widget.controller,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           hintText: widget.hint,
           hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -47,6 +51,17 @@ class _CustomFormFieldState extends State<CustomFormField> {
                 // color: black,
                 ),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent.withOpacity(0),
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: Colors.transparent.withOpacity(0),
+            ),
+          ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
@@ -54,14 +69,9 @@ class _CustomFormFieldState extends State<CustomFormField> {
             ),
           ),
         ),
+        obscureText: widget.ispass,
+        obscuringCharacter: '*',
         keyboardType: widget.text,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-      ),
-    );
+        validator: widget.val);
   }
 }

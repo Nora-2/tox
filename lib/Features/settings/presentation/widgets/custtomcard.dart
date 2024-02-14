@@ -26,7 +26,7 @@ class CustomContainerCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         color: isDark ? darkcolor : icolor.withOpacity(.95),
-        shadowColor: isDark ? Colors.grey :  black,
+        shadowColor: isDark ? Colors.grey.withOpacity(.5) :  black,
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,

@@ -12,7 +12,7 @@ class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    bool submit = true;
+    bool submit = false;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;

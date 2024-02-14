@@ -71,9 +71,9 @@ class _LiverScreenState extends State<LiverScreen> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 3,
+                            spreadRadius: 1,
                             blurRadius: 10,
-                            offset: const Offset(0, -8),
+                            offset: const Offset(0, -2),
                           ),
                         ],
                         borderRadius: const BorderRadius.only(
@@ -92,6 +92,7 @@ class _LiverScreenState extends State<LiverScreen> {
                               height: size.height * .015,
                             ),
                             CustomFormField(
+                              ispass: false,
                                 hint: 'Enter your Smile',
                                 preicon: const Icon(
                                   Icons.edit,
