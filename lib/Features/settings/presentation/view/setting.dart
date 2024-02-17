@@ -1,17 +1,16 @@
 import 'package:Toxicon/Features/settings/presentation/view/history.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/view/aboutus.dart';
 import 'package:Toxicon/Features/settings/presentation/view/profile.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/custtomcard.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
-
+static String id = 'SettingScreen';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -54,23 +53,23 @@ class SettingScreen extends StatelessWidget {
                 SizedBox(
                   width: size.width * .03,
                 ),
-                Column(
+              const  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Nora Mohamed',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:   TextStyle(
+                            fontFamily: 'acme',
                               fontWeight: FontWeight.w400,
-                              fontSize: 24)),
+                              fontSize: 24),
                     ),
                     Text(
                       'Researcher',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:   TextStyle(
+                            fontFamily: 'acme',
                               fontWeight: FontWeight.w400,
-                              fontSize: 20)),
+                              fontSize: 20),
                     ),
                   ],
                 ),

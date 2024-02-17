@@ -1,19 +1,21 @@
 // ignore_for_file: dead_code
-
-import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
+import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/molecule/result.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/buttons.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+import '../../core/utils/function/arrowpop.dart';
 
 // ignore: must_be_immutable
 class MoleculeScreen extends StatefulWidget {
   const MoleculeScreen({super.key});
-
+static String id = 'MoleculeScreen';
   @override
   State<MoleculeScreen> createState() => _MoleculeScreenState();
 }
@@ -28,10 +30,9 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
     bool isDark = brightnessValue == ThemeMode.dark;
 
     final size = MediaQuery.of(context).size;
-    bool result = true;
     return BlocProvider(
-        create: (context) => LivercubitCubit(),
-        child: BlocConsumer<LivercubitCubit, LivercubitState>(
+        create: (context) => MoleculeCubit(),
+        child: BlocConsumer<MoleculeCubit, MoleculeState>(
           listener: (context, state) {},
           builder: (context, state) {
             return Scaffold(
@@ -110,16 +111,16 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    LivercubitCubit.get(context).changemode();
+                                    MoleculeCubit.get(context).changemode();
                                   });
                                 },
                                 child: submit(size: size, isDark: isDark),
                               ),
                             ),
                             SizedBox(height: size.height * .02),
-                            LivercubitCubit.get(context).issubmit
+                            MoleculeCubit.get(context).issubmit
                                 ? resultmolecule(
-                                    size: size, result: result, isDark: isDark)
+                                    size: size, result: MoleculeCubit().result, isDark: isDark)
                                 : Center(
                                     child: Image.asset(
                                     ImageConstant.molbefor,

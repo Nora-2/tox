@@ -1,30 +1,30 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/Features/Authantication/signup/registercubit/register_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-
 import 'package:Toxicon/core/components/homelayout.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class SignUp extends StatefulWidget {
   SignUp({super.key});
-
+static String id = 'SignUp';
   @override
   State<SignUp> createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
   TextEditingController email = TextEditingController();
-
   TextEditingController password = TextEditingController();
-
   TextEditingController username = TextEditingController();
 
   @override
@@ -187,62 +187,11 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(
                       height: size.height * .02,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 1,
-                          width: size.width * .4,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          'or',
-                          style: GoogleFonts.sanchez(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 16)),
-                        ),
-                        Container(
-                          height: 1,
-                          width: size.width * .4,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                          ),
-                        )
-                      ],
-                    ),
+                    seprator(size: size),
                     SizedBox(
                       height: size.height * .02,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          ImageConstant.facebook,
-                          width: 35,
-                          height: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * .09,
-                        ),
-                        Image.asset(
-                          ImageConstant.google,
-                          width: 35,
-                          height: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * .09,
-                        ),
-                        Image.asset(
-                          ImageConstant.twitter,
-                          width: 35,
-                          height: 35,
-                        )
-                      ],
-                    ),
+                   socialmedia(size: size),
                     SizedBox(
                       height: size.height * .02,
                     ),
@@ -258,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => SignIn(),

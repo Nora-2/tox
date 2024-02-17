@@ -1,18 +1,21 @@
 // ignore_for_file: dead_code
-import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
+import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/mutresult.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/arrowpop.dart';
+import 'package:Toxicon/core/utils/function/buttons.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class MutagencityScreen extends StatefulWidget {
   const MutagencityScreen({super.key});
-
+static String id = 'MutagencityScreen';
   @override
   State<MutagencityScreen> createState() => _MutagencityScreenState();
 }
@@ -26,10 +29,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
-    bool result = false;
     return BlocProvider(
-        create: (context) => LivercubitCubit(),
-        child: BlocConsumer<LivercubitCubit, LivercubitState>(
+        create: (context) => DnaCubit(),
+        child: BlocConsumer<DnaCubit, DnaState>(
           listener: (context, state) {},
           builder: (context, state) {
             return Scaffold(
@@ -110,15 +112,15 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    LivercubitCubit.get(context).changemode();
+                                    DnaCubit.get(context).changemode();
                                   });
                                 },
                                 child: submit(size: size, isDark: isDark))
                             ),
                             SizedBox(height: size.height * .04),
-                            LivercubitCubit.get(context).issubmit
+                            DnaCubit.get(context).issubmit
                                 ? dnaresult(
-                                    size: size, result: result, isDark: isDark)
+                                    size: size, result: DnaCubit().result, isDark: isDark)
                                 : Center(
                                     child: Image.asset(
                                     ImageConstant.dnabefor,

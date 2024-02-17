@@ -1,4 +1,3 @@
-
 // ignore_for_file: camel_case_types
 
 import 'package:Toxicon/Features/chat/chatscreen.dart';
@@ -6,14 +5,18 @@ import 'package:Toxicon/Features/home/presentation/widgets/categoy.dart';
 import 'package:Toxicon/Features/liver/liver.dart';
 import 'package:Toxicon/Features/molecule/molecule.dart';
 import 'package:Toxicon/Features/mutagenicity/mutagencity.dart';
+import 'package:Toxicon/Features/smilarty/smilarty.dart';
+import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class homewidgetliver extends StatelessWidget {
-  const homewidgetliver({super.key, required this.size,});
+  const homewidgetliver({
+    super.key,
+    required this.size,
+  });
 
   final Size size;
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class homewidgetliver extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const LiverScreen() ,
+              builder: (_) => const LiverScreen(),
             ),
           );
         },
@@ -35,11 +38,12 @@ class homewidgetliver extends StatelessWidget {
 }
 
 class homewidgetdna extends StatelessWidget {
-  const homewidgetdna({super.key, required this.size,});
+  const homewidgetdna({
+    super.key,
+    required this.size,
+  });
 
   final Size size;
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -48,42 +52,71 @@ class homewidgetdna extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const MutagencityScreen() ,
+              builder: (_) => const MutagencityScreen(),
             ),
           );
         },
-        child:CustomContainerCtegory(
-              titel: 'Mutagenicity',
-              size: size,
-              image: 'assets/images/wepik-export-20240127181104M5Ff.png') );
+        child: CustomContainerCtegory(
+            titel: 'Mutagenicity',
+            size: size,
+            image: 'assets/images/wepik-export-20240127181104M5Ff.png'));
   }
 }
+
+class homewidgetsimilarty extends StatelessWidget {
+  const homewidgetsimilarty({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const smilartyScreen() ,
+            ),
+          );
+        },
+        child: CustomContainerCtegory(
+          size: size,
+          image: ImageConstant.similartyresult,
+          titel: 'Similarity\n  Map',
+        ));
+  }
+}
+
 
 class homewidgetmol extends StatelessWidget {
-  const homewidgetmol({super.key, required this.size,});
+  const homewidgetmol({
+    super.key,
+    required this.size,
+  });
 
   final Size size;
-
- 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const MoleculeScreen() ,
-            ),
-          );
-        },
-        child:CustomContainerCtegory(
-            titel: 'Toxicity\nof molecules',
-            size: size,
-            image: 'assets/images/molechome.png'), );
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const MoleculeScreen(),
+          ),
+        );
+      },
+      child: CustomContainerCtegory(
+          titel: 'Toxicity\nof molecules',
+          size: size,
+          image: 'assets/images/molechome.png'),
+    );
   }
 }
-
 
 class robot extends StatelessWidget {
   const robot({

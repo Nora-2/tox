@@ -1,8 +1,7 @@
 // ignore_for_file: must_be_immutable, camel_case_types
 
-import 'package:Toxicon/core/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 abstract class Styles {
   static const textStyle18 = TextStyle(
@@ -28,21 +27,11 @@ abstract class Styles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
-  static final textStyleacme30 = GoogleFonts.acme(
-      textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 30));
-  static final textStyphilosopher17 = GoogleFonts.philosopher(
-      textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 17));
+  static  const textStyleacme30 =  TextStyle( fontFamily: 'acme',fontWeight: FontWeight.w600, fontSize: 30);
+  static const textStyphilosopher17 =   TextStyle(fontFamily: 'philosopher',fontWeight: FontWeight.w600, fontSize: 17);
 }
 
-dynamic gradientTop(isDark) {
-  return LinearGradient(colors: [
-    isDark ? darkcolor : icolor,
-    isDark ? darkcolor : icolor,
-    isDark ? darkcolor : Colors.white,
-    isDark ? darkcolor : kcolor,
-    isDark ? darkcolor : icolor,
-  ], begin: Alignment.topLeft, end: Alignment.bottomRight);
-}
+
 
 
 class CustomText extends StatelessWidget {
@@ -70,14 +59,25 @@ class CustomTextfont24_600 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.sanchez(
-          textStyle:
-              const TextStyle(fontWeight: FontWeight.w600, fontSize: 24)),
-    );
+      style: 
+              const TextStyle( fontFamily: 'sanchez',fontWeight: FontWeight.w600, fontSize: 24));
   }
 }
 
 
+class customtext50014 extends StatelessWidget {
+  const customtext50014({super.key, required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style:  const TextStyle(
+         fontFamily: 'sanchez',
+              fontWeight: FontWeight.w500, color: Colors.grey, fontSize: 14),
+    );
+  }
+}
 class CustomTextfont24_900 extends StatelessWidget {
   CustomTextfont24_900({
     required this.text,
@@ -89,9 +89,8 @@ class CustomTextfont24_900 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.sanchez(
-          textStyle:
-              const TextStyle(fontWeight: FontWeight.w600, fontSize: 24)),
+      style: 
+              const TextStyle(fontWeight: FontWeight.w600, fontSize: 24 ,fontFamily: 'sanchez',),
     );
   }
 }
@@ -107,9 +106,8 @@ class CustomTextfont16_700 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.sanchez(
-          textStyle:
-              const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+      style:
+              const TextStyle(fontFamily: 'sanchez',fontWeight: FontWeight.w700, fontSize: 16),
     );
   }
 }
@@ -121,11 +119,12 @@ class customtext60020 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.acme(
-          textStyle: const TextStyle(
+      style:
+         const TextStyle(
+            fontFamily: 'acme',
               fontWeight: FontWeight.w600,
-              // color: black,
-              fontSize: 20)),
+              
+              fontSize: 20),
     );
   }
 }
@@ -137,9 +136,9 @@ class customtext400_12 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
      text,
-      style: GoogleFonts.sanchez(
-          textStyle: const TextStyle(
-              fontWeight: FontWeight.w400, color: Colors.grey, fontSize: 12)),
+      style:  const TextStyle(
+        fontFamily: 'sanchez',
+              fontWeight: FontWeight.w400, color: Colors.grey, fontSize: 12)
     );
   }
 }
@@ -155,9 +154,8 @@ class CustomTextfont16_500 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.sanchez(
-          textStyle:
-              const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+      style: 
+              const TextStyle(fontFamily: 'sanchez',fontWeight: FontWeight.w500, fontSize: 16)
     );
   }
 }
@@ -172,9 +170,8 @@ class CustomTextfont12_700 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.sanchez(
-          textStyle:
-              const TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
+      style:
+              const TextStyle(fontFamily: 'sanchez',fontWeight: FontWeight.w700, fontSize: 12)
     );
   }
 }

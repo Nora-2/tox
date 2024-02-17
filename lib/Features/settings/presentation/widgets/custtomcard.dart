@@ -1,7 +1,7 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+
 
 class CustomContainerCard extends StatelessWidget {
   const CustomContainerCard(
@@ -43,10 +43,10 @@ class CustomContainerCard extends StatelessWidget {
                 ),
                 Text(
                   titel,
-                  style: GoogleFonts.acme(
-                      textStyle: const TextStyle(
+                  style:  const TextStyle(
+                    fontFamily: 'acme',
                           fontWeight: FontWeight.w400, fontSize: 24)),
-                ),
+                
                 Icon(
                   icontralling,
                   size: 30,

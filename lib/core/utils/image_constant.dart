@@ -55,5 +55,9 @@ class ImageConstant {
   static String molresult = '$imagePath/wepik-export-20240131042544KUTb.png';
 
   static String image2d = '$imagePath/wepik-export-20240131050749OHmR.png';
+ static String similartyhome = '$imagePath/eimilartyhome.png';
+  static String similartybefor = '$imagePath/similarty befor.png';
+
+  static String similartyresult = '$imagePath/similartyresult.png';
 
 }

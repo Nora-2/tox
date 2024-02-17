@@ -7,3 +7,4 @@ sealed class LivercubitState {}
 
 final class LivercubitInitial extends LivercubitState {}
 class changemodestate extends LivercubitState {}
+class changeresultstate extends LivercubitState {}

@@ -1,9 +1,10 @@
 // ignore_for_file: camel_case_types
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class showdiloginfo extends StatelessWidget {
   const showdiloginfo({
@@ -62,12 +63,12 @@ class showdiloginfo extends StatelessWidget {
               ),
               Text(
                 '2D Structer',
-                style: GoogleFonts.sanchez(
-                    textStyle: TextStyle(
+                style:  TextStyle(
                         fontWeight: FontWeight.w600,
                         color: black,
+                         fontFamily: 'sanchez',
                         fontSize: 24)),
-              ),
+              
               SizedBox(
                 height: size.height * .01,
               ),
@@ -87,65 +88,66 @@ class showdiloginfo extends StatelessWidget {
               ),
               Text(
                 'Atomic Number',
-                style: GoogleFonts.sanchez(
-                    textStyle: TextStyle(
+                style:  TextStyle(
+                       fontFamily: 'sanchez',
                         fontWeight: FontWeight.w600,
                         color: black,
-                        fontSize: 24)),
+                        fontSize: 24),
               ),
               SizedBox(
                 height: size.height * .01,
               ),
               Text(
                 'Atom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6',
-                style: GoogleFonts.sanchez(
-                    textStyle: TextStyle(
+                style:  TextStyle(
+                       fontFamily: 'sanchez',
                         fontWeight: FontWeight.w500,
                         color: black,
-                        fontSize: 20)),
+                        fontSize: 20)
               ),
               SizedBox(height: size.height * .02),
               Text(
                 'Bond Type',
-                style: GoogleFonts.sanchez(
-                    textStyle:  TextStyle(
+                style: 
+                     TextStyle(
+                       fontFamily: 'sanchez',
                         fontWeight: FontWeight.w600,
                         color: black,
-                        fontSize: 24)),
+                        fontSize: 24),
               ),
               SizedBox(
                 height: size.height * .01,
               ),
               Text(
                 "Bond between atoms 0 and 1\nBond Type: SINGLE\nBond between atoms 1,and 2\nBond Type: AROMATIC\nBond between atoms 2 and 3\nBond Type: AROMATIC\nBond between atoms 3 and 4\nBond Type: AROMATIC\nBond between atoms 4 and 5\nBond Type: AROMATIC\nBond between atoms 5 and 6\nBond Type: AROMATIC\nBond between atoms 6 and 1 \nBond Type: AROMATIC",
-                style: GoogleFonts.sanchez(
-                    textStyle:  TextStyle(
+                style:   TextStyle(
                         fontWeight: FontWeight.w500,
                         color: black,
-                        fontSize: 20)),
+                         fontFamily: 'sanchez',
+                        fontSize: 20)
               ),
               SizedBox(
                 height: size.height * .02,
               ),
               Text(
                 'Gasteiger charges',
-                style: GoogleFonts.sanchez(
-                    textStyle:  TextStyle(
+                style:   TextStyle(
+                       fontFamily: 'sanchez',
                         fontWeight: FontWeight.w600,
                         color: black,
-                        fontSize: 24)),
+                        fontSize: 24),
               ),
               SizedBox(
                 height: size.height * .01,
               ),
               Text(
                 "Atom Index: 0, Symbol: C,\nGasteiger Charge: -0.039774526323627504\nAtom Index: 1, Symbol: C\nGasteiger Charge: -0.05113326481434698\nAtom Index: 2, Symbol: C\nGasteiger Charge: -0.059326411981218706\nAtom Index: 3, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 4, Symbol: C\nGasteiger Charge: -0.06224908578199481\nAtom Index: 5, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 6, Symbol: C\nGasteiger Charge: -0.059326411981218706",
-                style: GoogleFonts.sanchez(
-                    textStyle:  TextStyle(
+                style:   TextStyle(
                         fontWeight: FontWeight.w500,
                         color: black,
+                         fontFamily: 'sanchez',
                         fontSize: 16)),
-              ),
+              
             ],
           ),
         ),

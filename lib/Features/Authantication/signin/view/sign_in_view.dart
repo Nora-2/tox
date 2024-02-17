@@ -1,12 +1,13 @@
-// ignore_for_file: camel_case_types, dead_code
+// ignore_for_file: camel_case_types, dead_code, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers
 
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/forgetpass.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
@@ -16,7 +17,7 @@ import 'package:Toxicon/core/constants/constants.dart';
 // ignore: must_be_immutable
 class SignIn extends StatefulWidget {
   SignIn({super.key});
-
+static String id = 'SignIn';
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -152,7 +153,7 @@ class _SignInState extends State<SignIn> {
                         GestureDetector(
                           onTap: () {
                             {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => const ForgetPassword(),
@@ -172,7 +173,7 @@ class _SignInState extends State<SignIn> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          _wrongCase;
+                        
                           if (_formKey.currentState!.validate()) {
                             Navigator.push(
                               context,
@@ -180,9 +181,7 @@ class _SignInState extends State<SignIn> {
                                 builder: (_) => const HomeLayout(),
                               ),
                             );
-                          } else {
-                            _wrongCase;
-                          }
+                          } 
                         },
                         child: customButtonContainer(
                           size: size,
@@ -193,62 +192,11 @@ class _SignInState extends State<SignIn> {
                     SizedBox(
                       height: size.height * .02,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 1,
-                          width: size.width * .4,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          'or',
-                          style: GoogleFonts.sanchez(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 16)),
-                        ),
-                        Container(
-                          height: 1,
-                          width: size.width * .4,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                          ),
-                        )
-                      ],
-                    ),
+                    seprator(size: size),
                     SizedBox(
                       height: size.height * .02,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          ImageConstant.facebook,
-                          width: 35,
-                          height: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * .09,
-                        ),
-                        Image.asset(
-                          ImageConstant.google,
-                          width: 35,
-                          height: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * .09,
-                        ),
-                        Image.asset(
-                          ImageConstant.twitter,
-                          width: 35,
-                          height: 35,
-                        )
-                      ],
-                    ),
+                    socialmedia(size: size),
                     SizedBox(
                       height: size.height * .02,
                     ),
@@ -284,15 +232,5 @@ class _SignInState extends State<SignIn> {
         ));
   }
 
-  void _wrongCase(
-    BuildContext context,
-    String email,
-    String password,
-  ) {
-    if (!Checker.checkEmail(email) || email.isEmpty) {
-      AppMessage.customSnackBar(context: context, content: "Invalid email");
-    } else if (!Checker.checkPassword(password) || password.isEmpty) {
-      AppMessage.customSnackBar(context: context, content: "Invalid password");
-    }
-  }
+
 }

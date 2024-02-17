@@ -1,6 +1,6 @@
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -9,13 +9,13 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.end, children: [
+      child: const Row(crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.end, children: [
         Text(
           "Skip",
-          style: GoogleFonts.acme(
-              textStyle: const TextStyle(
+          style:   TextStyle(
+                fontFamily: 'acme',
                   fontWeight: FontWeight.w500, color: kcolor, fontSize: 24)),
-        ),
+        
       ]),
     );
   }

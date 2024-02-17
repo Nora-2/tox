@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+
 
 class CustomInfoCard extends StatelessWidget {
   const CustomInfoCard({
@@ -41,23 +41,21 @@ class CustomInfoCard extends StatelessWidget {
               children: [
                 Text(
                   titel,
-                  style: GoogleFonts.acme(
-                      textStyle: const TextStyle(
+                  style:  const TextStyle(
                           fontWeight: FontWeight.w600,
-                          // color: black,
+                        fontFamily: 'acme',
                           fontSize: 18)),
-                ),
+                
                 SizedBox(
                   height: size.height * .015,
                 ),
                 Text(
                   subtitel,
-                  style: GoogleFonts.acme(
-                      textStyle: const TextStyle(
+                  style: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          // color: black,
+                          fontFamily: 'acme',
                           fontSize: 16)),
-                ),
+                
               ],
             ),
           ),

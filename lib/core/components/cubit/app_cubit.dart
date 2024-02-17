@@ -9,7 +9,7 @@ class AppCubit extends Cubit<AppState> {
     static AppCubit get(context) => BlocProvider.of(context);
  
   ThemeMode appmode = ThemeMode.dark;
-  bool isdark = true;
+  bool isdark = false;
   void changemode() {
     isdark = !isdark;
     emit(changemodestate());

@@ -1,5 +1,6 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 // ignore: camel_case_types
 class homeScreen extends StatelessWidget {
   const homeScreen({super.key});
+  static String id = 'homeScreen';
   @override
   Widget build(BuildContext context) {
     final ThemeMode brightnessValue =
@@ -16,7 +18,8 @@ class homeScreen extends StatelessWidget {
     List widgets = [
       homewidgetliver(size:size,),
       homewidgetmol(size: size),
-      homewidgetdna(size: size)
+      homewidgetdna(size: size),
+      homewidgetsimilarty(size: size,)
     ];
     return Scaffold(
         body: SafeArea(
@@ -74,7 +77,7 @@ class homeScreen extends StatelessWidget {
                     topRight: Radius.circular(15)),
               ),
               child: ListView.builder(
-                padding: const EdgeInsets.only(top: 18, left: 8, right: 8),
+                padding: const EdgeInsets.only(top: 5, left: 8, right: 8,bottom: 5),
                 itemCount: widgets.length,
                 itemBuilder: (context, index) {
                   return widgets[index];

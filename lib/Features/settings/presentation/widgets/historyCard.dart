@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class CustomHistoryCard extends StatelessWidget {
   const CustomHistoryCard(
@@ -46,27 +47,26 @@ class CustomHistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                  const  Text(
                       'Input',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:  TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color:  isDark?Colors.white70:black,
-                              fontSize: 24)),
+                              fontFamily: 'acme',
+                              fontSize: 24),
                     ),
                     SizedBox(
                       width: size.width * .09,
                     ),
                     Text(
                       input,
-                      style: GoogleFonts.acme(
-                          textStyle: TextStyle(
+                      style:TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w500,
                               color: isDark
                                   ? Colors.white70
                                   : black,
                               fontSize: 20)),
-                    ),
+                    
                   ],
                 ),
                 SizedBox(
@@ -76,27 +76,27 @@ class CustomHistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                   const Text(
                       'Section',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:   TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w600,
                               // color:  isDark?black:Colors.white,
                               fontSize: 20)),
-                    ),
+                    
                     SizedBox(
                       width: size.width * .09,
                     ),
                     Text(
                       category,
-                      style: GoogleFonts.acme(
-                          textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w500,
                               color: isDark
                                   ? Colors.white70
                                   : black,
                               fontSize: 20)),
-                    ),
+                    
                   ],
                 ),
                 SizedBox(
@@ -106,27 +106,27 @@ class CustomHistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                  const  Text(
                       'Date',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:  TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w600,
                               // color:  isDark?black:Colors.white,
                               fontSize: 26)),
-                    ),
+                    
                     SizedBox(
                       width: size.width * .09,
                     ),
                     Text(
                       date,
-                      style: GoogleFonts.acme(
-                          textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w500,
                               color: isDark
                                   ? Colors.white70
                                   : black,
                               fontSize: 20)),
-                    ),
+                    
                   ],
                 ),
                 SizedBox(
@@ -136,26 +136,25 @@ class CustomHistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Result',
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style:  TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: black,
+                             fontFamily: 'acme',
                               fontSize: 24)),
-                    ),
+                    
                     SizedBox(
                       width: size.width * .09,
                     ),
                     Text(
                       output,
-                      style: GoogleFonts.acme(
-                          textStyle: TextStyle(
+                      style:  TextStyle(
+                        fontFamily: 'acme',
                               fontWeight: FontWeight.w500,
                               color: isDark
                                   ? Colors.white70
                                   : black,
-                              fontSize: 20)),
+                              fontSize: 20),
                     ),
                   ],
                 ),

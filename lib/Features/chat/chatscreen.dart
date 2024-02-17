@@ -2,13 +2,13 @@
 
 import 'dart:convert';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/arrowpop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class Message {
   final bool isSender;
@@ -19,7 +19,7 @@ class Message {
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
-
+static String id = 'ChatScreen';
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
@@ -119,13 +119,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     width: 40,
                   ),
                   
-                  Text(
+                const  Text(
                     'Mr-Tox',
-                    style: GoogleFonts.sanchez(
-                        textStyle: const TextStyle(
+                    style:   TextStyle(
                             fontWeight: FontWeight.w500,
-                            // color: black,
-                            fontSize: 20)),
+                           fontFamily: 'sanchez',
+                            fontSize: 20),
                   ),
                 ],
               ),

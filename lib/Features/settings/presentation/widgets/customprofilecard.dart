@@ -1,8 +1,7 @@
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CustomProfileCard extends StatelessWidget {
@@ -49,11 +48,10 @@ class CustomProfileCard extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 9),
                     child: Text(
                       titel,
-                      style: GoogleFonts.acme(
-                          textStyle: const TextStyle(
+                      style: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              // color: black,
-                              fontSize: 16)),
+                              fontFamily: 'acme',
+                              fontSize: 16),
                     ),
                   ),
                   CustomTextField(

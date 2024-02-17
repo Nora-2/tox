@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
-
-import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/utils/function/moreunfo.dart';
+import 'package:Toxicon/core/utils/function/resultcontainer.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';

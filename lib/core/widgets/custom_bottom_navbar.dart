@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class BottomNavyBar extends StatelessWidget {
   BottomNavyBar({

@@ -1,16 +1,15 @@
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
-
+static String id = 'ResetPassword';
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
 }
@@ -65,40 +64,40 @@ class _ResetPasswordState extends State<ResetPassword> {
                       SizedBox(
                         height: size.height * .015,
                       ),
-                       CustomFormField(
-                                  hint: 'Enter password',
-                                  ispass: LoginCubit.get(context).ispassword,
-                                  preicon: const Icon(
-                                    Icons.lock,
-                                    size: 20,
-                                    color: kcolor,
-                                  ),
-                                  val: (passs) {
-                                    if (passs == null ||
-                                        passs.isEmpty ||
-                                        !Checker.checkPassword(passs)) {
-                                      return 'Invalid Password';
-                                    }
-                                    return null;
-                                  },
-                                  suffix: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          LoginCubit.get(context).changepass();
-                                        });
-                                      },
-                                      icon: LoginCubit.get(context).ispassword
-                                          ? const Icon(
-                                              Icons.visibility_off,
-                                              size: 20,
-                                              color: icolor,
-                                            )
-                                          : const Icon(
-                                              Icons.visibility,
-                                              size: 20,
-                                              color: icolor,
-                                            )),
-                                  controller: password),
+                      CustomFormField(
+                          hint: 'Enter password',
+                          ispass: LoginCubit.get(context).ispassword,
+                          preicon: const Icon(
+                            Icons.lock,
+                            size: 20,
+                            color: kcolor,
+                          ),
+                          val: (passs) {
+                            if (passs == null ||
+                                passs.isEmpty ||
+                                !Checker.checkPassword(passs)) {
+                              return 'Invalid Password';
+                            }
+                            return null;
+                          },
+                          suffix: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  LoginCubit.get(context).changepass();
+                                });
+                              },
+                              icon: LoginCubit.get(context).ispassword
+                                  ? const Icon(
+                                      Icons.visibility_off,
+                                      size: 20,
+                                      color: icolor,
+                                    )
+                                  : const Icon(
+                                      Icons.visibility,
+                                      size: 20,
+                                      color: icolor,
+                                    )),
+                          controller: password),
                       SizedBox(
                         height: size.height * .015,
                       ),
@@ -109,40 +108,41 @@ class _ResetPasswordState extends State<ResetPassword> {
                         height: size.height * .015,
                       ),
                       CustomFormField(
-                                  hint: 'Enter Confirmed password',
-                                  ispass: LoginCubit.get(context).ispassword,
-                                  preicon: const Icon(
-                                    Icons.lock,
-                                    size: 20,
-                                    color: kcolor,
-                                  ),
-                                  val: (pass) {
-                                    if (pass == null ||
-                                        pass.isEmpty ||
-                                        (password.toString() == confirmpass.toString()) ||
-                                        !Checker.checkPassword(pass)) {
-                                      return 'Password must match';
-                                    }
-                                    return null;
-                                  },
-                                  suffix: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          LoginCubit.get(context).changepass();
-                                        });
-                                      },
-                                      icon: LoginCubit.get(context).ispassword
-                                          ? const Icon(
-                                              Icons.visibility_off,
-                                              size: 20,
-                                              color: icolor,
-                                            )
-                                          : const Icon(
-                                              Icons.visibility,
-                                              size: 20,
-                                              color: icolor,
-                                            )),
-                                  controller: confirmpass),
+                          hint: 'Enter Confirmed password',
+                          ispass: LoginCubit.get(context).ispassword,
+                          preicon: const Icon(
+                            Icons.lock,
+                            size: 20,
+                            color: kcolor,
+                          ),
+                          val: (pass) {
+                            if (pass == null ||
+                                pass.isEmpty ||
+                                (password.toString() ==
+                                    confirmpass.toString()) ||
+                                !Checker.checkPassword(pass)) {
+                              return 'Password must match';
+                            }
+                            return null;
+                          },
+                          suffix: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  LoginCubit.get(context).changepass();
+                                });
+                              },
+                              icon: LoginCubit.get(context).ispassword
+                                  ? const Icon(
+                                      Icons.visibility_off,
+                                      size: 20,
+                                      color: icolor,
+                                    )
+                                  : const Icon(
+                                      Icons.visibility,
+                                      size: 20,
+                                      color: icolor,
+                                    )),
+                          controller: confirmpass),
                       SizedBox(
                         height: size.height * .06,
                       ),
@@ -150,7 +150,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         child: GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => SignIn(),
@@ -168,11 +168,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                             child: Center(
                               child: Text(
                                 'Rest Password',
-                                style: GoogleFonts.sanchez(
-                                    textStyle: TextStyle(
+                                style: TextStyle(
+                                      fontFamily: 'sanchez',
                                         fontWeight: FontWeight.w500,
                                         color: isDark ? black : Colors.white,
-                                        fontSize: 18)),
+                                        fontSize: 18),
                               ),
                             ),
                           ),

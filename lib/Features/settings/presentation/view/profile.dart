@@ -1,17 +1,18 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-import 'package:Toxicon/core/utils/styles.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
-  
+   static String id = 'ProfileScreen';
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -130,22 +131,20 @@ void _pickImage() async {
       ),
     ),
             
-              Text(
+             const Text(
                 'Nora Mohamed',
-                style: GoogleFonts.acme(
-                    textStyle: const TextStyle(
+                style:   TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: black,
-                        fontSize: 24)),
+                       fontFamily: 'acme',
+                        fontSize: 24),
               ),
-              Text(
+              const Text(
                 'Researcher',
-                style: GoogleFonts.acme(
-                    textStyle: const TextStyle(
+                style:   TextStyle(
                         fontWeight: FontWeight.w400,
-                        // color: black,
+                       fontFamily: 'acme',
                         fontSize: 20)),
-              ),
+              
             ],
           ),
           SizedBox(

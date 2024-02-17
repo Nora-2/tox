@@ -1,13 +1,14 @@
+import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class OtpVerify extends StatelessWidget {
   const OtpVerify({super.key});
-
+static String id = 'OtpVerify';
   @override
   Widget build(BuildContext context) {
     final Brightness brightnessValue =
@@ -70,7 +71,7 @@ class OtpVerify extends StatelessWidget {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => const ResetPassword(),

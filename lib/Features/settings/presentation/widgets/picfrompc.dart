@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'dart:typed_data';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ void _pickImage() async {
       children: [
         GestureDetector(
           onTap: _pickImage,
-          child: Text("Pick Image"),
+          child:const Text("Pick Image"),
         ),
        
         if (_fileName.isNotEmpty)

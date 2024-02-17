@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:async';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -10,6 +11,7 @@ import '../../core/constants/constants.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
+  static String id = 'OnBoardingScreen';
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
 }
@@ -78,10 +80,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             await perfs.setInt('onBoard', 1);
 
                             // ignore: use_build_context_synchronously
-                            Navigator.pushReplacement(
+                            Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()));
+                                    builder: (context) => SignUp()),
+                                (route) => false);
                           }),
                         ),
                         SizedBox(

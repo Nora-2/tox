@@ -1,11 +1,10 @@
 
+import 'package:Toxicon/Features/home/cubit_home/homecubit_cubit.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
-import 'package:Toxicon/core/cubit_home/homecubit_cubit.dart';
 import 'package:Toxicon/core/widgets/custom_bottom_navbar.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -40,20 +39,23 @@ class HomeLayout extends StatelessWidget {
                       CupertinoIcons.home,
                     ),
                     title:  Text(
-                      'Home',style: GoogleFonts.acme(
-              textStyle: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                      fontSize: 20)),
+                      'Home',style: TextStyle(
+                    fontFamily: 'acme',
+                      fontWeight: FontWeight.w400,
+                      color: isDark?Colors.white:Colors.black,
+                      fontSize: 20)
                     ),
                     activeColor: isDark?Colors.black:Colors.white,
                     inactiveColor: Colors.white
                     ),
                         BottomNavyBarItem(
                     icon: const Icon(Icons.settings),
-                    title:  Text('Settings',style: GoogleFonts.acme(
-              textStyle:const  TextStyle(
-                  fontWeight: FontWeight.w400,
-                    fontSize: 20)),
+                    title:  Text('Settings',style:
+                   TextStyle(
+                    fontFamily: 'acme',
+                      fontWeight: FontWeight.w400,
+                      color: isDark?Colors.white:Colors.black,
+                      fontSize: 20)
             ),
                     activeColor: isDark?Colors.black:Colors.white,
                     inactiveColor:Colors.white,

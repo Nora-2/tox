@@ -1,7 +1,8 @@
 // ignore_for_file: dead_code
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
-import 'package:Toxicon/core/constants/constants.dart';
+import 'package:Toxicon/core/utils/function/arrowpop.dart';
+import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:Toxicon/Features/settings/presentation/widgets/historyCard.dart'
 // ignore: camel_case_types
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
+   static String id = 'HistoryScreen';
   @override
   Widget build(BuildContext context) {
     bool submit = false;

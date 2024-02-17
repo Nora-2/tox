@@ -1,7 +1,6 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 
 class CustomContainerCtegory extends StatelessWidget {
   const CustomContainerCtegory(
@@ -19,7 +18,7 @@ class CustomContainerCtegory extends StatelessWidget {
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 5),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -29,7 +28,7 @@ class CustomContainerCtegory extends StatelessWidget {
         elevation: 10,
         child: SizedBox(
           width: size.width * .89,
-          height: size.height * .17,
+          height: size.height * .15,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Row(
@@ -39,10 +38,10 @@ class CustomContainerCtegory extends StatelessWidget {
                 Text(
                   titel,
                   // lakkiReddy
-                  style: GoogleFonts.lakkiReddy(
-                      textStyle: const TextStyle(
+                  style: const TextStyle(
+                        fontFamily: 'lakkiReddy',
                           fontWeight: FontWeight.w400,
-                          fontSize: 28)),
+                          fontSize: 28),
                 ),
                 Image(
                   image: AssetImage(

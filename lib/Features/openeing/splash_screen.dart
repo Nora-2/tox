@@ -1,15 +1,14 @@
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:Toxicon/core/constants/constants.dart';
 import 'package:Toxicon/main.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
+static String id = 'SplashScreen';
   @override
   Widget build(BuildContext context) {
     final Brightness brightnessValue =
@@ -64,11 +63,11 @@ class SplashScreen extends StatelessWidget {
                 incomingEffect: WidgetTransitionEffects.incomingScaleDown(),
                 atRestEffect: WidgetRestingEffects.bounce(),
                 outgoingEffect: WidgetTransitionEffects.outgoingScaleUp(),
-                style: GoogleFonts.sanchez(
-                    textStyle: const TextStyle(
+                style:  const TextStyle(
+                      fontFamily: 'sanchez',
                         fontWeight: FontWeight.w900,
                         color: Color(0xffB5A1B7),
-                        fontSize: 18))),
+                        fontSize: 18)),
           ),
         ],
       ),
