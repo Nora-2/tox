@@ -39,7 +39,7 @@ class CustomContainerCtegory extends StatelessWidget {
                   titel,
                   // lakkiReddy
                   style: const TextStyle(
-                        fontFamily: 'lakkiReddy',
+                        fontFamily: 'lakkiRaddy',
                           fontWeight: FontWeight.w400,
                           fontSize: 28),
                 ),

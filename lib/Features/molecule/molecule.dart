@@ -111,7 +111,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    MoleculeCubit.get(context).changemode();
+                                    MoleculeCubit.get(context).viewResult();
                                   });
                                 },
                                 child: submit(size: size, isDark: isDark),

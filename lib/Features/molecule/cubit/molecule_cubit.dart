@@ -13,7 +13,7 @@ class MoleculeCubit extends Cubit<MoleculeState> {
   }
 
   bool issubmit = false;
-  void changemode() {
+  void viewResult() {
     issubmit = !issubmit;
     emit(changemodestate());
   }

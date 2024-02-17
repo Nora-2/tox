@@ -13,7 +13,7 @@ class LivercubitCubit extends Cubit<LivercubitState> {
     emit(changeresultstate());
   }
   bool issubmit = false;
-  void changemode() {
+  void viewResult() {
     issubmit = !issubmit;
     emit(changemodestate());
   }

@@ -123,7 +123,7 @@ TextEditingController smile2 = TextEditingController();
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    SmilartyCubit.get(context).changemode();
+                                    SmilartyCubit.get(context).viewResult();
                                   });
                                 },
                                 child: submit(size: size, isDark: isDark),

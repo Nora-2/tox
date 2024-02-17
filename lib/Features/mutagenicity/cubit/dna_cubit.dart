@@ -13,7 +13,7 @@ class DnaCubit extends Cubit<DnaState> {
   }
 
   bool issubmit = false;
-  void changemode() {
+  void viewResult() {
     issubmit = !issubmit;
     emit(changemodestate());
   }

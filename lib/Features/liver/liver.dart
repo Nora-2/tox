@@ -108,7 +108,7 @@ class _LiverScreenState extends State<LiverScreen> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      LivercubitCubit.get(context).changemode();
+                                      LivercubitCubit.get(context).viewResult();
                                     });
                                   },
                                   child: submit(size: size, isDark: isDark),

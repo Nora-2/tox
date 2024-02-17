@@ -8,6 +8,7 @@ import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
@@ -15,13 +16,26 @@ import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.d
 // ignore: must_be_immutable
 class MutagencityScreen extends StatefulWidget {
   const MutagencityScreen({super.key});
-static String id = 'MutagencityScreen';
+  static String id = 'MutagencityScreen';
   @override
   State<MutagencityScreen> createState() => _MutagencityScreenState();
 }
 
 class _MutagencityScreenState extends State<MutagencityScreen> {
   TextEditingController dna = TextEditingController();
+  String fileName = 'mol.sdf'; // Default file name
+
+  // Function to handle file selection
+  void _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      setState(() {
+        fileName = result.files.single.name;
+        // Perform any additional actions with the selected file if needed
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +51,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
             return Scaffold(
                 body: SafeArea(
                     child: Container(
-              decoration: BoxDecoration(
-                gradient: gradientTop(isDark)
-              ),
+              decoration: BoxDecoration(gradient: gradientTop(isDark)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +65,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       arrowpop(isDark: isDark),
+                        arrowpop(isDark: isDark),
                         SizedBox(
                           width: size.width * .2,
                         ),
@@ -72,7 +84,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: isDark ?  black : Colors.white,
+                        color: isDark ? black : Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.3),
@@ -97,7 +109,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               height: size.height * .015,
                             ),
                             CustomFormField(
-                              ispass: false,
+                                ispass: false,
                                 hint: 'Enter your Smile',
                                 preicon: const Icon(
                                   Icons.edit,
@@ -106,21 +118,57 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                 ),
                                 controller: dna),
                             SizedBox(
+                              height: size.height * .01,
+                            ),
+                            Container(
+                              height: size.height * .055,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: Colors.grey.withOpacity(.8)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0, horizontal: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                     Text(
+                                      fileName,
+                                      style:const TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                    ),
+                                    IconButton(
+                                        onPressed: _pickFile,
+                                        icon: const Icon(
+                                          Icons.upload_file,
+                                          color: kcolor,
+                                          size: 28,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
                               height: size.height * .02,
                             ),
                             Center(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    DnaCubit.get(context).changemode();
-                                  });
-                                },
-                                child: submit(size: size, isDark: isDark))
-                            ),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        DnaCubit.get(context).viewResult();
+                                      });
+                                    },
+                                    child: submit(size: size, isDark: isDark))),
                             SizedBox(height: size.height * .04),
                             DnaCubit.get(context).issubmit
                                 ? dnaresult(
-                                    size: size, result: DnaCubit().result, isDark: isDark)
+                                    size: size,
+                                    result: DnaCubit().result,
+                                    isDark: isDark)
                                 : Center(
                                     child: Image.asset(
                                     ImageConstant.dnabefor,
