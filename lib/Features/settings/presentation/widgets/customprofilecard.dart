@@ -36,7 +36,7 @@ class CustomProfileCard extends StatelessWidget {
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
-          height: size.height * .095,
+          height: size.height * .11,
           child: Padding(
               padding:
                   const EdgeInsets.only(left: 8.0, right: 8, top: 1, bottom: 1),
@@ -51,7 +51,7 @@ class CustomProfileCard extends StatelessWidget {
                       style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontFamily: 'acme',
-                              fontSize: 16),
+                              fontSize: 18),
                     ),
                   ),
                   CustomTextField(

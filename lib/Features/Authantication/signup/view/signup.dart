@@ -21,7 +21,7 @@ static String id = 'SignUp';
   @override
   State<SignUp> createState() => _SignUpState();
 }
-
+ final formKey = GlobalKey<FormState>();
 class _SignUpState extends State<SignUp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -33,7 +33,7 @@ class _SignUpState extends State<SignUp> {
         MediaQuery.of(context).platformBrightness;
     bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
-    final formKey = GlobalKey<FormState>();
+   
     return BlocProvider(
         create: (context) => RegisterCubit(),
         child: BlocConsumer<RegisterCubit, RegisterState>(
@@ -42,184 +42,190 @@ class _SignUpState extends State<SignUp> {
             return Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                        child: Image.asset(
-                      ImageConstant.signup,
-                      width: 270,
-                      height: 170,
-                    )),
-                    SizedBox(
-                      height: size.height * .001,
-                    ),
-                    CustomTextfont24_900(text: 'Sign Up'),
-                    SizedBox(
-                      height: size.height * .003,
-                    ),
-                    Form(
-                      key: formKey,
-                      child: Card(
-                        shadowColor: isDark ? Colors.white : black,
-                        elevation: 8,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomTextfont16_500(text: 'UserName'),
-                              SizedBox(
-                                height: size.height * .015,
-                              ),
-                              CustomFormField(
-                                  ispass: false,
-                                  val: (name) {
-                                    if (name == null ||
-                                        name.isEmpty ||
-                                        !Checker.checkName(name)) {
-                                      return 'Invalid Name';
-                                    }
-                                    return null;
-                                  },
-                                  hint: 'Enter your Name',
-                                  preicon: const Icon(
-                                    Icons.person,
-                                    size: 19,
-                                    color: kcolor,
-                                  ),
-                                  controller: username),
-                              SizedBox(
-                                height: size.height * .02,
-                              ),
-                              CustomTextfont16_500(
-                                text: 'Email',
-                              ),
-                              SizedBox(
-                                height: size.height * .015,
-                              ),
-                              CustomFormField(
-                                  ispass: false,
-                                  hint: 'Enter your Email',
-                                  preicon: const Icon(
-                                    Icons.email,
-                                    size: 20,
-                                    color: kcolor,
-                                  ),
-                                  val: (email) {
-                                    if (email == null ||
-                                        email.isEmpty ||
-                                        !Checker.checkEmail(email)) {
-                                      return 'Invalid email';
-                                    }
-                                    return null;
-                                  },
-                                  controller: email),
-                              SizedBox(
-                                height: size.height * .02,
-                              ),
-                              CustomTextfont16_500(
-                                text: 'Password',
-                              ),
-                              SizedBox(
-                                height: size.height * .015,
-                              ),
-                              CustomFormField(
-                                  hint: 'Enter password',
-                                  ispass: RegisterCubit.get(context).ispassword,
-                                  preicon: const Icon(
-                                    Icons.lock,
-                                    size: 20,
-                                    color: kcolor,
-                                  ),
-                                  val: (pass) {
-                                    if (pass == null ||
-                                        pass.isEmpty ||
-                                        !Checker.checkPassword(pass)) {
-                                      return 'Invalid Password';
-                                    }
-                                    return null;
-                                  },
-                                  suffix: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          RegisterCubit.get(context)
-                                              .changepass();
-                                        });
-                                      },
-                                      icon: LoginCubit.get(context).ispassword
-                                          ? const Icon(
-                                              Icons.visibility_off,
-                                              size: 20,
-                                              color: icolor,
-                                            )
-                                          : const Icon(
-                                              Icons.visibility,
-                                              size: 20,
-                                              color: icolor,
-                                            )),
-                                  controller: password),
-                            ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: size.height * .07,
+                      ),
+                      Center(
+                          child: Image.asset(
+                        ImageConstant.signup,
+                        width: 270,
+                        height: 170,
+                      )),
+                      SizedBox(
+                        height: size.height * .001,
+                      ),
+                      CustomTextfont24_900(text: 'Sign Up'),
+                      SizedBox(
+                        height: size.height * .003,
+                      ),
+                      Form(
+                        key: formKey,
+                        child: Card(
+                          shadowColor: isDark ? Colors.white : black,
+                          elevation: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomTextfont16_500(text: 'UserName'),
+                                SizedBox(
+                                  height: size.height * .015,
+                                ),
+                                CustomFormField(
+                                    ispass: false,
+                                    val: (name) {
+                                      if (name == null ||
+                                          name.isEmpty ||
+                                          !Checker.checkName(name)) {
+                                        return 'Invalid Name';
+                                      }
+                                      return null;
+                                    },
+                                    hint: 'Enter your Name',
+                                    preicon: const Icon(
+                                      Icons.person,
+                                      size: 24,
+                                      color: kcolor,
+                                    ),
+                                    controller: username),
+                                SizedBox(
+                                  height: size.height * .02,
+                                ),
+                                CustomTextfont16_500(
+                                  text: 'Email',
+                                ),
+                                SizedBox(
+                                  height: size.height * .015,
+                                ),
+                                CustomFormField(
+                                    ispass: false,
+                                    hint: 'Enter your Email',
+                                    preicon: const Icon(
+                                      Icons.email,
+                                      size: 20,
+                                      color: kcolor,
+                                    ),
+                                    val: (email) {
+                                      if (email == null ||
+                                          email.isEmpty ||
+                                          !Checker.checkEmail(email)) {
+                                        return 'Invalid email';
+                                      }
+                                      return null;
+                                    },
+                                    controller: email),
+                                SizedBox(
+                                  height: size.height * .02,
+                                ),
+                                CustomTextfont16_500(
+                                  text: 'Password',
+                                ),
+                                SizedBox(
+                                  height: size.height * .015,
+                                ),
+                                CustomFormField(
+                                    hint: 'Enter password',
+                                    ispass: RegisterCubit.get(context).ispassword,
+                                    preicon: const Icon(
+                                      Icons.lock,
+                                      size: 20,
+                                      color: kcolor,
+                                    ),
+                                    val: (pass) {
+                                      if (pass == null ||
+                                          pass.isEmpty ||
+                                          !Checker.checkPassword(pass)) {
+                                        return 'Invalid Password';
+                                      }
+                                      return null;
+                                    },
+                                    suffix: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            RegisterCubit.get(context)
+                                                .changepass();
+                                          });
+                                        },
+                                        icon: LoginCubit.get(context).ispassword
+                                            ? const Icon(
+                                                Icons.visibility_off,
+                                                size: 20,
+                                                color: kcolor,
+                                              )
+                                            : const Icon(
+                                                Icons.visibility,
+                                                size: 20,
+                                                color: kcolor,
+                                              )),
+                                    controller: password),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                          onTap: () {
-                            if (formKey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const HomeLayout(),
-                                ),
-                              );
-                            } else {}
-                          },
-                          child: customButtonContainer(
-                              size: size, text: 'Sign Up')),
-                    ),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    seprator(size: size),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                   socialmedia(size: size),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const customtext50014(
-                          text: "Already have an account?",
-                        ),
-                        SizedBox(
-                          width: size.width * .009,
-                        ),
-                        GestureDetector(
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      Center(
+                        child: GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => SignIn(),
-                                ),
-                              );
+                              if (formKey.currentState!.validate()) {
+                               Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const HomeLayout(),
+                                  ),
+                                  (route) => false);
+                               
+                              } else {}
                             },
-                            child: CustomTextfont12_700(
-                              text: 'sign In',
-                            )),
-                      ],
-                    ),
-                  ],
+                            child: customButtonContainer(
+                                size: size, text: 'Sign Up')),
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      seprator(size: size),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                     socialmedia(size: size),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const customtext50014(
+                            text: "Already have an account?",
+                          ),
+                          SizedBox(
+                            width: size.width * .009,
+                          ),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => SignIn(),
+                                  ),
+                                );
+                              },
+                              child: CustomTextfont12_700(
+                                text: 'sign In',
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

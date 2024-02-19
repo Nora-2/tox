@@ -32,7 +32,7 @@ class CustomInfoCard extends StatelessWidget {
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,
-          height: size.height * .16,
+          height: size.height * .18,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Column(

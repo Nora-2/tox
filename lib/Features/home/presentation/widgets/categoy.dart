@@ -18,7 +18,7 @@ class CustomContainerCtegory extends StatelessWidget {
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     return Padding(
-      padding: const EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.only(top: 2),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -28,7 +28,7 @@ class CustomContainerCtegory extends StatelessWidget {
         elevation: 10,
         child: SizedBox(
           width: size.width * .89,
-          height: size.height * .15,
+          height: size.height * .149,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Row(
@@ -41,14 +41,14 @@ class CustomContainerCtegory extends StatelessWidget {
                   style: const TextStyle(
                         fontFamily: 'lakkiRaddy',
                           fontWeight: FontWeight.w400,
-                          fontSize: 28),
+                          fontSize: 26),
                 ),
                 Image(
                   image: AssetImage(
                     image,
                   ),
                   width: size.width * .5,
-                  height: size.width * .5,
+                  height: size.width * .44,
                 ),
               ],
             ),

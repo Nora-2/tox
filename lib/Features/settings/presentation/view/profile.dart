@@ -52,8 +52,7 @@ void _pickImage() async {
     bool isDark = brightnessValue == ThemeMode.dark;
     
     return Scaffold(
-        body: SafeArea(
-            child: Container(
+        body: Container(
       decoration: BoxDecoration(
         gradient: gradientTop(isDark)
       ),
@@ -62,33 +61,33 @@ void _pickImage() async {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: size.height * .03,
+        height: size.height * .03,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: isDark ? Colors.white : black,
-                    )),
-              ],
-            ),
+        padding: const EdgeInsets.only(left: 4.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: isDark ? Colors.white : black,
+                )),
+          ],
+        ),
           ),
           SizedBox(
-            height: size.height * .009,
+        height: size.height * .009,
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
       child: SizedBox(
         height: 150,
         width: 150,
@@ -96,129 +95,131 @@ void _pickImage() async {
           fit: StackFit.expand,
           clipBehavior: Clip.none,
           children: [
-              if (_fileName.isNotEmpty)
+          if (_fileName.isNotEmpty)
          
-             
          
-                 CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:MemoryImage(_imageBytes) ,)
+         
+             CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:MemoryImage(_imageBytes) ,)
 
-                 else
-                 CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:AssetImage( ImageConstant.profile,),),
+             else
+             CircleAvatar(backgroundColor: Colors.transparent.withOpacity(0),backgroundImage:AssetImage( ImageConstant.profile,),),
          
-            Positioned(
-              right: 10,
-              bottom: 10,
-              child: GestureDetector(
-                onTap:  _pickImage,
-                child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.7),
-                          blurRadius: 0.3,
-                        )
-                      ],
-                    ),
-                    height: 30,
-                    width: 30,
-                    child: const Icon(Icons.camera_alt_rounded,color: Colors.black,size: 20,)),
-              ),
-            )
+        Positioned(
+          right: 10,
+          bottom: 10,
+          child: GestureDetector(
+            onTap:  _pickImage,
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.7),
+                      blurRadius: 0.3,
+                    )
+                  ],
+                ),
+                height: 30,
+                width: 30,
+                child: const Icon(Icons.camera_alt_rounded,color: Colors.black,size: 20,)),
+          ),
+        )
           ],
         ),
       ),
     ),
-            
-             const Text(
-                'Nora Mohamed',
-                style:   TextStyle(
-                        fontWeight: FontWeight.w400,
-                       fontFamily: 'acme',
-                        fontSize: 24),
-              ),
-              const Text(
-                'Researcher',
-                style:   TextStyle(
-                        fontWeight: FontWeight.w400,
-                       fontFamily: 'acme',
-                        fontSize: 20)),
-              
-            ],
+        
+         const Text(
+            'Nora Mohamed',
+            style:   TextStyle(
+                    fontWeight: FontWeight.w400,
+                   fontFamily: 'acme',
+                    fontSize: 24),
+          ),
+          const Text(
+            'Researcher',
+            style:   TextStyle(
+                    fontWeight: FontWeight.w400,
+                   fontFamily: 'acme',
+                    fontSize: 20)),
+          
+        ],
           ),
           SizedBox(
-            height: size.height * .02,
+        height: size.height * .02,
           ),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: isDark ? black : Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius:1,
-                    blurRadius: 9,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: isDark ? black : Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius:1,
+                blurRadius: 9,
+                offset: const Offset(0, -2),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomProfileCard(
-                      titel: 'Name',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: 'Nora Mohamed',
-                      controller: name,
-                      input: TextInputType.name),
-                  CustomProfileCard(
-                      titel: 'Email',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: 'Nora123@gmail.com',
-                      controller: email,
-                      input: TextInputType.emailAddress),
-                  CustomProfileCard(
-                      titel: 'Mobile',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: '01026076471',
-                      controller: mobile,
-                      input: TextInputType.phone),
-                  CustomProfileCard(
-                      titel: 'country',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: 'Egypt',
-                      controller: country,
-                      input: TextInputType.name),
-                  CustomProfileCard(
-                      titel: 'data of birth',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: '12/12/2001',
-                      controller: birth,
-                      input: TextInputType.datetime),
-                  CustomProfileCard(
-                      titel: 'job describtion',
-                      size: size,
-                      icon: Icons.edit,
-                      subtitel: 'Researcher',
-                      controller: jop,
-                      input: TextInputType.name),
-                ],
-              ),
+            ],
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15)),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomProfileCard(
+                    titel: 'Name',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: 'Nora Mohamed',
+                    controller: name,
+                    input: TextInputType.name),
+                CustomProfileCard(
+                    titel: 'Email',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: 'Nora123@gmail.com',
+                    controller: email,
+                    input: TextInputType.emailAddress),
+                CustomProfileCard(
+                    titel: 'Mobile',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: '01026076471',
+                    controller: mobile,
+                    input: TextInputType.phone),
+                CustomProfileCard(
+                    titel: 'country',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: 'Egypt',
+                    controller: country,
+                    input: TextInputType.name),
+                CustomProfileCard(
+                    titel: 'data of birth',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: '12/12/2001',
+                    controller: birth,
+                    input: TextInputType.datetime),
+                CustomProfileCard(
+                    titel: 'job describtion',
+                    size: size,
+                    icon: Icons.edit,
+                    subtitel: 'Researcher',
+                    controller: jop,
+                    input: TextInputType.name),
+              ],
             ),
+          ),
+        ),
           ),
         ],
       ),
-    )));
+    ));
   }
 }

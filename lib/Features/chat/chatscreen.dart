@@ -96,165 +96,167 @@ class _ChatScreenState extends State<ChatScreen> {
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            isDark ?  black : Colors.white,
-            isDark ?  black : Colors.white,
-          ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-        ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  arrowpop(isDark: isDark),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  
-                const  Text(
-                    'Mr-Tox',
-                    style:   TextStyle(
-                            fontWeight: FontWeight.w500,
-                           fontFamily: 'sanchez',
-                            fontSize: 20),
-                  ),
-                ],
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              isDark ?  black : Colors.white,
+              isDark ?  black : Colors.white,
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 8,
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: msgs.length,
-                shrinkWrap: true,
-                reverse: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: isTyping && index == 0
-                        ? Column(
-                            children: [
-                              BubbleNormal(
-                                text: msgs[0].msg,
-                                isSender: true,
-                                color: Colors.blue.shade100,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, top: 4),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Lottie.asset(
-                                    'assets/images/loading.json', // Replace with your Lottie file
-                                    width: 70,
-                                    height: 50,
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    arrowpop(isDark: isDark),
+                    const SizedBox(
+                      width: 40,
+                    ),
+                    
+                  const  Text(
+                      'Mr-Tox',
+                      style:   TextStyle(
+                              fontWeight: FontWeight.w500,
+                             fontFamily: 'sanchez',
+                              fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: msgs.length,
+                  shrinkWrap: true,
+                  reverse: true,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: isTyping && index == 0
+                          ? Column(
+                              children: [
+                                BubbleNormal(
+                                  text: msgs[0].msg,
+                                  isSender: true,
+                                  color: Colors.blue.shade100,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 4, top: 4),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Lottie.asset(
+                                      'assets/images/1.json', // Replace with your Lottie file
+                                      width: 100,
+                                      height: 60,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                        : Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: msgs[index].isSender
-                                ? MainAxisAlignment.end
-                                : MainAxisAlignment.start,
-                            children: [
-                              msgs[index].isSender
-                                  ? const SizedBox()
-                                  : Image.asset(ImageConstant.robotchat,
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                              const SizedBox(width: 3),
-                              Expanded(
-                                child: BubbleNormal(
-                                  text: msgs[index].msg,
-                                  isSender: msgs[index].isSender,
-                                  color: msgs[index].isSender
-                                      ? Colors.blue.shade100
-                                      : Colors.grey.shade200,
+                              ],
+                            )
+                          : Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: msgs[index].isSender
+                                  ? MainAxisAlignment.end
+                                  : MainAxisAlignment.start,
+                              children: [
+                                msgs[index].isSender
+                                    ? const SizedBox()
+                                    : Image.asset(ImageConstant.robotchat,
+                                        width: 50,
+                                        height: 50,
+                                      ),
+                                const SizedBox(width: 3),
+                                Expanded(
+                                  child: BubbleNormal(
+                                    text: msgs[index].msg,
+                                    isSender: msgs[index].isSender,
+                                    color: msgs[index].isSender
+                                        ? Colors.blue.shade100
+                                        : Colors.grey.shade200,
+                                  ),
                                 ),
-                              ),
-                              msgs[index].isSender
-                                  ? Image.asset(
-                                      ImageConstant.profile,
-                                      width: 50,
-                                      height: 50,
-                                    )
-                                  : const SizedBox(),
-                            ],
-                          ),
-                  );
-                },
+                                msgs[index].isSender
+                                    ? Image.asset(
+                                        ImageConstant.profile,
+                                        width: 50,
+                                        height: 50,
+                                      )
+                                    : const SizedBox(),
+                              ],
+                            ),
+                    );
+                  },
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color:
-                            isDark ? Colors.white : Colors.grey.withOpacity(.2),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: TextField(
-                          controller: controller,
-                          textCapitalization: TextCapitalization.sentences,
-                          onSubmitted: (value) {
-                            sendMsg();
-                          },
-                          textInputAction: TextInputAction.send,
-                          showCursor: true,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Enter text",
-                              hintStyle: TextStyle(
-                                color: isDark
-                                    ?  black
-                                    : Colors.white,
-                              )),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color:
+                              isDark ? Colors.white : icolor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: TextField(
+                            controller: controller,
+                            textCapitalization: TextCapitalization.sentences,
+                            onSubmitted: (value) {
+                              sendMsg();
+                            },
+                            textInputAction: TextInputAction.send,
+                            showCursor: true,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Enter text",
+                                hintStyle: TextStyle(
+                                  color: isDark
+                                      ?  black
+                                      : Colors.white,
+                                )),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    sendMsg();
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: isDark ? darkcolor : icolor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Icon(
-                      Icons.send,
-                      size: 15,
-                      color: isDark ? Colors.white : Colors.white,
+                  InkWell(
+                    onTap: () {
+                      sendMsg();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: isDark ? darkcolor : icolor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Icon(
+                        Icons.send,
+                        size: 15,
+                        color: isDark ? Colors.white : Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 8,
-                )
-              ],
-            ),
-          ],
+                  const SizedBox(
+                    width: 8,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

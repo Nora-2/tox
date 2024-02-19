@@ -25,7 +25,7 @@ class AppRoutes {
 
   static String? get initialRoute {
     if (!isAuth) {
-      return HomeLayout.id;
+      return SplashScreen.id;
     } else {
       return HomeLayout.id;
     }
@@ -41,7 +41,7 @@ class AppRoutes {
     MoleculeScreen.id:(context)=>const MoleculeScreen(),
     MutagencityScreen.id:(context)=>const MutagencityScreen(),
     OnBoardingScreen.id:(context)=>const OnBoardingScreen(),
-     ChatScreen.id: (context) => const ChatScreen(),
+    ChatScreen.id: (context) => const ChatScreen(),
     smilartyScreen.id: (context) => const smilartyScreen(),
     ForgetPassword.id:(context)=>const ForgetPassword(),
     OtpVerify.id:(context)=>const OtpVerify(),

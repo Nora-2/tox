@@ -2,10 +2,10 @@
 
 import 'dart:async';
 import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
 import 'package:Toxicon/Features/openeing/custom_button.dart';
 import '../../core/constants/constants.dart';
 
@@ -67,51 +67,49 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     });
                   },
                   itemBuilder: (_, index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: CustomButton(onTap: () async {
-                            SharedPreferences perfs =
-                                await SharedPreferences.getInstance();
-                            await perfs.setInt('onBoard', 1);
-
-                            // ignore: use_build_context_synchronously
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()),
-                                (route) => false);
-                          }),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.003,
-                        ),
-                        Image.asset(
-                            screens[index % screens.length].lottieBuilder,
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.7),
-                        Text(
-                          screens[index % screens.length].text,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 29.0,
-                            fontWeight: FontWeight.bold,
-                            // color: black,
+                    return SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: CustomButton(onTap: () async {
+                              SharedPreferences perfs =
+                                  await SharedPreferences.getInstance();
+                              await perfs.setInt('onBoard', 1);
+                    
+                              // ignore: use_build_context_synchronously
+                               Navigator.of(context).pushReplacement(signin());
+                            }),
                           ),
-                        ),
-                        Text(
-                          screens[index % screens.length].desc,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                            // color: black,
+                          // SizedBox(
+                          //   height: MediaQuery.of(context).size.height * 0.003,
+                          // ),
+                          Image.asset(
+                              screens[index % screens.length].lottieBuilder,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              height: MediaQuery.of(context).size.height * 0.7),
+                          Text(
+                            screens[index % screens.length].text,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 29.0,
+                              fontWeight: FontWeight.bold,
+                              // color: black,
+                            ),
                           ),
-                        ),
-                      ],
+                          Text(
+                            screens[index % screens.length].desc,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              // color: black,
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }),
             ),

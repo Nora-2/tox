@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: const Row(crossAxisAlignment: CrossAxisAlignment.end,mainAxisAlignment: MainAxisAlignment.end, children: [
         Text(
-          "Skip",
+          "Skip   ",
           style:   TextStyle(
                 fontFamily: 'acme',
                   fontWeight: FontWeight.w500, color: kcolor, fontSize: 24)),

@@ -39,7 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
         iconColor: isDark ? darkcolor : icolor,
         hintText: widget.subtitel,
-        hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+        hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         suffixIcon: IconButton(
             color: isDark ? Colors.white : black,
             onPressed: () {

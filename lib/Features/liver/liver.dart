@@ -36,54 +36,54 @@ class _LiverScreenState extends State<LiverScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            body: SafeArea(
-              child: Container(
-                decoration: BoxDecoration(gradient: gradientTop(isDark)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        arrowpop(isDark: isDark),
-                        SizedBox(
-                          width: size.width * .2,
-                        ),
-                        Image.asset(
-                          ImageConstant.liverhome,
-                          width: 190,
-                          height: 100,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: isDark ? black : Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: const Offset(0, -2),
-                            ),
-                          ],
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30.0, left: 10, right: 10),
+            body: Container(
+              decoration: BoxDecoration(gradient: gradientTop(isDark)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: size.height * .02,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      arrowpop(isDark: isDark),
+                      SizedBox(
+                        width: size.width * .2,
+                      ),
+                      Image.asset(
+                        ImageConstant.liverhome,
+                        width: 190,
+                        height: 100,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * .02,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: isDark ? black : Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: const Offset(0, -2),
+                          ),
+                        ],
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30.0, left: 10, right: 10),
+                        child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,8 +131,8 @@ class _LiverScreenState extends State<LiverScreen> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

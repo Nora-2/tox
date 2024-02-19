@@ -22,71 +22,70 @@ class homeScreen extends StatelessWidget {
       homewidgetsimilarty(size: size,)
     ];
     return Scaffold(
-        body: SafeArea(
-            child: Container(
+        body: Container(
       decoration: BoxDecoration(gradient: gradientTop(isDark)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           customsizebox(
-            size: size,
-            height: .08,
+        size: size,
+        height: .08,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'Hi,Nora!',
-                      style: Styles.textStyleacme30,
-                    ),
-                    customsizebox(
-                      size: size,
-                      height: .01,
-                    ),
-                    CustomText(
-                      text: "Find out your desierd answer ",
-                      style: Styles.textStyphilosopher17,
-                    ),
-                  ],
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: 'Hi,Nora!',
+                  style: Styles.textStyleacme30,
                 ),
-              ),
-              robot(size: size)
-            ],
+                customsizebox(
+                  size: size,
+                  height: .01,
+                ),
+                CustomText(
+                  text: "Find out your desierd answer ",
+                  style: Styles.textStyphilosopher17,
+                ),
+              ],
+            ),
+          ),
+          robot(size: size)
+        ],
           ),
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: isDark ?black: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
+        child: Container(
+          decoration: BoxDecoration(
+            color: isDark ?black: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: const Offset(0, -2),
               ),
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 5, left: 8, right: 8,bottom: 5),
-                itemCount: widgets.length,
-                itemBuilder: (context, index) {
-                  return widgets[index];
-                },
-              ),
-            ),
+            ],
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15)),
+          ),
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 3, left: 8, right: 8,bottom: 3),
+            itemCount: widgets.length,
+            itemBuilder: (context, index) {
+              return widgets[index];
+            },
+          ),
+        ),
           )
         ],
       ),
-    )));
+    ));
   }
 }

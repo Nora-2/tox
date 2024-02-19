@@ -20,7 +20,7 @@ class HomeLayout extends StatelessWidget {
       create: (context) => HomecubitCubit(),
       child: BlocConsumer<HomecubitCubit, HomecubitState>(
         builder: (context, state) => Scaffold(
-          backgroundColor:isDark?Colors.transparent.withOpacity(0):Colors.white,
+          backgroundColor:isDark?darkcolor:icolor,
                   
             body: HomecubitCubit.get(context)
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],
@@ -42,7 +42,7 @@ class HomeLayout extends StatelessWidget {
                       'Home',style: TextStyle(
                     fontFamily: 'acme',
                       fontWeight: FontWeight.w400,
-                      color: isDark?Colors.white:Colors.black,
+                      color: isDark?darkcolor:kcolor,
                       fontSize: 20)
                     ),
                     activeColor: isDark?Colors.black:Colors.white,
@@ -54,7 +54,7 @@ class HomeLayout extends StatelessWidget {
                    TextStyle(
                     fontFamily: 'acme',
                       fontWeight: FontWeight.w400,
-                      color: isDark?Colors.white:Colors.black,
+                      color:isDark?darkcolor:kcolor,
                       fontSize: 20)
             ),
                     activeColor: isDark?Colors.black:Colors.white,

@@ -11,7 +11,7 @@ class BottomNavyBar extends StatelessWidget {
     this.showElevation = true,
     this.iconSize = 24,
     this.backgroundColor,
-    required this.shadowColor ,
+    required this.shadowColor,
     this.itemCornerRadius = 50,
     this.containerHeight = 56,
     this.blurRadius = 10,
@@ -65,7 +65,7 @@ class BottomNavyBar extends StatelessWidget {
       ),
       child: SafeArea(
         child: Container(
-          color: isDark ?  darkcolor : icolor,
+          color: isDark ? darkcolor : icolor,
           width: double.infinity,
           height: containerHeight,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
@@ -79,7 +79,7 @@ class BottomNavyBar extends StatelessWidget {
                   item: item,
                   iconSize: iconSize,
                   isSelected: index == selectedIndex,
-                  backgroundColor: isDark ?  black : icolor,
+                  backgroundColor: isDark ? black : icolor,
                   itemCornerRadius: itemCornerRadius,
                   animationDuration: animationDuration,
                   itemPadding: itemPadding,
@@ -132,7 +132,7 @@ class _ItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? isDark
-                  ?  black
+                  ? black
                   : Colors.white
               : item.activeColor?.withOpacity(0.01),
           borderRadius: BorderRadius.circular(10),
@@ -141,6 +141,11 @@ class _ItemWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
           child: Container(
+            decoration: BoxDecoration(
+              color:
+                  isSelected ? Colors.white : Colors.transparent.withOpacity(0),
+              borderRadius: BorderRadius.circular(10),
+            ),
             width: isSelected ? 130 : 50,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
@@ -151,11 +156,7 @@ class _ItemWidget extends StatelessWidget {
                 IconTheme(
                   data: IconThemeData(
                       size: iconSize,
-                      color: isSelected
-                          ? isDark
-                              ?  black
-                              : kcolor
-                          : item.inactiveColor),
+                      color: isSelected ? kcolor : item.inactiveColor),
                   child: item.icon,
                 ),
                 if (isSelected)
@@ -164,7 +165,7 @@ class _ItemWidget extends StatelessWidget {
                       padding: itemPadding,
                       child: DefaultTextStyle.merge(
                         style: TextStyle(
-                          color: isDark ?  black : kcolor,
+                          color: isSelected ? kcolor : item.inactiveColor,
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,

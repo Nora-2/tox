@@ -1,4 +1,3 @@
-import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -11,21 +10,12 @@ class SplashScreen extends StatelessWidget {
 static String id = 'SplashScreen';
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+  
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                isDark ? darkcolor : icolor,
-                isDark ?  black : Colors.white,
-                kcolor,
-              ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-            ),
-          ),
+         
+          
           Container(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.1,
