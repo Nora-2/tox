@@ -7,3 +7,7 @@ abstract class AppState {}
 
 final class AppInitial extends AppState {}
 class changemodestate extends AppState {}
+
+class ChangeThemeModeState extends AppState {}
+
+class GetDataFromSharedState extends AppState {}

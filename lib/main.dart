@@ -1,9 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/Features/home/cubit_home/homecubit_cubit.dart';
 import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
 import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
 import 'package:Toxicon/Features/smilarty/cubit/smilarty_cubit.dart';
+import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +21,21 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt('onBoard');
-  runApp(const Toxicon());
+  await CacheHelper.init();
+  var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
+
+  runApp(Toxicon(isDarkFromShared));
 }
 
 class Toxicon extends StatelessWidget {
-  const Toxicon({super.key});
+   final bool? isDark;
+   Toxicon(this.isDark, {super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => AppCubit(),
+            create: (context) => AppCubit()..changemode(fromShared: isDark),
           ),
           BlocProvider(
             create: (context) => LoginCubit(),
@@ -39,17 +46,15 @@ class Toxicon extends StatelessWidget {
           BlocProvider(
             create: (context) => LivercubitCubit(),
           ),
-          
           BlocProvider(
             create: (context) => DnaCubit(),
           ),
           BlocProvider(
             create: (context) => MoleculeCubit(),
           ),
-           BlocProvider(
+          BlocProvider(
             create: (context) => SmilartyCubit(),
           ),
-          
         ],
         child: BlocConsumer<AppCubit, AppState>(
           listener: (context, state) {},
