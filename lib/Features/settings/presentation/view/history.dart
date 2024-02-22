@@ -36,53 +36,52 @@ class HistoryScreen extends StatelessWidget {
       ),
     ];
     return Scaffold(
-        body: SafeArea(
-            child: Container(
-                decoration: BoxDecoration(gradient: gradientTop(isDark)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: size.height * .03,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          arrowpop(isDark: isDark),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                         const customtext60020(text:'History'),
-                        ],
+        body: Container(
+            decoration: BoxDecoration(gradient: gradientTop(isDark)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: size.height * .03,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0,top: 11),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      arrowpop(isDark: isDark),
+                      const SizedBox(
+                        width: 40,
                       ),
-                    ),
-                    SizedBox(
-                      height: size.height * .01,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                          height: size.height * .98,
-                          child: submit
-                              ? ListView.builder(
-                                  padding: const EdgeInsets.only(
-                                      top: 18, left: 8, right: 8),
-                                  itemCount: widgets.length,
-                                  itemBuilder: (context, index) {
-                                    return widgets[index];
-                                  },
-                                )
-                              : Center(
-                                  child: Image.asset(
-                                  ImageConstant.history,
-                                  width: size.width * .9,
-                                  height: size.height * .8,
-                                ))),
-                    ),
-                  ],
-                ))));
+                     const customtext60020(text:'History'),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * .01,
+                ),
+                Expanded(
+                  child: SizedBox(
+                      height: size.height * .98,
+                      child: submit
+                          ? ListView.builder(
+                              padding: const EdgeInsets.only(
+                                  top: 18, left: 8, right: 8),
+                              itemCount: widgets.length,
+                              itemBuilder: (context, index) {
+                                return widgets[index];
+                              },
+                            )
+                          : Center(
+                              child: Image.asset(
+                              ImageConstant.history,
+                              width: size.width * .9,
+                              height: size.height * .8,
+                            ))),
+                ),
+              ],
+            )));
   }
 }

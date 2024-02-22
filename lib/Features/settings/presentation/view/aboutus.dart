@@ -80,8 +80,7 @@ class InfoScreen extends StatelessWidget {
       ),
     ];
     return Scaffold(
-        body: SafeArea(
-            child: Container(
+        body: Container(
       decoration: BoxDecoration(
         color: isDark ? black : Colors.white,
       ),
@@ -90,39 +89,39 @@ class InfoScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: size.height * .03,
+        height: size.height * .03,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                arrowpop(isDark: isDark),
-                const SizedBox(
-                  width: 40,
-                ),
-              const customtext60020(text: 'Information')
-              ],
+        padding: const EdgeInsets.only(left: 4.0,top: 11),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            arrowpop(isDark: isDark),
+            const SizedBox(
+              width: 40,
             ),
+          const customtext60020(text: 'Information')
+          ],
+        ),
           ),
           SizedBox(
-            height: size.height * .01,
+        height: size.height * .01,
           ),
           Expanded(
-            child: SizedBox(
-              height: size.height * .98,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 18, left: 8, right: 8),
-                itemCount: widgets.length,
-                itemBuilder: (context, index) {
-                  return widgets[index];
-                },
-              ),
-            ),
+        child: SizedBox(
+          height: size.height * .98,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 18, left: 8, right: 8),
+            itemCount: widgets.length,
+            itemBuilder: (context, index) {
+              return widgets[index];
+            },
+          ),
+        ),
           ),
         ],
       ),
-    )));
+    ));
   }
 }

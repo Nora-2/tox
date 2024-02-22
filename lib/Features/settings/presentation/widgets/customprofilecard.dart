@@ -4,7 +4,7 @@ import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class CustomProfileCard extends StatelessWidget {
+class CustomProfileCard extends StatefulWidget {
   CustomProfileCard({
     super.key,
     required this.titel,
@@ -20,6 +20,12 @@ class CustomProfileCard extends StatelessWidget {
   final String subtitel;
   TextEditingController controller;
   TextInputType input;
+
+  @override
+  State<CustomProfileCard> createState() => _CustomProfileCardState();
+}
+
+class _CustomProfileCardState extends State<CustomProfileCard> {
   @override
   Widget build(BuildContext context) {
     final ThemeMode brightnessValue =
@@ -35,8 +41,8 @@ class CustomProfileCard extends StatelessWidget {
         shadowColor: isDark ? Colors.grey :  black,
         elevation: 10,
         child: SizedBox(
-          width: size.width * .95,
-          height: size.height * .11,
+          width: widget.size.width * .95,
+          height: widget.size.height * .11,
           child: Padding(
               padding:
                   const EdgeInsets.only(left: 8.0, right: 8, top: 1, bottom: 1),
@@ -47,7 +53,7 @@ class CustomProfileCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 9),
                     child: Text(
-                      titel,
+                      widget.titel,
                       style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontFamily: 'acme',
@@ -55,10 +61,10 @@ class CustomProfileCard extends StatelessWidget {
                     ),
                   ),
                   CustomTextField(
-                      controller: controller,
-                      input: input,
-                      icon: icon,
-                      subtitel: subtitel)
+                      controller: widget.controller,
+                      input: widget.input,
+                      icon: widget.icon,
+                      subtitel: widget.subtitel)
                 ],
               )),
         ),

@@ -63,7 +63,7 @@ class resultmolecule extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: size.height * .1),
+        SizedBox(height: size.height * .04),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,7 +71,8 @@ class resultmolecule extends StatelessWidget {
             CustomTextfont24_600(text: 'More Info'),
             morinformation(size: size, isDark: isDark)
           ],
-        )
+        ),
+        SizedBox(height: size.height * .04),
       ],
     );
   }

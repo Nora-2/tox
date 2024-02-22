@@ -240,9 +240,9 @@ Route createRouteprofile() {
     pageBuilder: (context, animation, secondaryAnimation) =>
          ProfileScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
+      const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
-      const curve = Curves.easeOut;
+      const curve = Curves.linearToEaseOut;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 

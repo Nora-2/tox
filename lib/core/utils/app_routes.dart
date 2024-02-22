@@ -25,7 +25,7 @@ class AppRoutes {
 
   static String? get initialRoute {
     if (!isAuth) {
-      return SplashScreen.id;
+      return ProfileScreen.id;
     } else {
       return HomeLayout.id;
     }

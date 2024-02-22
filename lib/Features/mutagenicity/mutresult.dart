@@ -57,7 +57,8 @@ class dnaresult extends StatelessWidget {
             CustomTextfont24_600(text: 'More Info'),
             morinformation(size: size, isDark: isDark)
           ],
-        )
+        ),
+        SizedBox(height: size.height * .04),
       ],
     );
   }
