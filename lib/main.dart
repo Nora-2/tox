@@ -8,6 +8,7 @@ import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
 import 'package:Toxicon/Features/smilarty/cubit/smilarty_cubit.dart';
 import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/components/cubit/blocopserver.dart';
 import 'package:Toxicon/core/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
   isViewed = prefs.getInt('onBoard');
   await CacheHelper.init();
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
-
+  Bloc.observer = MyBlocObserver();
   runApp(Toxicon(isDarkFromShared));
 }
 
