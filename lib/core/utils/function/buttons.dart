@@ -64,3 +64,38 @@ class submit extends StatelessWidget {
     );
   }
 }
+
+class save extends StatefulWidget {
+  const save({
+    super.key,
+    required this.size,
+    required this.isDark,
+  });
+
+  final Size size;
+  final bool isDark;
+
+  @override
+  State<save> createState() => _saveState();
+}
+
+class _saveState extends State<save> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 44,
+      width: widget.size.width * .95,
+      decoration: BoxDecoration(
+        color: widget.isDark ? darkcolor : icolor,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child:const Center(
+        child: Text(
+          'Save',
+          style:
+                   TextStyle(fontFamily: 'sanchez',fontWeight: FontWeight.w500, fontSize: 22)),
+        
+      ),
+    );
+  }
+}

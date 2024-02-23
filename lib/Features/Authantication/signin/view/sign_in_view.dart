@@ -23,20 +23,15 @@ class SignIn extends StatefulWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
-
 class _SignInState extends State<SignIn> {
   TextEditingController email = TextEditingController();
-
   TextEditingController password = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final Brightness brightnessValue =
         MediaQuery.of(context).platformBrightness;
     bool isDark = brightnessValue == Brightness.dark;
-
     final size = MediaQuery.of(context).size;
-
     return BlocProvider(
         create: (context) => LoginCubit(),
         child: BlocConsumer<LoginCubit, LoginState>(
@@ -50,7 +45,7 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       SizedBox(
+                      SizedBox(
                         height: size.height * .07,
                       ),
                       Center(
@@ -98,6 +93,9 @@ class _SignInState extends State<SignIn> {
                                           email.isEmpty ||
                                           !Checker.checkEmail(email)) {
                                         return 'Invalid email';
+                                        AppMessage.customSnackBar(
+                                            context: context,
+                                            content: "Wrong email !");
                                       }
                                       return null;
                                     },

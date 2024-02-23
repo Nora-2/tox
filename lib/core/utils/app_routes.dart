@@ -11,6 +11,7 @@ import 'package:Toxicon/Features/mutagenicity/mutagencity.dart';
 import 'package:Toxicon/Features/openeing/onboarding_screen.dart';
 import 'package:Toxicon/Features/openeing/splash_screen.dart';
 import 'package:Toxicon/Features/settings/presentation/view/aboutus.dart';
+import 'package:Toxicon/Features/settings/presentation/view/editprofile.dart';
 import 'package:Toxicon/Features/settings/presentation/view/history.dart';
 import 'package:Toxicon/Features/settings/presentation/view/profile.dart';
 import 'package:Toxicon/Features/settings/presentation/view/setting.dart';
@@ -25,7 +26,7 @@ class AppRoutes {
 
   static String? get initialRoute {
     if (!isAuth) {
-      return HomeLayout.id;
+      return SplashScreen.id;
     } else {
       return HomeLayout.id;
     }
@@ -36,6 +37,7 @@ class AppRoutes {
     SplashScreen.id: (context) => const SplashScreen(),
     SignIn.id: (context) =>  SignIn(),
     SignUp.id: (context) =>  SignUp(),
+    EditProfileScreen.id: (context) =>  EditProfileScreen(),
     homeScreen.id: (context) => const homeScreen(),
     LiverScreen.id: (context) => const LiverScreen(),
     MoleculeScreen.id:(context)=>const MoleculeScreen(),

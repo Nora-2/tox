@@ -12,14 +12,14 @@ class CustomTextField extends StatefulWidget {
       required this.controller,
       required this.input,
       required this.icon,
-      this.reedonly = true,
+      required this.label,
+    
       required this.subtitel});
   TextEditingController controller;
-
   final IconData icon;
-  bool reedonly = true;
   final String subtitel;
   final TextInputType input;
+  final Text label;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -31,47 +31,52 @@ class _CustomTextFieldState extends State<CustomTextField> {
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
-    return TextFormField(
-      controller: widget.controller,
-      keyboardType: widget.input,
-      readOnly: widget.reedonly,
-      cursorColor: Colors.white,
-      decoration: InputDecoration(
-        iconColor: isDark ? darkcolor : icolor,
-        hintText: widget.subtitel,
-        hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-        suffixIcon: IconButton(
-            color: isDark ? Colors.white : black,
-            onPressed: () {
-              setState(() {
-                widget.reedonly = false;
-              });
-            },
-            icon: Icon(widget.icon)),
-        disabledBorder: OutlineInputBorder(
+    return Padding(
+      padding: const EdgeInsets.only(left: 10,right: 10),
+      child: TextFormField(
+        controller: widget.controller,
+        keyboardType: widget.input,
+        
+        cursorColor: Colors.white,
+        decoration: InputDecoration(
+          label: widget.label,
+          floatingLabelAlignment: FloatingLabelAlignment.start,
+          floatingLabelStyle: TextStyle(color: isDark ? darkcolor : icolor,fontSize: 19 ),
+    
+          iconColor: isDark ? darkcolor : icolor,
+          hintText: widget.subtitel,
+          hintStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+          suffixIcon: IconButton(
+              color: isDark ? Colors.white : black,
+              onPressed: () {
+               
+              },
+              icon: Icon(widget.icon)),
+          disabledBorder: OutlineInputBorder(
+              gapPadding: 2,
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: isDark ? icolor : icolor.withOpacity(.95),
+              )),
+          enabledBorder: OutlineInputBorder(
+              gapPadding: 2,
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: isDark ? icolor : icolor.withOpacity(.95),
+              )),
+          border: OutlineInputBorder(
             gapPadding: 2,
-            // borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: isDark ? darkcolor : icolor.withOpacity(.95),
-            )),
-        enabledBorder: OutlineInputBorder(
-            gapPadding: 2,
-            // borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: isDark ? darkcolor : icolor.withOpacity(.95),
-            )),
-        border: OutlineInputBorder(
-          gapPadding: 2,
-          // borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: isDark ? Colors.white :  black,
+              color: isDark ? icolor :  black,
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          gapPadding: 2,
-          // borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: isDark ? darkcolor : icolor.withOpacity(.95),
+          focusedBorder: OutlineInputBorder(
+            gapPadding: 2,
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: isDark ? icolor: icolor.withOpacity(.95),
+            ),
           ),
         ),
       ),
