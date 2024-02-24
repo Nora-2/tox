@@ -85,60 +85,62 @@ TextEditingController smile2 = TextEditingController();
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 30.0, left: 10, right: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextfont24_600(text: 'Input'),
-                        SizedBox(
-                          height: size.height * .015,
-                        ),
-                        CustomFormField(
-                          ispass: false,
-                            hint: 'Enter your Smile',
-                            preicon: const Icon(
-                              Icons.edit,
-                              size: 19,
-                              color: kcolor,
-                            ),
-                            controller: smile1),
-                            
-                        SizedBox(
-                          height: size.height * .015,
-                        ),
-                        CustomFormField(
-                          ispass: false,
-                            hint: 'Enter your Smile',
-                            preicon: const Icon(
-                              Icons.edit,
-                              size: 19,
-                              color: kcolor,
-                            ),
-                            controller: smile2),
-                        SizedBox(
-                          height: size.height * .02,
-                        ),
-                        Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                SmilartyCubit.get(context).viewResult();
-                              });
-                            },
-                            child: submit(size: size, isDark: isDark),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomTextfont24_600(text: 'Input'),
+                          SizedBox(
+                            height: size.height * .015,
                           ),
-                        ),
-                        SizedBox(height: size.height * .04),
-                        SmilartyCubit.get(context).issubmit
-                            ? resultsimilarty(
-                                size: size, result: result, isDark: isDark)
-                            : Center(
-                                child: Image.asset(
-                                ImageConstant.similartybefor,
-                                width: size.width * .9,
-                                height: size.height * .4,
-                              ))
-                      ],
+                          CustomFormField(
+                            ispass: false,
+                              hint: 'Enter your Smile',
+                              preicon: const Icon(
+                                Icons.edit,
+                                size: 19,
+                                color: kcolor,
+                              ),
+                              controller: smile1),
+                              
+                          SizedBox(
+                            height: size.height * .015,
+                          ),
+                          CustomFormField(
+                            ispass: false,
+                              hint: 'Enter your Smile',
+                              preicon: const Icon(
+                                Icons.edit,
+                                size: 19,
+                                color: kcolor,
+                              ),
+                              controller: smile2),
+                          SizedBox(
+                            height: size.height * .02,
+                          ),
+                          Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  SmilartyCubit.get(context).viewResult();
+                                });
+                              },
+                              child: submit(size: size, isDark: isDark),
+                            ),
+                          ),
+                          SizedBox(height: size.height * .04),
+                          SmilartyCubit.get(context).issubmit
+                              ? resultsimilarty(
+                                  size: size, result: result, isDark: isDark)
+                              : Center(
+                                  child: Image.asset(
+                                  ImageConstant.similartybefor,
+                                  width: size.width * .9,
+                                  height: size.height * .4,
+                                ))
+                        ],
+                      ),
                     ),
                   ),
                 ),

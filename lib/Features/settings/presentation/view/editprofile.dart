@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, non_constant_identifier_names
 
 import 'dart:io';
-
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
 import 'package:Toxicon/core/Data/Models/user/user.dart';
 import 'package:Toxicon/core/Data/Models/user/usermodel.dart';
@@ -226,7 +225,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           icon: Icons.edit,
                           label: const Text('Jop'),
                           subtitel: user2.jop!),
-                           SizedBox(
+                      SizedBox(
                         height: size.height * .03,
                       ),
                       GestureDetector(
@@ -238,6 +237,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               user2.jop = Jop;
                               user2.phone = Phone;
                               user2.date = Birth;
+                              user2.image = _image;
                             });
                           },
                           child: save(size: size, isDark: isDark))

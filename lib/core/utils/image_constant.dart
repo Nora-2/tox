@@ -12,6 +12,9 @@ class ImageConstant {
 
   static String onbordchemical = '$imagePath/chemical.png';
 
+ static String finger = '$imagePath/GetSimilarityMapForFingerprint.png';
+
+  static String count = '$imagePath/_count-based fingerprints.png';
   static String onboarddna = '$imagePath/dna.png';
 
   static String otp = '$imagePath/Enter OTP-rafiki.png';
