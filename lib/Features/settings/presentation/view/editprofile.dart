@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
@@ -91,7 +91,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       _image != null
                           ? CircleAvatar(
                               radius: 100,
-                              backgroundImage: MemoryImage(_image!))
+                              backgroundImage: MemoryImage(user2.image))
                           : CircleAvatar(
                               backgroundColor:
                                   Colors.transparent.withOpacity(0),
@@ -231,12 +231,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       GestureDetector(
                           onTap: () {
                             setState(() {
-                              user2.name = Name;
-                              user2.email = Email;
-                              user2.country = Country;
-                              user2.jop = Jop;
-                              user2.phone = Phone;
-                              user2.date = Birth;
+                              Name == '' ? user2.name : user2.name = Name;
+                              Email == '' ? user2.email : user2.email = Email;
+                              Country == ''
+                                  ? user2.country
+                                  : user2.country = Country;
+                              Jop == '' ? user2.jop : user2.jop = Jop;
+                              Phone == '' ? user2.phone : user2.phone = Phone;
+                              Birth == '' ? user2.date : user2.date = Birth;
                               user2.image = _image;
                             });
                           },

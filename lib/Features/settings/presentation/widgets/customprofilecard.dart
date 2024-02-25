@@ -1,4 +1,3 @@
-
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
@@ -39,14 +38,14 @@ class _CustomProfileCardState extends State<CustomProfileCard> {
           width: widget.size.width * .95,
           height: widget.size.height * .09,
           child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 16.0, right: 8, top: 1, bottom: 1),
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 8, top: 1, bottom: 1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left:16),
+                    padding: const EdgeInsets.only(left: 16),
                     child: Text(
                       widget.titel,
                       style: const TextStyle(
@@ -59,8 +58,7 @@ class _CustomProfileCardState extends State<CustomProfileCard> {
                     padding: const EdgeInsets.only(left: 20, top: 4),
                     child: Text(
                       widget.subtitel,
-                      style:  TextStyle(
-                          color: isDark ? Colors.grey.withOpacity(.4) : black,
+                      style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontFamily: 'acme',
                           fontSize: 18),
