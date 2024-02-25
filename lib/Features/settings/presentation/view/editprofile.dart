@@ -91,14 +91,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       _image != null
                           ? CircleAvatar(
                               radius: 100,
-                              backgroundImage: MemoryImage(user2.image))
-                          : CircleAvatar(
+                              backgroundImage: MemoryImage(_image!))
+                          :user2.image==null? CircleAvatar(
                               backgroundColor:
                                   Colors.transparent.withOpacity(0),
                               backgroundImage: AssetImage(
                                 ImageConstant.profile,
                               ),
-                            ),
+                            ):CircleAvatar(
+                              radius: 100,
+                              backgroundImage: MemoryImage(user2.image)),
                       Positioned(
                         right: 10,
                         bottom: 10,
