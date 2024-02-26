@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -77,7 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 150,
                   child: user2.image != null
                       ? CircleAvatar(
-                          radius: 100, backgroundImage: MemoryImage(user2.image!))
+                          radius: 100,
+                          backgroundImage: MemoryImage(user2.image!))
                       : CircleAvatar(
                           backgroundColor: Colors.transparent.withOpacity(0),
                           backgroundImage: AssetImage(
@@ -125,32 +126,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomProfileCard(
-                    titel: 'Name',
+                    icon: Icons.person_2,
                     size: size,
                     subtitel: user2.name,
                   ),
                   CustomProfileCard(
-                    titel: 'Email',
+                    icon: Icons.email,
                     size: size,
                     subtitel: user2.email,
                   ),
                   CustomProfileCard(
-                    titel: 'Mobile',
+                    icon: Icons.phone,
                     size: size,
                     subtitel: user2.phone!,
                   ),
                   CustomProfileCard(
-                    titel: 'country',
+                     icon: Icons.place,
                     size: size,
                     subtitel: user2.country!,
                   ),
                   CustomProfileCard(
-                    titel: 'data of birth',
+                     icon: Icons.date_range,
                     size: size,
                     subtitel: '12/12/2001',
                   ),
                   CustomProfileCard(
-                    titel: 'job describtion',
+                    icon: Icons.work_rounded,
                     size: size,
                     subtitel: user2.jop!,
                   ),

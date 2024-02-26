@@ -127,12 +127,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       icontralling: Icons.arrow_forward,
                     ),
                   ),
-                  CustomContainerCard(
-                    titel: 'language',
-                    icon: Icons.language,
-                    size: size,
-                    icontralling: Icons.arrow_forward,
-                  ),
+                
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -157,7 +152,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.of(context).push(createRouteabout());
                     },
                     child: CustomContainerCard(
-                      titel: 'About Us',
+                      titel: 'Information',
                       icon: Icons.info,
                       size: size,
                       icontralling: Icons.arrow_forward,

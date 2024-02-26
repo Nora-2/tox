@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 class CustomProfileCard extends StatefulWidget {
   CustomProfileCard({
     super.key,
-    required this.titel,
+    required this.icon,
     required this.size,
     required this.subtitel,
   });
-  final String titel;
+  final IconData icon;
   final Size size;
 
   final String subtitel;
@@ -45,15 +45,7 @@ class _CustomProfileCardState extends State<CustomProfileCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Text(
-                      widget.titel,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'acme',
-                          fontSize: 20),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(left: 2), child: Icon(widget.icon,size: 25,)),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 4),
                     child: Text(
