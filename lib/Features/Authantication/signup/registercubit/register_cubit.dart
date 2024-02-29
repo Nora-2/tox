@@ -15,30 +15,59 @@ class RegisterCubit extends Cubit<RegisterState> {
       ispassword = !ispassword;
       emit(changepassstate());
     }
-   Future<void> registerUser(
-      {required String email, required String password,}) async {
-    emit(Registerloading());
-    try {
-      UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword
-          (email: email, password: password,);
-      emit(Registersucsess());
-    }on FirebaseAuthException catch (ex) {
-                              if (ex.code == 'weak-password') {
-                                 emit(Registerfailure(error: 'weak-password'));
-                              } else if (ex.code == 'email-already-in-use') {
+  //  Future<void> registerUser(
+  //     {required String email, required String password,}) async {
+  //   emit(Registerloading());
+  //   try {
+  //     UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword
+  //         (email: email, password: password,);
+  
+  //     emit(Registersucsess());
+  //   }on FirebaseAuthException catch (ex) {
+  //                             if (ex.code == 'weak-password') {
+  //                                emit(Registerfailure(error: 'weak-password'));
+  //                             } else if (ex.code == 'email-already-in-use') {
                               
                                 
-      emit(Registerfailure(error: 'email-already-in-use'));
-                              }
+  //     emit(Registerfailure(error: 'email-already-in-use'));
+  //                             }
                             
 
+  //   }
+  //   catch(e){
+  //       emit(Registerfailure(error: 'somthing went wrong'));
+  //   }
+  // }
+  Future<void> registerUser({
+  required String email,
+  required String password,
+  required String displayName, 
+}) async {
+  emit(Registerloading());
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final user = userCredential.user;
+
+    if (user != null) {
+      await user.updateDisplayName(displayName);
+      await user.reload(); 
     }
-    catch(e){
-        emit(Registerfailure(error: 'somthing went wrong'));
+
+    emit(Registersucsess());
+  } on FirebaseAuthException catch (ex) {
+    if (ex.code == 'weak-password') {
+      emit(Registerfailure(error: 'weak-password'));
+    } else if (ex.code == 'email-already-in-use') {
+      emit(Registerfailure(error: 'email-already-in-use'));
     }
+  } catch (e) {
+    emit(Registerfailure(error: 'something went wrong'));
   }
+}
 
-  
-
+          
 }
 

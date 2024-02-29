@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409363777864",
+    "project_id": "toxikon-e4395",
+    "storage_bucket": "toxikon-e4395.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409363777864:android:ae49e0e8fb93c28e18cb7d",
+        "android_client_info": {
+          "package_name": "com.example.Toxicon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDshJ-LZ4pCKMa9NsNIv8hUuSf8Gp0LezA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

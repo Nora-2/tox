@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/core/widgets/custom_bottom_navbar.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+  const HomeLayout({super.key});
   static String id = 'HomeLayout';
 
   @override

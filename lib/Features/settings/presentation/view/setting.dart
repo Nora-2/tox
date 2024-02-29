@@ -1,11 +1,17 @@
-import 'package:Toxicon/core/Data/Models/user/user.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/custtomcard.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -14,7 +20,24 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
+List data = [];
+getdata() async {
+  QuerySnapshot quarysnapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  data.addAll(quarysnapshot.docs);
+}
+
 class _SettingScreenState extends State<SettingScreen> {
+  @override
+  void initState() {
+    getdata();
+     setState(() {});
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -40,9 +63,18 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                user2.image != null
-                    ? CircleAvatar(
-                        radius: 50, backgroundImage: MemoryImage(user2.image!))
+                data.isNotEmpty
+                    ? data.last['url'] != null
+                        ? CircleAvatar(
+                            radius: 100,
+                            backgroundImage: NetworkImage(data.last['url']))
+                        : CircleAvatar(
+                            radius: 50,
+                            backgroundColor: Colors.transparent.withOpacity(0),
+                            backgroundImage: AssetImage(
+                              ImageConstant.profile,
+                            ),
+                          )
                     : CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.transparent.withOpacity(0),
@@ -60,7 +92,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(
                       width: size.width * .4,
                       child: Text(
-                        user2.name,
+                        data.isNotEmpty
+                            ? data.last['full_name']
+                            : 'Nora Mohamed',
                         style: const TextStyle(
                             fontFamily: 'acme',
                             overflow: TextOverflow.ellipsis,
@@ -69,7 +103,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       ),
                     ),
                     Text(
-                      user2.jop!,
+                      data.isNotEmpty ? data.last['company'] : 'Bioinformatics',
                       style: const TextStyle(
                           fontFamily: 'acme',
                           fontWeight: FontWeight.w400,
@@ -82,8 +116,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(createRouteprofile()
-                      );
+                      Navigator.of(context).push(createRouteprofile());
                     },
                     icon: const Icon(
                       Icons.edit,
@@ -127,7 +160,6 @@ class _SettingScreenState extends State<SettingScreen> {
                       icontralling: Icons.arrow_forward,
                     ),
                   ),
-                
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -158,11 +190,25 @@ class _SettingScreenState extends State<SettingScreen> {
                       icontralling: Icons.arrow_forward,
                     ),
                   ),
-                  CustomContainerCard(
-                    titel: 'Log Out',
-                    icon: Icons.logout,
-                    size: size,
-                    icontralling: Icons.arrow_forward,
+                  GestureDetector(
+                    onTap: () async {
+                      GoogleSignIn google = GoogleSignIn();
+                      google.disconnect();
+                      FacebookAuth.instance.logOut();
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SignUp(),
+                        ),
+                      );
+                    },
+                    child: CustomContainerCard(
+                      titel: 'Log Out',
+                      icon: Icons.logout,
+                      size: size,
+                      icontralling: Icons.arrow_forward,
+                    ),
                   ),
                 ],
               ),

@@ -1,4 +1,3 @@
-import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
@@ -7,12 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 
+
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
-static String id = 'ResetPassword';
+  static String id = 'ResetPassword';
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
-} final formKey = GlobalKey<FormState>();
+}
+
+final formKey = GlobalKey<FormState>();
 
 class _ResetPasswordState extends State<ResetPassword> {
   @override
@@ -20,7 +22,9 @@ class _ResetPasswordState extends State<ResetPassword> {
     TextEditingController password = TextEditingController();
     TextEditingController confirmpass = TextEditingController();
     final size = MediaQuery.of(context).size;
-   
+
+
+
     return BlocProvider(
         create: (context) => LoginCubit(),
         child: BlocConsumer<LoginCubit, LoginState>(
@@ -71,9 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               color: kcolor,
                             ),
                             val: (passs) {
-                              if (passs == null ||
-                                  passs.isEmpty ||
-                                  !Checker.checkPassword(passs)) {
+                              if (passs == null || passs.isEmpty) {
                                 return 'Invalid Password';
                               }
                               return null;
@@ -116,9 +118,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             val: (pass) {
                               if (pass == null ||
                                   pass.isEmpty ||
-                                  (password.toString() ==
-                                      confirmpass.toString()) ||
-                                  !Checker.checkPassword(pass)) {
+                                  (password.text != confirmpass.text)) {
                                 return 'Password must match';
                               }
                               return null;
@@ -148,6 +148,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           child: GestureDetector(
                             onTap: () {
                               if (formKey.currentState!.validate()) {
+                               
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -163,14 +164,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 color: kcolor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child:const Center(
+                              child: const Center(
                                 child: Text(
                                   'Rest Password',
                                   style: TextStyle(
-                                        fontFamily: 'sanchez',
-                                          fontWeight: FontWeight.w500,
-                                          color:   Colors.white,
-                                          fontSize: 18),
+                                      fontFamily: 'sanchez',
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                      fontSize: 18),
                                 ),
                               ),
                             ),
@@ -184,5 +185,6 @@ class _ResetPasswordState extends State<ResetPassword> {
             );
           },
         ));
+    // Import necessary packages and Firebase
   }
 }

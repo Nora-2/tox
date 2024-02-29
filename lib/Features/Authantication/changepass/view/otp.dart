@@ -1,3 +1,4 @@
+
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
@@ -8,7 +9,8 @@ import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
 
 class OtpVerify extends StatelessWidget {
   const OtpVerify({super.key});
-static String id = 'OtpVerify';
+  static String id = 'OtpVerify';
+// Function to send OTP to email
   @override
   Widget build(BuildContext context) {
     final Brightness brightnessValue =
@@ -35,12 +37,14 @@ static String id = 'OtpVerify';
               SizedBox(
                 height: size.height * .05,
               ),
-             CustomTextfont24_900(text: 'Code Verification'),
+              CustomTextfont24_900(text: 'Code Verification'),
               SizedBox(
                 height: size.height * .005,
               ),
-            const  customtext400_12(text: "Enter your verification code we just sent on your email address")
-            ,  SizedBox(
+              const customtext400_12(
+                  text:
+                      "Enter your verification code we just sent on your email address"),
+              SizedBox(
                 height: size.height * .04,
               ),
               OtpTextField(
@@ -50,7 +54,7 @@ static String id = 'OtpVerify';
                 borderColor: kcolor,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 enabledBorderColor: kcolor,
-                disabledBorderColor:  black,
+                disabledBorderColor: black,
                 focusedBorderColor: isDark ? darkcolor : icolor,
                 showFieldAsBox: true,
                 borderRadius: BorderRadius.circular(15),
@@ -71,16 +75,16 @@ static String id = 'OtpVerify';
               ),
               Center(
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ResetPassword(),
-                      ),
-                    );
-                  },
-                  child: customButtonContainer(size: size, text: 'Verify')
-                ),
+                    onTap: () {
+                      
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ResetPassword(),
+                        ),
+                      );
+                    },
+                    child: customButtonContainer(size: size, text: 'Verify')),
               ),
               SizedBox(
                 height: size.height * .02,
@@ -89,14 +93,17 @@ static String id = 'OtpVerify';
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                const customtext50014(text: "Did't recived code?",)
-                  ,SizedBox(
+                  const customtext50014(
+                    text: "Did't recived code?",
+                  ),
+                  SizedBox(
                     width: size.width * .009,
                   ),
                   GestureDetector(
-                    onTap: () {},
-                    child: CustomTextfont12_700(text: 'Resend',)
-                  ),
+                      onTap: () {},
+                      child: CustomTextfont12_700(
+                        text: 'Resend',
+                      )),
                 ],
               ),
             ],

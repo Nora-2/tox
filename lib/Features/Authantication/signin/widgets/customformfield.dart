@@ -12,6 +12,7 @@ class CustomFormField extends StatefulWidget {
    required this.ispass,
     this.suffix,
     required this.controller,
+    this.onChanged,
     super.key,
   });
   final bool ispass;
@@ -23,7 +24,7 @@ class CustomFormField extends StatefulWidget {
   final Widget? suffix;
   final TextEditingController? controller;
   final String? Function(String?)? val;
-
+   final void Function(String?)?onChanged;
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
 }
@@ -32,6 +33,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+    onChanged:widget.onChanged,
         textAlignVertical: TextAlignVertical.center,
         textAlign: TextAlign.start,
         maxLines: 1,

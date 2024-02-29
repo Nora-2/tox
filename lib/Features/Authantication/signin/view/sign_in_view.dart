@@ -1,11 +1,12 @@
-// ignore_for_file: camel_case_types, dead_code, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers
-
+// ignore_for_file: camel_case_types, dead_code, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
+import 'package:Toxicon/core/utils/function/custom_snack_bar.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/forgetpass.dart';
@@ -23,9 +24,13 @@ class SignIn extends StatefulWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
+
 class _SignInState extends State<SignIn> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  String? Email, Password;
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final Brightness brightnessValue =
@@ -35,7 +40,28 @@ class _SignInState extends State<SignIn> {
     return BlocProvider(
         create: (context) => LoginCubit(),
         child: BlocConsumer<LoginCubit, LoginState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is Loginloading) {
+              isLoading = true;
+            } else if (state is Loginsucsess) {
+              if (FirebaseAuth.instance.currentUser!.emailVerified) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const HomeLayout(),
+                    ),
+                    (route) => false);
+              } else {
+                FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                AppMessage.customSnackBar(
+                    context: context, content: "please verify your Email ");
+              }
+              isLoading = false;
+            } else if (state is Loginfailure) {
+              customSnackBar(context, state.error);
+              isLoading = false;
+            }
+          },
           builder: (context, state) {
             return Scaffold(
               body: Padding(
@@ -81,6 +107,9 @@ class _SignInState extends State<SignIn> {
                                   height: size.height * .015,
                                 ),
                                 CustomFormField(
+                                    onChanged: (data) {
+                                      Email = data;
+                                    },
                                     ispass: false,
                                     hint: 'Enter your Email',
                                     preicon: const Icon(
@@ -93,9 +122,6 @@ class _SignInState extends State<SignIn> {
                                           email.isEmpty ||
                                           !Checker.checkEmail(email)) {
                                         return 'Invalid email';
-                                        AppMessage.customSnackBar(
-                                            context: context,
-                                            content: "Wrong email !");
                                       }
                                       return null;
                                     },
@@ -110,6 +136,9 @@ class _SignInState extends State<SignIn> {
                                   height: size.height * .015,
                                 ),
                                 CustomFormField(
+                                    onChanged: (data) {
+                                      Password = data;
+                                    },
                                     hint: 'Enter password',
                                     ispass: LoginCubit.get(context).ispassword,
                                     preicon: const Icon(
@@ -118,9 +147,7 @@ class _SignInState extends State<SignIn> {
                                       color: kcolor,
                                     ),
                                     val: (pass) {
-                                      if (pass == null ||
-                                          pass.isEmpty ||
-                                          !Checker.checkPassword(pass)) {
+                                      if (pass == null || pass.isEmpty) {
                                         return 'Invalid Password';
                                       }
                                       return null;
@@ -179,12 +206,15 @@ class _SignInState extends State<SignIn> {
                         child: GestureDetector(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeLayout(),
-                                  ),
-                                  (route) => false);
+                              isLoading = true;
+                              BlocProvider.of<LoginCubit>(context).loginUser(
+                                  email: Email!, password: Password!);
+                              // Navigator.pushAndRemoveUntil(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (_) => const HomeLayout(),
+                              // ),
+                              // (route) => false);
                             }
                           },
                           child: customButtonContainer(

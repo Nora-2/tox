@@ -1,13 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 import 'dart:io';
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
-import 'package:Toxicon/core/Data/Models/user/user.dart';
-import 'package:Toxicon/core/Data/Models/user/usermodel.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,19 +31,80 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController birth = TextEditingController();
   TextEditingController jop = TextEditingController();
   TextEditingController country = TextEditingController();
+  String? url;
+  Future<String?> uploadImageToFirebase() async {
+    if (_image == null) {
+      print('No image selected.');
+      return null;
+    }
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        print('User not signed in.');
+        return null;
+      }
+      Reference storageReference = FirebaseStorage.instance.ref().child(
+          "user_images/${currentUser.uid}/${DateTime.now().toIso8601String()}");
+      await storageReference.putData(_image!);
+      final url = await storageReference.getDownloadURL();
+      print('File uploaded successfully. Image URL: $url');
+      return url;
+    } on FirebaseException catch (e) {
+      print('Error uploading file: $e');
+      return null;
+    }
+  }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  Future<void> addUser() {
+    return users
+        // existing document in 'users' collection: "ABC123"
+        .doc('ABC123')
+        .set(
+          {
+            'full_name': name.text == ''
+                ? data.isNotEmpty ? data.last['full_name']
+                : name.text:name.text,
+            'phone':mobile.text==''?data.isNotEmpty ? data.last['phone'] :mobile.text:mobile.text,
+            'company':jop.text==''?data.isNotEmpty ? data.last['company'] :jop.text:jop.text, // Stokes and Sons
+            'country':country.text==''?data.isNotEmpty ? data.last['country'] :country.text:country.text,
+            'birth': birth.text==''?data.isNotEmpty ? data.last['birth'] :birth.text:birth.text,
+            'email': email.text == ''?data.isNotEmpty ? data.last['email'] :
+                 FirebaseAuth.instance.currentUser!.email
+                : email.text,
+            'id': FirebaseAuth.instance.currentUser!.uid,
+            'url':url==''?data.isNotEmpty ? data.last['url'] :url:url
+          },
+          SetOptions(merge: true),
+        )
+        .then(
+            (value) => print("'full_name' & 'age' merged with existing data!"))
+        .catchError((error) => print("Failed to merge data: $error"));
+  }
 
   Uint8List? _image;
   File? selectedIMage;
+  List data = [];
+  getdata() async {
+    QuerySnapshot quarysnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    data.addAll(quarysnapshot.docs);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getdata();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    User user2 = usersList.last;
-    String Email = email.text.trim();
-    String Name = name.text.trim();
-    String Phone = mobile.text.trim();
-    String Birth = birth.text.trim();
-    String Jop = jop.text.trim();
-    String Country = country.text.trim();
+
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -91,16 +154,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ? CircleAvatar(
                               radius: 100,
                               backgroundImage: MemoryImage(_image!))
-                          :user2.image==null? CircleAvatar(
-                              backgroundColor:
-                                  Colors.transparent.withOpacity(0),
-                              backgroundImage: AssetImage(
-                                ImageConstant.profile,
-                              ),
-                            ):CircleAvatar(
-                              radius: 100,
-                              backgroundImage: MemoryImage(user2.image)),
-                      Positioned(
+                          :url == null
+                              ? 
+                      CircleAvatar(
+                                  backgroundColor:
+                                      Colors.transparent.withOpacity(0),
+                                  backgroundImage: AssetImage(
+                                    ImageConstant.profile,
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  radius: 100,
+                                  backgroundImage:
+                                      NetworkImage(url!))
+                      ,Positioned(
                         right: 10,
                         bottom: 10,
                         child: GestureDetector(
@@ -132,13 +199,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
               Text(
-                user2.name,
+              data.isNotEmpty ? data.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName  ,
                 style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontFamily: 'acme',
                     fontSize: 24),
               ),
-              Text(user2.jop!,
+              Text(data.isNotEmpty ?data.last['company']:'Engineer',
                   style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontFamily: 'acme',
@@ -180,7 +247,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.name,
                           icon: Icons.edit,
                           label: const Text('Name'),
-                          subtitel: user2.name),
+                          subtitel: data.isNotEmpty ? data.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -189,7 +256,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.emailAddress,
                           icon: Icons.edit,
                           label: const Text('Email'),
-                          subtitel: user2.email),
+                          subtitel: data.isNotEmpty ? data.last['email'] : FirebaseAuth.instance.currentUser!.displayName),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -198,7 +265,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.phone,
                           icon: Icons.edit,
                           label: const Text('Mobile'),
-                          subtitel: user2.phone!),
+                          subtitel:data.isNotEmpty ?  data.last['phone'] 
+                              : ''
+                             ),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -207,7 +276,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.text,
                           icon: Icons.edit,
                           label: const Text('Country'),
-                          subtitel: user2.country!),
+                          subtitel:data.isNotEmpty ?  data.last['country']
+                               :''
+                              ),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -216,7 +287,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.datetime,
                           icon: Icons.edit,
                           label: const Text('Birth'),
-                          subtitel: '12/12/2001'),
+                          subtitel:data.isNotEmpty ?  data.last['birth']
+                              : ''
+                              ),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -225,22 +298,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           input: TextInputType.text,
                           icon: Icons.edit,
                           label: const Text('Jop'),
-                          subtitel: user2.jop!),
+                          subtitel: data.isNotEmpty ? data.last['company'] 
+                              : ''
+               ),
                       SizedBox(
                         height: size.height * .03,
                       ),
                       GestureDetector(
                           onTap: () {
                             setState(() {
-                              Name == '' ? user2.name : user2.name = Name;
-                              Email == '' ? user2.email : user2.email = Email;
-                              Country == ''
-                                  ? user2.country
-                                  : user2.country = Country;
-                              Jop == '' ? user2.jop : user2.jop = Jop;
-                              Phone == '' ? user2.phone : user2.phone = Phone;
-                              Birth == '' ? user2.date : user2.date = Birth;
-                              user2.image = _image;
+                              addUser();
+                              uploadImageToFirebase();
                             });
                           },
                           child: save(size: size, isDark: isDark))

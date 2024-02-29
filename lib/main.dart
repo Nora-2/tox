@@ -9,6 +9,9 @@ import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/components/cubit/blocopserver.dart';
 import 'package:Toxicon/core/utils/app_routes.dart';
+import 'package:Toxicon/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +23,23 @@ Future<void> main() async {
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   isViewed = prefs.getInt('onBoard');
   await CacheHelper.init();
+  FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
   Bloc.observer = MyBlocObserver();
+  
   runApp(Toxicon(isDarkFromShared));
 }
 

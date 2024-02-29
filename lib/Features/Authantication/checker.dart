@@ -13,7 +13,7 @@ class Checker {
 
   static bool checkPassword(String password) {
     final passwordValid =
- RegExp(r'^[a-zA-Z ]+$');
+ RegExp(r'[a-z0-9]{9,}$/');
     return passwordValid.hasMatch(password);
   }
 }

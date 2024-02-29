@@ -6,8 +6,10 @@ import 'package:Toxicon/Features/Authantication/signup/registercubit/register_cu
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
+import 'package:Toxicon/core/utils/function/custom_snack_bar.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
@@ -17,15 +19,19 @@ import 'package:Toxicon/core/components/homelayout.dart';
 // ignore: must_be_immutable
 class SignUp extends StatefulWidget {
   SignUp({super.key});
-static String id = 'SignUp';
+  static String id = 'SignUp';
   @override
   State<SignUp> createState() => _SignUpState();
 }
- final formKey = GlobalKey<FormState>();
+
+final formKey = GlobalKey<FormState>();
+
 class _SignUpState extends State<SignUp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController username = TextEditingController();
+
+  String? Email, Password, name;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +39,31 @@ class _SignUpState extends State<SignUp> {
         MediaQuery.of(context).platformBrightness;
     bool isDark = brightnessValue == Brightness.dark;
     final size = MediaQuery.of(context).size;
-   
+
     return BlocProvider(
         create: (context) => RegisterCubit(),
         child: BlocConsumer<RegisterCubit, RegisterState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is Registerloading) {
+            } else if (state is Registersucsess) {
+              FirebaseAuth.instance.currentUser != null &&
+                      FirebaseAuth.instance.currentUser!.emailVerified
+                  ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const HomeLayout(),
+                      ),
+                      (route) => false)
+                  : Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>  SignIn(),
+                      ),
+                      (route) => false);
+            } else if (state is Registerfailure) {
+              customSnackBar(context, state.error);
+            }
+          },
           builder: (context, state) {
             return Scaffold(
               body: Padding(
@@ -79,6 +105,9 @@ class _SignUpState extends State<SignUp> {
                                   height: size.height * .015,
                                 ),
                                 CustomFormField(
+                                    onChanged: (data) {
+                                      name = data;
+                                    },
                                     ispass: false,
                                     val: (name) {
                                       if (name == null ||
@@ -105,6 +134,9 @@ class _SignUpState extends State<SignUp> {
                                   height: size.height * .015,
                                 ),
                                 CustomFormField(
+                                    onChanged: (data) {
+                                      Email = data;
+                                    },
                                     ispass: false,
                                     hint: 'Enter your Email',
                                     preicon: const Icon(
@@ -131,17 +163,19 @@ class _SignUpState extends State<SignUp> {
                                   height: size.height * .015,
                                 ),
                                 CustomFormField(
+                                    onChanged: (data) {
+                                      Password = data;
+                                    },
                                     hint: 'Enter password',
-                                    ispass: RegisterCubit.get(context).ispassword,
+                                    ispass:
+                                        RegisterCubit.get(context).ispassword,
                                     preicon: const Icon(
                                       Icons.lock,
                                       size: 20,
                                       color: kcolor,
                                     ),
                                     val: (pass) {
-                                      if (pass == null ||
-                                          pass.isEmpty ||
-                                          !Checker.checkPassword(pass)) {
+                                      if (pass == null || pass.isEmpty) {
                                         return 'Invalid Password';
                                       }
                                       return null;
@@ -177,13 +211,11 @@ class _SignUpState extends State<SignUp> {
                         child: GestureDetector(
                             onTap: () {
                               if (formKey.currentState!.validate()) {
-                               Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const HomeLayout(),
-                                  ),
-                                  (route) => false);
-                               
+                                BlocProvider.of<RegisterCubit>(context)
+                                    .registerUser(
+                                        email: Email!,
+                                        password: Password!,
+                                        displayName: name!);
                               } else {}
                             },
                             child: customButtonContainer(
@@ -196,7 +228,7 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: size.height * .02,
                       ),
-                     socialmedia(size: size),
+                      socialmedia(size: size),
                       SizedBox(
                         height: size.height * .02,
                       ),
