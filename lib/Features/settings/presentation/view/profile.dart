@@ -4,10 +4,11 @@ import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
+
+import '../../../../main.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatefulWidget {
@@ -17,24 +18,14 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-List data = [];
+
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
-  void initState() {
-    getdata();
-    setState(() {});
+ 
 
-    super.initState();
-  }
 
-  getdata() async {
-    QuerySnapshot quarysnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    data.addAll(quarysnapshot.docs);
-  }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:Toxicon/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/custtomcard.dart';
@@ -20,23 +20,15 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
-List data = [];
-getdata() async {
-  QuerySnapshot quarysnapshot = await FirebaseFirestore.instance
-      .collection('users')
-      .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .get();
-  data.addAll(quarysnapshot.docs);
-}
 
 class _SettingScreenState extends State<SettingScreen> {
   @override
-  void initState() {
-    getdata();
-     setState(() {});
+  // void initState() {
+  //   getdata();
+  //    setState(() {});
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -85,21 +86,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Uint8List? _image;
   File? selectedIMage;
-  List data = [];
-  getdata() async {
-    QuerySnapshot quarysnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    data.addAll(quarysnapshot.docs);
-    setState(() {});
-  }
+
 
   @override
-  void initState() {
-    getdata();
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

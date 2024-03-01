@@ -49,12 +49,7 @@ class AppMessage {
 class socialmedia extends StatelessWidget {
   final GoogleSignIn googleSignIn = new GoogleSignIn();
 
-  // Future signInWithFacebook() async {
-  //   final LoginResult loginResult = await FacebookAuth.instance.login();
-  //   final OAuthCredential facebookAuthCredential =
-  //       FacebookAuthProvider.credential(loginResult.accessToken.token);
-  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  // }
+ 
   Future signInWithGoogle() async {
     try {
       // Trigger the authentication flow
@@ -75,11 +70,7 @@ class socialmedia extends StatelessWidget {
     } catch (e) {
       // Handle any errors that occur during the sign-in process
       print('Error signing in with Google: $e');
-      // You can also show a message to the user or navigate to an error page
-      // AppMessage.customSnackBar(
-      //   context: context,
-      //   content: 'An error occurred while signing in with Google. Please try again.',
-      // );
+    
       rethrow;
     }
   }

@@ -69,7 +69,7 @@ class homewidgetsimilarty extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-         Navigator.of(context).push(createRoutehomesmi());
+          Navigator.of(context).push(createRoutehomesmi());
         },
         child: CustomContainerCtegory(
           size: size,
@@ -130,12 +130,13 @@ Route _createRoute() {
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
-      const curve = Curves.easeOut;
+      const curve = Curves.easeInOutCirc;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
 
       return SlideTransition(
-        position: animation.drive(tween),
+        position: offsetAnimation,
         child: child,
       );
     },
@@ -144,21 +145,33 @@ Route _createRoute() {
 
 Route createRoutehomesmi() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const smilartyScreen(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.linearToEaseOut;
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const smilartyScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutCirc;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var slideTween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(slideTween);
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
+        var fadeAnimation =
+            Tween<double>(begin: 0.0, end: 1.0).animate(animation);
+        var scaleAnimation =
+            Tween<double>(begin: 0.5, end: 1.0).animate(animation);
+
+        return FadeTransition(
+          opacity: fadeAnimation,
+          child: ScaleTransition(
+            scale: scaleAnimation,
+            child: SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            ),
+          ),
+        );
+      });
 }
 
 Route createRoutehomedna() {
@@ -166,18 +179,30 @@ Route createRoutehomedna() {
     pageBuilder: (context, animation, secondaryAnimation) =>
         const MutagencityScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.linearToEaseOut;
+     const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutCirc;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var slideTween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(slideTween);
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
+        var fadeAnimation =
+            Tween<double>(begin: 0.0, end: 1.0).animate(animation);
+        var scaleAnimation =
+            Tween<double>(begin: 0.5, end: 1.0).animate(animation);
+
+        return FadeTransition(
+          opacity: fadeAnimation,
+          child: ScaleTransition(
+            scale: scaleAnimation,
+            child: SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            ),
+          ),
+        );
+      });
 }
 
 Route createRoutehomemol() {
@@ -185,18 +210,30 @@ Route createRoutehomemol() {
     pageBuilder: (context, animation, secondaryAnimation) =>
         const MoleculeScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.linearToEaseOut;
+      const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutCirc;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var slideTween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(slideTween);
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
+        var fadeAnimation =
+            Tween<double>(begin: 0.0, end: 1.0).animate(animation);
+        var scaleAnimation =
+            Tween<double>(begin: 0.5, end: 1.0).animate(animation);
+
+        return FadeTransition(
+          opacity: fadeAnimation,
+          child: ScaleTransition(
+            scale: scaleAnimation,
+            child: SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            ),
+          ),
+        );
+      });
 }
 
 Route createRoutehomeliver() {
@@ -204,85 +241,103 @@ Route createRoutehomeliver() {
     pageBuilder: (context, animation, secondaryAnimation) =>
         const LiverScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.linearToEaseOut;
+      const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutCirc;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var slideTween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(slideTween);
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
+        var fadeAnimation =
+            Tween<double>(begin: 0.0, end: 1.0).animate(animation);
+        var scaleAnimation =
+            Tween<double>(begin: 0.5, end: 1.0).animate(animation);
+
+        return FadeTransition(
+          opacity: fadeAnimation,
+          child: ScaleTransition(
+            scale: scaleAnimation,
+            child: SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            ),
+          ),
+        );
+      });
 }
 
 Route signin() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => SignUp(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = const Offset(0.0, 1.0);
-      var end = Offset.zero;
-      var curve = Curves.bounceIn;
+      const begin = Offset(1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.easeInOutCirc;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
 
       return SlideTransition(
-        position: animation.drive(tween),
+        position: offsetAnimation,
         child: child,
       );
     },
   );
 }
+
 Route createRouteprofile() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-         ProfileScreen(),
+    pageBuilder: (context, animation, secondaryAnimation) => ProfileScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
-      const curve = Curves.linearToEaseOut;
+      const curve = Curves.easeInOutCirc;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
 
       return SlideTransition(
-        position: animation.drive(tween),
+        position: offsetAnimation,
         child: child,
       );
     },
   );
 }
+
 Route createRouteabout() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const InfoScreen(),
+    pageBuilder: (context, animation, secondaryAnimation) => const InfoScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
+     const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
-      const curve = Curves.easeOut;
+      const curve = Curves.easeInOutCirc;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
 
       return SlideTransition(
-        position: animation.drive(tween),
+        position: offsetAnimation,
         child: child,
       );
     },
   );
-}Route createRoutehistory() {
+}
+
+Route createRoutehistory() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
         const HistoryScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
+      const begin = Offset(1.0, 0.0);
       const end = Offset.zero;
-      const curve = Curves.easeOut;
+      const curve = Curves.easeInOutCirc;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
 
       return SlideTransition(
-        position: animation.drive(tween),
+        position: offsetAnimation,
         child: child,
       );
     },

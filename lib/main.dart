@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isViewed;
+List data=CacheHelper.data;
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -25,12 +26,14 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   isViewed = prefs.getInt('onBoard');
   await CacheHelper.init();
-  FirebaseAuth.instance
-  .authStateChanges()
-  .listen((User? user) {
+
+  await CacheHelper.getdata();
+   
+
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
       print('User is currently signed out!');
     } else {
@@ -39,13 +42,13 @@ Future<void> main() async {
   });
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
   Bloc.observer = MyBlocObserver();
-  
+
   runApp(Toxicon(isDarkFromShared));
 }
 
 class Toxicon extends StatelessWidget {
-   final bool? isDark;
-   Toxicon(this.isDark, {super.key});
+  final bool? isDark;
+  Toxicon(this.isDark, {super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
