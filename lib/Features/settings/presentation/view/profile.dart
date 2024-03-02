@@ -88,7 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: data.isNotEmpty
                         ? data.last['url'] != null
                             ? CircleAvatar(
-                                radius: 100,
+                                radius: 50,
+                                backgroundColor: Colors.transparent.withOpacity(0),
                                 backgroundImage: NetworkImage(data.last['url']))
                             : CircleAvatar(
                                 backgroundColor:

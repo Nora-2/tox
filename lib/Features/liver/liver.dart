@@ -9,10 +9,13 @@ import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-
+ DateTime dateToday =new DateTime.now(); 
+  String date = dateToday.toString().substring(0,10);
 // ignore: must_be_immutable
 class LiverScreen extends StatefulWidget {
   const LiverScreen({super.key});
@@ -26,6 +29,23 @@ class _LiverScreenState extends State<LiverScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference history =
+        FirebaseFirestore.instance.collection('history');
+
+    Future<void> addhistory() {
+      // Call the user's CollectionReference to add a new user
+      return history
+          .add({
+            'result': 'positive',
+            'input': liver.text,
+            'date':date,
+            'category': 'Liver Toxicity',
+            'id': FirebaseAuth.instance.currentUser!.uid,
+          })
+          .then((value) => print("history Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
+
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -108,6 +128,7 @@ class _LiverScreenState extends State<LiverScreen> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
+                                      addhistory();
                                       LivercubitCubit.get(context).viewResult();
                                     });
                                   },

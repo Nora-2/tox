@@ -58,7 +58,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 data.isNotEmpty
                     ? data.last['url'] != null
                         ? CircleAvatar(
-                            radius: 100,
+                          backgroundColor: Colors.transparent.withOpacity(0),
+                            radius: 50,
                             backgroundImage: NetworkImage(data.last['url']))
                         : CircleAvatar(
                             radius: 50,

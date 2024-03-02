@@ -11,3 +11,4 @@ class changemodestate extends AppState {}
 class ChangeThemeModeState extends AppState {}
 
 class GetDataFromSharedState extends AppState {}
+class GetDataFromfirebasState extends AppState {}

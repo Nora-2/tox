@@ -7,15 +7,20 @@ import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import '../../core/utils/function/arrowpop.dart';
 
+DateTime dateToday = new DateTime.now();
+String date = dateToday.toString().substring(0, 10);
+
 // ignore: must_be_immutable
 class MoleculeScreen extends StatefulWidget {
   const MoleculeScreen({super.key});
-static String id = 'MoleculeScreen';
+  static String id = 'MoleculeScreen';
   @override
   State<MoleculeScreen> createState() => _MoleculeScreenState();
 }
@@ -25,6 +30,23 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference history =
+        FirebaseFirestore.instance.collection('history');
+
+    Future<void> addhistory() {
+      // Call the user's CollectionReference to add a new user
+      return history
+          .add({
+            'result': 'toxic',
+            'input': mol.text,
+            'date': date,
+            'category': 'molecule Toxicity',
+            'id': FirebaseAuth.instance.currentUser!.uid,
+          })
+          .then((value) => print("history Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
+
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -43,95 +65,98 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                height: size.height * .03,
+                    height: size.height * .03,
                   ),
                   Padding(
-                padding: const EdgeInsets.only(left: 4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    arrowpop(isDark: isDark),
-                    SizedBox(
-                      width: size.width * .2,
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        arrowpop(isDark: isDark),
+                        SizedBox(
+                          width: size.width * .2,
+                        ),
+                        Image.asset(
+                          ImageConstant.molresult,
+                          width: 190,
+                          height: 100,
+                        )
+                      ],
                     ),
-                    Image.asset(
-                      ImageConstant.molresult,
-                      width: 190,
-                      height: 100,
-                    )
-                  ],
-                ),
                   ),
                   SizedBox(
-                height: size.height * .02,
+                    height: size.height * .02,
                   ),
                   Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: isDark ? black : Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 9,
-                        offset: const Offset(0, -2),
-                      ),
-                    ],
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30.0, left: 10, right: 10),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTextfont24_600(text: 'Input'),
-                          SizedBox(
-                            height: size.height * .015,
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: isDark ? black : Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 9,
+                            offset: const Offset(0, -2),
                           ),
-                          CustomFormField(
-                            ispass: false,
-                              hint: 'Enter your Smile',
-                              preicon: const Icon(
-                                Icons.edit,
-                                size: 19,
-                                color: kcolor,
-                              ),
-                              controller: mol),
-                          SizedBox(
-                            height: size.height * .02,
-                          ),
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  MoleculeCubit.get(context).viewResult();
-                                });
-                              },
-                              child: submit(size: size, isDark: isDark),
-                            ),
-                          ),
-                          SizedBox(height: size.height * .02),
-                          MoleculeCubit.get(context).issubmit
-                              ? resultmolecule(
-                                  size: size, result: MoleculeCubit().result, isDark: isDark)
-                              : Center(
-                                  child: Image.asset(
-                                  ImageConstant.molbefor,
-                                  width: size.width * .9,
-                                  height: size.height * .5,
-                                ))
                         ],
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30.0, left: 10, right: 10),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomTextfont24_600(text: 'Input'),
+                              SizedBox(
+                                height: size.height * .015,
+                              ),
+                              CustomFormField(
+                                  ispass: false,
+                                  hint: 'Enter your Smile',
+                                  preicon: const Icon(
+                                    Icons.edit,
+                                    size: 19,
+                                    color: kcolor,
+                                  ),
+                                  controller: mol),
+                              SizedBox(
+                                height: size.height * .02,
+                              ),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      addhistory();
+                                      MoleculeCubit.get(context).viewResult();
+                                    });
+                                  },
+                                  child: submit(size: size, isDark: isDark),
+                                ),
+                              ),
+                              SizedBox(height: size.height * .02),
+                              MoleculeCubit.get(context).issubmit
+                                  ? resultmolecule(
+                                      size: size,
+                                      result: MoleculeCubit().result,
+                                      isDark: isDark)
+                                  : Center(
+                                      child: Image.asset(
+                                      ImageConstant.molbefor,
+                                      width: size.width * .9,
+                                      height: size.height * .5,
+                                    ))
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
                   ),
                 ],
               ),

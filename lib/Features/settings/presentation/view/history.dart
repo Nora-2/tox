@@ -5,6 +5,7 @@ import 'package:Toxicon/core/utils/function/arrowpop.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:Toxicon/main.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/historyCard.dart';
 
@@ -14,27 +15,12 @@ class HistoryScreen extends StatelessWidget {
    static String id = 'HistoryScreen';
   @override
   Widget build(BuildContext context) {
-    bool submit = false;
+    bool submit = History.isNotEmpty ?true:false;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
-    List widgets = [
-      CustomHistoryCard(
-        input: 'CCCC(CCC)C(O)=O',
-        output: 'Positive',
-        date: '12/1/2024',
-        category: 'Liver Toxcity',
-        size: size,
-      ),
-      CustomHistoryCard(
-        input: 'CCCC(CCC)C(O)=O',
-        output: 'Positive',
-        date: '12/1/2024',
-        category: 'Liver Toxcity',
-        size: size,
-      ),
-    ];
+  
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(gradient: gradientTop(isDark)),
@@ -69,9 +55,15 @@ class HistoryScreen extends StatelessWidget {
                           ? ListView.builder(
                               padding: const EdgeInsets.only(
                                   top: 18, left: 8, right: 8),
-                              itemCount: widgets.length,
+                              itemCount: History.length,
                               itemBuilder: (context, index) {
-                                return widgets[index];
+                                return CustomHistoryCard(
+        input: History[index]['input'],
+        output: History[index]['result'],
+        date: History[index]['date'],
+        category: History[index]['category'],
+        size: size,
+      );
                               },
                             )
                           : Center(

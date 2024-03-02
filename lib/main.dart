@@ -18,7 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isViewed;
-List data=CacheHelper.data;
+List data = CacheHelper.data;
+List History = CacheHelper.History;
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -29,9 +30,8 @@ Future<void> main() async {
   );
   isViewed = prefs.getInt('onBoard');
   await CacheHelper.init();
-
+  await CacheHelper.getdataHistory();
   await CacheHelper.getdata();
-   
 
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
@@ -40,6 +40,7 @@ Future<void> main() async {
       print('User is signed in!');
     }
   });
+  print("History======================>${History}");
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
   Bloc.observer = MyBlocObserver();
 

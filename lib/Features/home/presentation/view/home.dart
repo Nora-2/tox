@@ -3,6 +3,7 @@ import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/homeutilis.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:Toxicon/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,7 @@ class homeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      text: 'Hi,${user.displayName}!',
+                      text: 'Hi,${data.isNotEmpty ? data.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName }!',
                       style: Styles.textStyleacme30,
                     ),
                     customsizebox(

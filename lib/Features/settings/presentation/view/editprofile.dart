@@ -9,7 +9,6 @@ import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,35 +32,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController jop = TextEditingController();
   TextEditingController country = TextEditingController();
   String? url;
-  Future<String?> uploadImageToFirebase() async {
-    if (_image == null) {
-      print('No image selected.');
-      return null;
-    }
-    try {
-      final currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser == null) {
-        print('User not signed in.');
-        return null;
-      }
-      Reference storageReference = FirebaseStorage.instance.ref().child(
-          "user_images/${currentUser.uid}/${DateTime.now().toIso8601String()}");
-      await storageReference.putData(_image!);
-      final url = await storageReference.getDownloadURL();
-      print('File uploaded successfully. Image URL: $url');
-      return url;
-    } on FirebaseException catch (e) {
-      print('Error uploading file: $e');
-      return null;
-    }
+Future<String?> uploadImageToFirebase() async {
+  if (_image == null) {
+    print('No image selected.');
+    return null;
   }
+
+  try {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      print('User not signed in.');
+      return null;
+    }
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child("user_images/${currentUser.uid}/${DateTime.now().toIso8601String()}");
+    await storageReference.putFile(selectedIMage!);
+    final imageUrl = await storageReference.getDownloadURL();
+    setState(() {
+      url = imageUrl;
+    });
+
+    print('File uploaded successfully. Image URL: $url');
+    return imageUrl;
+  } on FirebaseException catch (e) {
+    print('Error uploading file: $e');
+    return null;
+  }
+}
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   Future<void> addUser() {
     return users
         // existing document in 'users' collection: "ABC123"
-        .doc('ABC123')
+        .doc()
         .set(
           {
             'full_name': name.text == ''
@@ -75,7 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                  FirebaseAuth.instance.currentUser!.email
                 : email.text,
             'id': FirebaseAuth.instance.currentUser!.uid,
-            'url':url==''?data.isNotEmpty ? data.last['url'] :url:url
+            'url': url != null ? url :data.isNotEmpty ? data.last['url'] :'',
           },
           SetOptions(merge: true),
         )
@@ -88,8 +93,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   File? selectedIMage;
 
 
-  @override
- 
 
   @override
   Widget build(BuildContext context) {
@@ -140,24 +143,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     fit: StackFit.expand,
                     clipBehavior: Clip.none,
                     children: [
-                      _image != null
-                          ? CircleAvatar(
-                              radius: 100,
-                              backgroundImage: MemoryImage(_image!))
-                          :url == null
-                              ? 
-                      CircleAvatar(
-                                  backgroundColor:
-                                      Colors.transparent.withOpacity(0),
-                                  backgroundImage: AssetImage(
-                                    ImageConstant.profile,
-                                  ),
-                                )
-                              : CircleAvatar(
-                                  radius: 100,
-                                  backgroundImage:
-                                      NetworkImage(url!))
-                      ,Positioned(
+                     data.isNotEmpty
+                    ? data.last['url'] != null
+                        ? CircleAvatar(
+                          backgroundColor: Colors.transparent.withOpacity(0),
+                            radius: 50,
+                            backgroundImage: NetworkImage(data.last['url']))
+                        : CircleAvatar(
+                            radius: 50,
+                            backgroundColor: Colors.transparent.withOpacity(0),
+                            backgroundImage: AssetImage(
+                              ImageConstant.profile,
+                            ),
+                          )
+                    : CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.transparent.withOpacity(0),
+                        backgroundImage: AssetImage(
+                          ImageConstant.profile,
+                        ),
+                      ),
+                      Positioned(
                         right: 10,
                         bottom: 10,
                         child: GestureDetector(
@@ -294,14 +300,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       SizedBox(
                         height: size.height * .03,
                       ),
-                      GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              addUser();
-                              uploadImageToFirebase();
-                            });
-                          },
-                          child: save(size: size, isDark: isDark))
+                 GestureDetector(
+  onTap: () async {
+    // Ensure image upload is complete before updating user data
+    String? uploadedImageUrl = await uploadImageToFirebase();
+    if (uploadedImageUrl != null) {
+      // If image upload is successful, update user data
+      setState(() {
+        url = uploadedImageUrl;
+      });
+      addUser();
+    }
+  },
+  child: save(size: size, isDark: isDark),
+),
                     ],
                   ),
                 ),
@@ -393,3 +405,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     Navigator.of(context).pop();
   }
 }
+ 
