@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, camel_case_types
+// ignore_for_file: non_constant_identifier_names, camel_case_types, avoid_print
 import 'package:Toxicon/core/components/homelayout.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
@@ -94,7 +94,7 @@ static List<Map<String, String>> infodata = [
 
 // ignore: must_be_immutable
 class socialmedia extends StatelessWidget {
-  final GoogleSignIn googleSignIn = new GoogleSignIn();
+  // final GoogleSignIn googleSignIn = new GoogleSignIn();
 
  
   Future signInWithGoogle() async {
@@ -121,7 +121,6 @@ class socialmedia extends StatelessWidget {
       rethrow;
     }
   }
-
   socialmedia({
     super.key,
     required this.size,

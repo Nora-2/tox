@@ -1,5 +1,6 @@
 
 import 'package:Toxicon/Features/home/cubit_home/homecubit_cubit.dart';
+import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +14,8 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      CacheHelper.getdataHistory();
+      CacheHelper.getdata();
      final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;

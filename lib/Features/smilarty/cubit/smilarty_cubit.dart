@@ -13,7 +13,7 @@ class SmilartyCubit extends Cubit<SmilartyState> {
   }
 
   bool issubmit = false;
-  void viewResult() {
+ viewResult()  {
     issubmit = !issubmit;
     emit(changemodestate());
   }

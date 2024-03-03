@@ -6,17 +6,25 @@ import 'package:Toxicon/core/utils/function/resultcontainer.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class resultmolecule extends StatelessWidget {
-  const resultmolecule({
-    super.key,
-    required this.size,
-    required this.result,
-    required this.isDark,
-  });
+  resultmolecule(
+      {super.key,
+      required this.size,
+      required this.result,
+      required this.isDark,
+      required this.bond,
+      required this.atom,
+      required this.gester,
+      required this.imagepath});
 
   final Size size;
   final bool result;
+  String bond;
   final bool isDark;
+  String imagepath;
+  String atom;
+  String gester;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +57,22 @@ class resultmolecule extends StatelessWidget {
           children: [
             Column(
               children: [
-                molcircularviewer(isDark: isDark,Value: 10,color: seccolor,),
+                molcircularviewer(
+                  isDark: isDark,
+                  Value: 10,
+                  color: seccolor,
+                ),
                 SizedBox(height: size.height * .02),
                 CustomTextfont24_600(text: 'Tox score')
               ],
             ),
             Column(
               children: [
-               molcircularviewer(isDark: isDark,Value: 20,color: icolor,),
+                molcircularviewer(
+                  isDark: isDark,
+                  Value: 20,
+                  color: icolor,
+                ),
                 SizedBox(height: size.height * .02),
                 CustomTextfont24_600(text: 'SA score')
               ],
@@ -69,7 +85,14 @@ class resultmolecule extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextfont24_600(text: 'More Info'),
-            morinformation(size: size, isDark: isDark)
+            morinformation(
+              gester: gester ,
+              atom:atom ,
+              size: size,
+              isDark: isDark,
+              bond: bond,
+              imagepath: imagepath,
+            )
           ],
         ),
         SizedBox(height: size.height * .04),

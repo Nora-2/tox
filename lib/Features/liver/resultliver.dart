@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, must_be_immutable
 import 'package:Toxicon/core/utils/function/moreunfo.dart';
 import 'package:Toxicon/core/utils/function/resultcontainer.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
@@ -6,16 +6,24 @@ import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class resultliver extends StatelessWidget {
-  const resultliver({
+  resultliver({
     super.key,
     required this.size,
     required this.result,
     required this.isDark,
+    required this.bond,
+    required this.imagepath,
+    required  this.atom,
+    required this.gester
   });
 
   final Size size;
   final bool result;
   final bool isDark;
+  String bond;
+  String atom;
+  String imagepath;
+  String gester;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +68,10 @@ class resultliver extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextfont24_600(text: 'More Info'),
-            morinformation(size: size, isDark: isDark)
+            morinformation(
+              gester:gester,
+              atom: atom,
+                size: size, isDark: isDark, bond: bond, imagepath: imagepath)
           ],
         ),
         SizedBox(height: size.height * .04),

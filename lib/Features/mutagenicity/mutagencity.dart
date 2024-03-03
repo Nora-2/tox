@@ -1,4 +1,4 @@
-// ignore_for_file: dead_code
+// ignore_for_file: dead_code, use_build_context_synchronously, prefer_interpolation_to_compose_strings, avoid_print
 import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/mutresult.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
@@ -14,8 +14,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-DateTime dateToday = new DateTime.now();
+DateTime dateToday =  DateTime.now();
 String date = dateToday.toString().substring(0, 10);
 
 // ignore: must_be_immutable
@@ -29,6 +31,100 @@ class MutagencityScreen extends StatefulWidget {
 class _MutagencityScreenState extends State<MutagencityScreen> {
   TextEditingController dna = TextEditingController();
   String fileName = 'mol.sdf'; // Default file name
+  String _result = '';
+  String _imagePath = '';
+  String atoms='';
+  String gester = '';
+
+
+  Future<void> computeGasteigerCharges() async {
+     String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
+    final Map<String, String> headers = {'Content-Type': 'application/json'};
+    final String smiles = dna.text;
+
+    try {
+      final http.Response response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode({'smiles': smiles}),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> ge = jsonDecode(response.body);
+        setState(() {
+          gester = ge['result'];
+        });
+      } else {
+        setState(() {
+          gester = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        gester = 'Error: $e';
+      });
+    }
+  }
+  Future<void> _generate3DStructure() async {
+     String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'smiles': dna.text}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['success']) {
+          setState(() {
+            _imagePath = 'http://127.0.0.1:5000/' + data['image_path'];
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${data['message']}')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${response.reasonPhrase}')),
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> _processSmiles() async {
+     String url =
+        'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'smiles': dna.text}),
+      );
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+        // Assuming the data structure is {'atoms': [], 'bonds': []}
+        // Update the code according to the actual structure of your response
+        setState(() {
+            _result = '${data['bonds']}';
+           atoms=  '${data['atoms']}';  });
+      } else {
+        setState(() {
+          _result = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _result = 'Error: $e';
+      });
+    }
+  }
 
   // Function to handle file selection
   void _pickFile() async {
@@ -185,6 +281,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
+                                          computeGasteigerCharges();
+                                          _generate3DStructure();
+                                          _processSmiles();
                                           addhistory();
                                           DnaCubit.get(context).viewResult();
                                         });
@@ -194,6 +293,10 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               SizedBox(height: size.height * .04),
                               DnaCubit.get(context).issubmit
                                   ? dnaresult(
+                                    atom:atoms,
+                                    gester: gester,
+                                      bond: _result,
+                                      imagepath: _imagePath,
                                       size: size,
                                       result: DnaCubit().result,
                                       isDark: isDark)

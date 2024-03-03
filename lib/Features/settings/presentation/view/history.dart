@@ -9,18 +9,20 @@ import 'package:Toxicon/main.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/historyCard.dart';
 
+
+
 // ignore: camel_case_types
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
-   static String id = 'HistoryScreen';
+  static String id = 'HistoryScreen';
   @override
   Widget build(BuildContext context) {
-    bool submit = History.isNotEmpty ?true:false;
+    bool submit = History.isNotEmpty ? true : false;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
-  
+
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(gradient: gradientTop(isDark)),
@@ -32,7 +34,7 @@ class HistoryScreen extends StatelessWidget {
                   height: size.height * .03,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 4.0,top: 11),
+                  padding: const EdgeInsets.only(left: 4.0, top: 11),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +43,7 @@ class HistoryScreen extends StatelessWidget {
                       const SizedBox(
                         width: 40,
                       ),
-                     const customtext60020(text:'History'),
+                      const customtext60020(text: 'History'),
                     ],
                   ),
                 ),
@@ -58,12 +60,12 @@ class HistoryScreen extends StatelessWidget {
                               itemCount: History.length,
                               itemBuilder: (context, index) {
                                 return CustomHistoryCard(
-        input: History[index]['input'],
-        output: History[index]['result'],
-        date: History[index]['date'],
-        category: History[index]['category'],
-        size: size,
-      );
+                                  input: History[index]['input'],
+                                  output: History[index]['result'],
+                                  date: History[index]['date'],
+                                  category: History[index]['category'],
+                                  size: size,
+                                );
                               },
                             )
                           : Center(

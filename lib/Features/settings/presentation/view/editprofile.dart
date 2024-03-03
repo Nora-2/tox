@@ -1,6 +1,7 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
 import 'dart:io';
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
+import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
@@ -60,34 +61,6 @@ Future<String?> uploadImageToFirebase() async {
     return null;
   }
 }
-
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
-
-  Future<void> addUser() {
-    return users
-        // existing document in 'users' collection: "ABC123"
-        .doc()
-        .set(
-          {
-            'full_name': name.text == ''
-                ? data.isNotEmpty ? data.last['full_name']
-                : name.text:name.text,
-            'phone':mobile.text==''?data.isNotEmpty ? data.last['phone'] :mobile.text:mobile.text,
-            'company':jop.text==''?data.isNotEmpty ? data.last['company'] :jop.text:jop.text, // Stokes and Sons
-            'country':country.text==''?data.isNotEmpty ? data.last['country'] :country.text:country.text,
-            'birth': birth.text==''?data.isNotEmpty ? data.last['birth'] :birth.text:birth.text,
-            'email': email.text == ''?data.isNotEmpty ? data.last['email'] :
-                 FirebaseAuth.instance.currentUser!.email
-                : email.text,
-            'id': FirebaseAuth.instance.currentUser!.uid,
-            'url': url != null ? url :data.isNotEmpty ? data.last['url'] :'',
-          },
-          SetOptions(merge: true),
-        )
-        .then(
-            (value) => print("'full_name' & 'age' merged with existing data!"))
-        .catchError((error) => print("Failed to merge data: $error"));
-  }
 
   Uint8List? _image;
   File? selectedIMage;
@@ -156,13 +129,8 @@ Future<String?> uploadImageToFirebase() async {
                               ImageConstant.profile,
                             ),
                           )
-                    : CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.transparent.withOpacity(0),
-                        backgroundImage: AssetImage(
-                          ImageConstant.profile,
-                        ),
-                      ),
+                    : Container(),
+                      
                       Positioned(
                         right: 10,
                         bottom: 10,
@@ -302,14 +270,13 @@ Future<String?> uploadImageToFirebase() async {
                       ),
                  GestureDetector(
   onTap: () async {
-    // Ensure image upload is complete before updating user data
     String? uploadedImageUrl = await uploadImageToFirebase();
     if (uploadedImageUrl != null) {
-      // If image upload is successful, update user data
       setState(() {
         url = uploadedImageUrl;
       });
-      addUser();
+     CacheHelper.addUser(name: name, mobile: mobile, jop: jop, country: country, birth: birth, email: email, url: url);
+
     }
   },
   child: save(size: size, isDark: isDark),
