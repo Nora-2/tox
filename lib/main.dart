@@ -29,8 +29,7 @@ Future<void> main() async {
   );
   isViewed = prefs.getInt('onBoard');
   await CacheHelper.init();
-  // await CacheHelper.getdataHistory()??'';
-  // await CacheHelper.getdata()??'';
+
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
       print('User is currently signed out!');

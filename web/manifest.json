@@ -1,6 +1,6 @@
 {
-    "name": "store_ify",
-    "short_name": "store_ify",
+    "name": "Toxicon",
+    "short_name": "Toxicon",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

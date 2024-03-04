@@ -1,17 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
 from rdkit import Chem
 from rdkit.Chem import AllChem
-import numpy as np
 from flask_cors import CORS  # Import the CORS extension
 from rdkit.Chem import Draw
 from rdkit.Chem.Draw import SimilarityMaps
 import matplotlib.pyplot as plt
 import os
 from joblib import load
-import pandas as pd
-from joblib import dump
-
-
 app = Flask(__name__)
 CORS(app) 
 # ////////////////similarty map///////////////////
@@ -36,7 +31,6 @@ def generate_similarity_map():
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
-
 #////////////////////////////bond//////////////////
 def process_smiles(smiles):
     molecule = Chem.MolFromSmiles(smiles)
@@ -102,7 +96,6 @@ def generate_3d_structure():
 def serve_image(filename):
     return send_from_directory('static', filename)
 # ////////////gester charge///////////
-
 @app.route('/compute_gasteiger_charges', methods=['POST'])
 def compute_gasteiger_charges():
     data = request.get_json()
@@ -122,34 +115,20 @@ def compute_gasteiger_charges():
 
     return jsonify({"result": output_string})
 # //////////////////////////dili///////////////////////
-# Load the trained model
-# loaded_model = load('assets/model.joblib')
+loaded_model = load('dili.joblib')
 
-# # Define the endpoint for prediction
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     try:
-#         # Get the SMILES string from the request
-#         data = request.get_json()
-#         smiles = data['smiles']
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    smiles = data['smiles']
+    fingerprint = generate_morgan_fingerprint(smiles)
+    prediction = int(loaded_model.predict([fingerprint])[0])  # Convert to Python integer
+    return jsonify({'prediction': prediction})
 
-#         # Generate Morgan fingerprint for the input SMILES
-#         fingerprint = generate_morgan_fingerprint(smiles)
-
-#         # Make a prediction using the loaded model
-#         prediction = loaded_model.predict([fingerprint])[0]
-
-#         # Return the prediction as JSON
-#         return jsonify({'prediction': prediction})
-
-#     except Exception as e:
-#         return jsonify({'error': str(e)})
-
-# def generate_morgan_fingerprint(smiles):
-#     mol = Chem.MolFromSmiles(smiles)
-#     morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024, useChirality=True, useBondTypes=True)
-#     return morgan_fp
+def generate_morgan_fingerprint(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+    morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024, useChirality=True, useBondTypes=True)
+    return morgan_fp
 if __name__ == '__main__':
     os.makedirs('static', exist_ok=True)
     app.run(debug=True)
-

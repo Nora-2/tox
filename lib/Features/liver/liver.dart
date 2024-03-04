@@ -16,7 +16,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 
-DateTime dateToday =  DateTime.now();
+DateTime dateToday = DateTime.now();
 String date = dateToday.toString().substring(0, 10);
 
 // ignore: must_be_immutable
@@ -33,107 +33,19 @@ class _LiverScreenState extends State<LiverScreen> {
   String _imagePath = '';
   String atoms = '';
   String gester = '';
-  Future<void> computeGasteigerCharges() async {
-    String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
-    final Map<String, String> headers = {'Content-Type': 'application/json'};
-    final String smiles = liver.text;
+  int _prediction = 0;
 
-    try {
-      final http.Response response = await http.post(
-        Uri.parse(url),
-        headers: headers,
-        body: jsonEncode({'smiles': smiles}),
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> gestere = jsonDecode(response.body);
-        setState(() {
-          gester = gestere['result'];
-        });
-      } else {
-        setState(() {
-          gester = 'Error: ${response.statusCode}';
-        });
-      }
-    } catch (e) {
-      setState(() {
-        gester = 'Error: $e';
-      });
-    }
-  }
-
-  Future<void> _generate3DStructure() async {
-    String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
-
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'smiles': liver.text}),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['success']) {
-          setState(() {
-            _imagePath = 'http://127.0.0.1:5000/' + data['image_path'];
-          });
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${data['message']}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${response.reasonPhrase}')),
-        );
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
-  Future<void> _processSmiles() async {
-    String url =
-        'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
-
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'smiles': liver.text}),
-      );
-
-      if (response.statusCode == 200) {
-        Map<String, dynamic> data = jsonDecode(response.body);
-        // Assuming the data structure is {'atoms': [], 'bonds': []}
-        // Update the code according to the actual structure of your response
-        setState(() {
-          _result = '${data['bonds']}';
-          atoms = '${data['atoms']}';
-        });
-      } else {
-        setState(() {
-          _result = response.statusCode as String;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        print(e);
-      });
-    }
-  }
-
-  @override
+ 
+    @override
   Widget build(BuildContext context) {
     CollectionReference history =
         FirebaseFirestore.instance.collection('history');
+    String prediction=(_prediction == 0||_prediction<0) ? 'Negative' : 'Positive';
 
     Future<void> addhistory() {
-      // Call the user's CollectionReference to add a new user
       return history
           .add({
-            'result': 'positive',
+            'result':prediction,
             'input': liver.text,
             'date': date,
             'category': 'Liver Toxicity',
@@ -225,6 +137,7 @@ class _LiverScreenState extends State<LiverScreen> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
+                                      _predict();
                                       computeGasteigerCharges();
                                       _generate3DStructure();
                                       _processSmiles();
@@ -238,12 +151,12 @@ class _LiverScreenState extends State<LiverScreen> {
                               SizedBox(height: size.height * .04),
                               LivercubitCubit.get(context).issubmit
                                   ? resultliver(
-                                    gester: gester,
+                                      gester: gester,
                                       bond: _result,
                                       atom: atoms,
                                       size: size,
                                       imagepath: _imagePath,
-                                      result: LivercubitCubit().result,
+                                      result: (_prediction==0||_prediction<0)?false:true,
                                       isDark: isDark)
                                   : Center(
                                       child: Image.asset(
@@ -264,5 +177,114 @@ class _LiverScreenState extends State<LiverScreen> {
         },
       ),
     );
+  }
+   Future<void> _predict() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/predict'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'smiles': liver.text}),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      final prediction =
+          responseData['prediction']; // Convert to String
+      setState(() {
+        _prediction = prediction;
+      });
+    } else {
+      // Handle error
+      print('Error: ${response.statusCode}');
+    }
+  }
+
+  Future<void> computeGasteigerCharges() async {
+    String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
+    final Map<String, String> headers = {'Content-Type': 'application/json'};
+    final String smiles = liver.text;
+
+    try {
+      final http.Response response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode({'smiles': smiles}),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> gestere = jsonDecode(response.body);
+        setState(() {
+          gester = gestere['result'];
+        });
+      } else {
+        setState(() {
+          gester = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        gester = 'Error: $e';
+      });
+    }
+  }
+
+  Future<void> _generate3DStructure() async {
+    String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'smiles': liver.text}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['success']) {
+          setState(() {
+            _imagePath = 'http://127.0.0.1:5000/' + data['image_path'];
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${data['message']}')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${response.reasonPhrase}')),
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> _processSmiles() async {
+    String url =
+        'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'smiles': liver.text}),
+      );
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+         
+        setState(() {
+          _result = '${data['bonds']}';
+          atoms = '${data['atoms']}';
+        });
+      } else {
+        setState(() {
+          _result = response.statusCode as String;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        print(e);
+      });
+    }
   }
 }

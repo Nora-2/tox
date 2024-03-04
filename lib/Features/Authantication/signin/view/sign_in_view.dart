@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, dead_code, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
+import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/custom_snack_bar.dart';
@@ -45,6 +46,8 @@ class _SignInState extends State<SignIn> {
               isLoading = true;
             } else if (state is Loginsucsess) {
               if (FirebaseAuth.instance.currentUser!.emailVerified) {
+                   CacheHelper.getdataHistory() ?? '';
+                   CacheHelper.getdata() ?? '';
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -209,12 +212,7 @@ class _SignInState extends State<SignIn> {
                               isLoading = true;
                               BlocProvider.of<LoginCubit>(context).loginUser(
                                   email: Email!, password: Password!);
-                              // Navigator.pushAndRemoveUntil(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (_) => const HomeLayout(),
-                              // ),
-                              // (route) => false);
+                             
                             }
                           },
                           child: customButtonContainer(
@@ -245,7 +243,8 @@ class _SignInState extends State<SignIn> {
                             width: size.width * .009,
                           ),
                           GestureDetector(
-                              onTap: () {
+                              onTap: ()  {
+                              
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
