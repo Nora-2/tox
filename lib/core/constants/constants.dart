@@ -121,7 +121,7 @@ class socialmedia extends StatelessWidget {
       rethrow;
     }
   }
-  socialmedia({
+ const socialmedia({
     super.key,
     required this.size,
   });

@@ -327,7 +327,7 @@ Route createRouteabout() {
 Route createRoutehistory() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
-        const HistoryScreen(),
+         HistoryScreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(1.0, 0.0);
       const end = Offset.zero;

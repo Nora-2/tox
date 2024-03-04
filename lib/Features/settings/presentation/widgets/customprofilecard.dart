@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomProfileCard extends StatefulWidget {
-  CustomProfileCard({
+ const CustomProfileCard({
     super.key,
     required this.icon,
     required this.size,

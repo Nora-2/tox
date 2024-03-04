@@ -1,13 +1,11 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print
+// ignore_for_file: non_constant_identifier_names, avoid_print, use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 import 'dart:io';
 import 'package:Toxicon/Features/settings/presentation/widgets/custom%20textfield.dart';
-import 'package:Toxicon/core/components/cachhelper.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-import 'package:Toxicon/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,7 +15,7 @@ import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen({super.key});
+ const EditProfileScreen({super.key});
   static String id = 'editprofile';
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -33,34 +31,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController jop = TextEditingController();
   TextEditingController country = TextEditingController();
   String? url;
-Future<String?> uploadImageToFirebase() async {
-  if (_image == null) {
-    print('No image selected.');
-    return null;
-  }
-
-  try {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      print('User not signed in.');
-      return null;
-    }
-    Reference storageReference = FirebaseStorage.instance
-        .ref()
-        .child("user_images/${currentUser.uid}/${DateTime.now().toIso8601String()}");
-    await storageReference.putFile(selectedIMage!);
-    final imageUrl = await storageReference.getDownloadURL();
-    setState(() {
-      url = imageUrl;
-    });
-
-    print('File uploaded successfully. Image URL: $url');
-    return imageUrl;
-  } on FirebaseException catch (e) {
-    print('Error uploading file: $e');
-    return null;
-  }
-}
+   final Stream<QuerySnapshot> documentStream = FirebaseFirestore.instance.collection('users')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
 
   Uint8List? _image;
   File? selectedIMage;
@@ -68,13 +40,68 @@ Future<String?> uploadImageToFirebase() async {
 
 
   @override
+  // ignore: dead_code
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
-    return Scaffold(
+    return StreamBuilder(stream: documentStream, builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Something went wrong');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+        return  const  Center( child: CircularProgressIndicator(color:Colors.black),);
+          }
+          CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
+  
+   Future<void>? addUser() {
+    return users
+        .doc()
+        .set(
+          {
+            'full_name': name.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['full_name']
+                    : name.text
+                : name.text,
+            'phone': mobile.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['phone']
+                    : mobile.text
+                : mobile.text,
+            'company': jop.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['company']
+                    : jop.text
+                : jop.text, // Stokes and Sons
+            'country': country.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['country']
+                    : country.text
+                : country.text,
+            'birth': birth.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['birth']
+                    : birth.text
+                : birth.text,
+            'email': email.text == ''
+                ?  snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['email']
+                    : FirebaseAuth.instance.currentUser!.email
+                : email.text,
+            'id': FirebaseAuth.instance.currentUser!.uid,
+            'url': url ?? ( snapshot.data!.docs.isNotEmpty ?  snapshot.data!.docs.last['url'] : ''),
+          },
+          SetOptions(merge: true),
+        )
+        .then(
+            (value) => print("'full_name' & 'age' merged with existing data!"))
+        .catchError((error) => print("Failed to merge data: $error"));
+  }
+          return Scaffold(
         body: Container(
       decoration: BoxDecoration(gradient: gradientTop(isDark)),
       child: Column(
@@ -116,12 +143,12 @@ Future<String?> uploadImageToFirebase() async {
                     fit: StackFit.expand,
                     clipBehavior: Clip.none,
                     children: [
-                     data.isNotEmpty
-                    ? data.last['url'] != null
+                     snapshot.data!.docs.isNotEmpty
+                    ?  snapshot.data!.docs.last['url'] != null
                         ? CircleAvatar(
                           backgroundColor: Colors.transparent.withOpacity(0),
                             radius: 50,
-                            backgroundImage: NetworkImage(data.last['url']))
+                            backgroundImage: NetworkImage( snapshot.data!.docs.last['url']))
                         : CircleAvatar(
                             radius: 50,
                             backgroundColor: Colors.transparent.withOpacity(0),
@@ -163,13 +190,13 @@ Future<String?> uploadImageToFirebase() async {
                 ),
               ),
               Text(
-              data.isNotEmpty ? data.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName  ,
+               snapshot.data!.docs.isNotEmpty ?  snapshot.data!.docs.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName  ,
                 style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontFamily: 'acme',
                     fontSize: 24),
               ),
-              Text(data.isNotEmpty ?data.last['company']:'Engineer',
+              Text( snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['company']:'Engineer',
                   style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontFamily: 'acme',
@@ -211,7 +238,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.name,
                           icon: Icons.edit,
                           label: const Text('Name'),
-                          subtitel: data.isNotEmpty ? data.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName),
+                          subtitel:  snapshot.data!.docs.isNotEmpty ?  snapshot.data!.docs.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -220,7 +247,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.emailAddress,
                           icon: Icons.edit,
                           label: const Text('Email'),
-                          subtitel: data.isNotEmpty ? data.last['email'] : FirebaseAuth.instance.currentUser!.displayName),
+                          subtitel:  snapshot.data!.docs.isNotEmpty ?  snapshot.data!.docs.last['email'] : FirebaseAuth.instance.currentUser!.displayName),
                       SizedBox(
                         height: size.height * .03,
                       ),
@@ -229,7 +256,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.phone,
                           icon: Icons.edit,
                           label: const Text('Mobile'),
-                          subtitel:data.isNotEmpty ?  data.last['phone'] 
+                          subtitel: snapshot.data!.docs.isNotEmpty ?   snapshot.data!.docs.last['phone'] 
                               : ''
                              ),
                       SizedBox(
@@ -240,7 +267,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.text,
                           icon: Icons.edit,
                           label: const Text('Country'),
-                          subtitel:data.isNotEmpty ?  data.last['country']
+                          subtitel: snapshot.data!.docs.isNotEmpty ?   snapshot.data!.docs.last['country']
                                :''
                               ),
                       SizedBox(
@@ -251,7 +278,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.datetime,
                           icon: Icons.edit,
                           label: const Text('Birth'),
-                          subtitel:data.isNotEmpty ?  data.last['birth']
+                          subtitel: snapshot.data!.docs.isNotEmpty ?   snapshot.data!.docs.last['birth']
                               : ''
                               ),
                       SizedBox(
@@ -262,7 +289,7 @@ Future<String?> uploadImageToFirebase() async {
                           input: TextInputType.text,
                           icon: Icons.edit,
                           label: const Text('Jop'),
-                          subtitel: data.isNotEmpty ? data.last['company'] 
+                          subtitel:  snapshot.data!.docs.isNotEmpty ?  snapshot.data!.docs.last['company'] 
                               : ''
                ),
                       SizedBox(
@@ -275,8 +302,7 @@ Future<String?> uploadImageToFirebase() async {
       setState(() {
         url = uploadedImageUrl;
       });
-     CacheHelper.addUser(name: name, mobile: mobile, jop: jop, country: country, birth: birth, email: email, url: url);
-
+     addUser();
     }
   },
   child: save(size: size, isDark: isDark),
@@ -289,8 +315,38 @@ Future<String?> uploadImageToFirebase() async {
           ),
         ],
       ),
-    ));
+    ));});}
+  
+
+
+Future<String?> uploadImageToFirebase() async {
+  if (_image == null) {
+    print('No image selected.');
+    return null;
   }
+
+  try {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      print('User not signed in.');
+      return null;
+    }
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child("user_images/${currentUser.uid}/${DateTime.now().toIso8601String()}");
+    await storageReference.putFile(selectedIMage!);
+    final imageUrl = await storageReference.getDownloadURL();
+    setState(() {
+      url = imageUrl;
+    });
+
+    print('File uploaded successfully. Image URL: $url');
+    return imageUrl;
+  } on FirebaseException catch (e) {
+    print('Error uploading file: $e');
+    return null;
+  }
+}
 
   void showImagePickerOption(BuildContext context) {
     showModalBottomSheet(
@@ -368,8 +424,9 @@ Future<String?> uploadImageToFirebase() async {
       selectedIMage = File(returnImage.path);
       _image = File(returnImage.path).readAsBytesSync();
     });
-    // ignore: use_build_context_synchronously
+
     Navigator.of(context).pop();
   }
+ 
 }
  

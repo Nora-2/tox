@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 import 'package:Toxicon/Features/settings/presentation/view/editprofile.dart';
+import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
+import 'package:Toxicon/core/utils/function/arrowpop.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:Toxicon/Features/settings/presentation/widgets/customprofilecard.dart';
-
-import '../../../../main.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatefulWidget {
@@ -18,23 +18,23 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-
+ final Stream<QuerySnapshot> documentStream = FirebaseFirestore.instance.collection('users')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
- 
-
-
-  
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
-    return Scaffold(
+    return StreamBuilder(stream: documentStream, builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Something went wrong');
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+        return  const  Center( child: CircularProgressIndicator(color:Colors.black),);
+          }return Scaffold(
         body: Container(
       decoration: BoxDecoration(gradient: gradientTop(isDark)),
       child: Column(
@@ -50,20 +50,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: isDark ? Colors.white : black,
-                    )),
+               arrowpop(isDark: isDark),
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => EditProfileScreen(),
+                          builder: (_) =>const EditProfileScreen(),
                         ),
                       );
                     },
@@ -85,12 +78,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: SizedBox(
                     height: 150,
                     width: 150,
-                    child: data.isNotEmpty
-                        ? data.last['url'] != null
+                    child: snapshot.data!.docs.isNotEmpty
+                        ? snapshot.data!.docs.last['url'] != null
                             ? CircleAvatar(
                                 radius: 50,
                                 backgroundColor: Colors.transparent.withOpacity(0),
-                                backgroundImage: NetworkImage(data.last['url']))
+                                backgroundImage: NetworkImage(snapshot.data!.docs.last['url']))
                             : CircleAvatar(
                                 backgroundColor:
                                     Colors.transparent.withOpacity(0),
@@ -106,15 +99,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )),
               ),
               Text(
-                data.isNotEmpty
-                    ? data.last['full_name']
+                snapshot.data!.docs.isNotEmpty
+                    ? snapshot.data!.docs.last['full_name']
                     : 'Nora Mohamed',
                 style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontFamily: 'acme',
                     fontSize: 24),
               ),
-              Text(data.isNotEmpty ? data.last['company'] : 'Engineer',
+              Text(snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['company'] : 'Engineer',
                   style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontFamily: 'acme',
@@ -148,36 +141,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CustomProfileCard(
                     icon: Icons.person_2,
                     size: size,
-                    subtitel: data.isNotEmpty
-                        ? data.last['full_name']
+                    subtitel: snapshot.data!.docs.isNotEmpty
+                        ? snapshot.data!.docs.last['full_name']
                         : '',
                   ),
                   CustomProfileCard(
                     icon: Icons.email,
                     size: size,
-                    subtitel: data.isNotEmpty
-                        ? data.last['email']
+                    subtitel: snapshot.data!.docs.isNotEmpty
+                        ? snapshot.data!.docs.last['email']
                         : '',
                   ),
                   CustomProfileCard(
                     icon: Icons.phone,
                     size: size,
-                    subtitel: data.isNotEmpty ? data.last['phone'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['phone'] : '',
                   ),
                   CustomProfileCard(
                     icon: Icons.place,
                     size: size,
-                    subtitel: data.isNotEmpty ? data.last['country'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['country'] : '',
                   ),
                   CustomProfileCard(
                     icon: Icons.date_range,
                     size: size,
-                    subtitel: data.isNotEmpty ? data.last['birth'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['birth'] : '',
                   ),
                   CustomProfileCard(
                     icon: Icons.work_rounded,
                     size: size,
-                    subtitel: data.isNotEmpty ? data.last['company'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['company'] : '',
                   ),
                 ],
               ),
@@ -185,6 +178,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-    ));
+    ));});
   }
 }

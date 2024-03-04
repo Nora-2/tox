@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/Features/home/cubit_home/homecubit_cubit.dart';
 import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
@@ -17,8 +17,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 int? isViewed;
-List data = CacheHelper.data;
-List History = CacheHelper.History;
+// List data = CacheHelper.data;
+// List History = CacheHelper.History;
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -46,7 +46,7 @@ Future<void> main() async {
 
 class Toxicon extends StatelessWidget {
   final bool? isDark;
-  Toxicon(this.isDark, {super.key});
+  const Toxicon(this.isDark, {super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

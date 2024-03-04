@@ -30,7 +30,7 @@ class resultsimilarty extends StatelessWidget {
           child: (imagepath.isNotEmpty)
               ? Image.network(imagepath,height: size.height * .4,
                   width: size.width * .9)
-              : Text('No similarity map generated yet'),
+              : const Text('No similarity map generated yet'),
         ),
         SizedBox(height: size.height * .04),
         CustomTextfont24_600(text: 'count-based fingerprints'),

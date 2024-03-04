@@ -37,7 +37,7 @@ class AppRoutes {
     SplashScreen.id: (context) => const SplashScreen(),
     SignIn.id: (context) =>  SignIn(),
     SignUp.id: (context) =>  SignUp(),
-    EditProfileScreen.id: (context) =>  EditProfileScreen(),
+    EditProfileScreen.id: (context) => const EditProfileScreen(),
     homeScreen.id: (context) => const homeScreen(),
     LiverScreen.id: (context) => const LiverScreen(),
     MoleculeScreen.id:(context)=>const MoleculeScreen(),
@@ -49,7 +49,7 @@ class AppRoutes {
     OtpVerify.id:(context)=>const OtpVerify(),
     ResetPassword.id:(context)=>const ResetPassword(),
     InfoScreen.id: (context) => const InfoScreen(),
-    HistoryScreen.id:(context)=>const HistoryScreen(),
+    HistoryScreen.id:(context)=> HistoryScreen(),
     ProfileScreen.id:(context)=> ProfileScreen(),
     SettingScreen.id:(context)=>const SettingScreen(),
     

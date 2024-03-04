@@ -14,7 +14,7 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      CacheHelper.getdataHistory();
+      // CacheHelper.getdataHistory();
       CacheHelper.getdata();
      final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;

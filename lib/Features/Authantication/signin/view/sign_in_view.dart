@@ -46,7 +46,7 @@ class _SignInState extends State<SignIn> {
               isLoading = true;
             } else if (state is Loginsucsess) {
               if (FirebaseAuth.instance.currentUser!.emailVerified) {
-                   CacheHelper.getdataHistory() ?? '';
+                  //  CacheHelper.getdataHistory() ?? '';
                    CacheHelper.getdata() ?? '';
                 Navigator.pushAndRemoveUntil(
                     context,

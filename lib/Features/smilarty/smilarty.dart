@@ -28,7 +28,7 @@ class _smilartyScreenState extends State<smilartyScreen> {
   String imagePath = '';
 
   Future<void> generateSimilarityMap() async {
-    final apiUrl = 'http://127.0.0.1:5000/generate_similarity_map';
+    const apiUrl = 'http://127.0.0.1:5000/generate_similarity_map';
 
     final response = await http.post(
       Uri.parse(apiUrl),
@@ -57,7 +57,7 @@ class _smilartyScreenState extends State<smilartyScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Error: $error'),
-        duration: Duration(seconds: 3),
+        duration:const Duration(seconds: 3),
       ),
     );
   }

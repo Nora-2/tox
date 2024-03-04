@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors_in_immutables, non_constant_identifier_names
 
 import 'package:Toxicon/Features/Authantication/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                         builder: (_) =>  SignIn(),
                       ),
                       (route) => false);
-                      CacheHelper.getdataHistory() ?? '';
+                      // CacheHelper.getdataHistory() ?? '';
                    CacheHelper.getdata() ?? '';
             } else if (state is Registerfailure) {
               customSnackBar(context, state.error);

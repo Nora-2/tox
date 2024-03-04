@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class BottomNavyBar extends StatelessWidget {
   BottomNavyBar({
-    Key? key,
+    super.key,
     this.selectedIndex = 0,
     this.showElevation = true,
     this.iconSize = 24,
@@ -24,8 +24,7 @@ class BottomNavyBar extends StatelessWidget {
     required this.items,
     required this.onItemSelected,
     this.curve = Curves.linear,
-  })  : assert(items.length >= 2 && items.length <= 5),
-        super(key: key);
+  })  : assert(items.length >= 2 && items.length <= 5);
   final int selectedIndex;
   final double iconSize;
   final Color? backgroundColor;
@@ -105,7 +104,7 @@ class _ItemWidget extends StatelessWidget {
   final Curve curve;
 
   const _ItemWidget({
-    Key? key,
+    
     required this.iconSize,
     required this.isSelected,
     required this.item,
@@ -114,7 +113,7 @@ class _ItemWidget extends StatelessWidget {
     required this.animationDuration,
     required this.itemPadding,
     this.curve = Curves.linear,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

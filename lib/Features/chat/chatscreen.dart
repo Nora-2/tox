@@ -18,7 +18,7 @@ class Message {
 }
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key});
 static String id = 'ChatScreen';
   @override
   State<ChatScreen> createState() => _ChatScreenState();

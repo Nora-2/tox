@@ -3,6 +3,7 @@
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
+
 // ignore: must_be_immutable
 class showdiloginfo extends StatelessWidget {
   showdiloginfo(
@@ -25,7 +26,7 @@ class showdiloginfo extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Container(
-      color: isDark ? black: Colors.white,
+      color: isDark ? black : Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(left: 8, right: 5),
         child: SingleChildScrollView(
@@ -59,10 +60,9 @@ class showdiloginfo extends StatelessWidget {
               SizedBox(
                 height: size.height * .01,
               ),
-            const  Text('2D Structer',
+              const Text('2D Structer',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      
                       fontFamily: 'sanchez',
                       fontSize: 24)),
               SizedBox(
@@ -89,7 +89,6 @@ class showdiloginfo extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'sanchez',
                     fontWeight: FontWeight.w600,
-                 
                     fontSize: 24),
               ),
               SizedBox(
@@ -98,18 +97,16 @@ class showdiloginfo extends StatelessWidget {
               Text(
                   // 'Atom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6\nAtom Symbol: C ,AtomicNum: 6',
                   atom,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       fontFamily: 'sanchez',
                       fontWeight: FontWeight.w500,
-                     
                       fontSize: 20)),
               SizedBox(height: size.height * .02),
-            const  Text(
+              const Text(
                 'Bond Type',
                 style: TextStyle(
                     fontFamily: 'sanchez',
                     fontWeight: FontWeight.w600,
-                
                     fontSize: 24),
               ),
               SizedBox(
@@ -120,18 +117,16 @@ class showdiloginfo extends StatelessWidget {
                   bond,
                   style: const TextStyle(
                       fontWeight: FontWeight.w500,
-                     
                       fontFamily: 'sanchez',
                       fontSize: 20)),
               SizedBox(
                 height: size.height * .02,
               ),
-            const  Text(
+              const Text(
                 'Gasteiger charges',
                 style: TextStyle(
                     fontFamily: 'sanchez',
                     fontWeight: FontWeight.w600,
-                   
                     fontSize: 24),
               ),
               SizedBox(
@@ -140,9 +135,8 @@ class showdiloginfo extends StatelessWidget {
               Text(
                   // "Atom Index: 0, Symbol: C,\nGasteiger Charge: -0.039774526323627504\nAtom Index: 1, Symbol: C\nGasteiger Charge: -0.05113326481434698\nAtom Index: 2, Symbol: C\nGasteiger Charge: -0.059326411981218706\nAtom Index: 3, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 4, Symbol: C\nGasteiger Charge: -0.06224908578199481\nAtom Index: 5, Symbol: C\nGasteiger Charge: -0.06200472120721145\nAtom Index: 6, Symbol: C\nGasteiger Charge: -0.059326411981218706",
                   gester,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w500,
-                    
                       fontFamily: 'sanchez',
                       fontSize: 16)),
             ],

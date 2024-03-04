@@ -1,4 +1,4 @@
-// ignore_for_file: dead_code
+// ignore_for_file: dead_code, avoid_print, use_build_context_synchronously, prefer_interpolation_to_compose_strings
 import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/molecule/result.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
@@ -95,7 +95,7 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
   }
 
   Future<void> _processSmiles() async {
-    final String url =
+    const String url =
         'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
 
     try {

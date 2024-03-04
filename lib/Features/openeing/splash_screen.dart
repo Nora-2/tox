@@ -6,7 +6,7 @@ import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 static String id = 'SplashScreen';
   @override
   Widget build(BuildContext context) {
