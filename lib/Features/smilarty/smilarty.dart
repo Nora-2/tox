@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 // ignore: must_be_immutable
 class smilartyScreen extends StatefulWidget {
   const smilartyScreen({super.key});
@@ -21,47 +20,10 @@ class smilartyScreen extends StatefulWidget {
   @override
   State<smilartyScreen> createState() => _smilartyScreenState();
 }
-
 class _smilartyScreenState extends State<smilartyScreen> {
   TextEditingController smile1 = TextEditingController();
   TextEditingController smile2 = TextEditingController();
   String imagePath = '';
-
-  Future<void> generateSimilarityMap() async {
-    const apiUrl = 'http://127.0.0.1:5000/generate_similarity_map';
-
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'mol_smiles': smile1.text,
-        'refmol_smiles': smile2.text,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      if (data['success']) {
-        setState(() {
-          imagePath = data['image_path'];
-        });
-      } else {
-        showErrorMessage(data['error']);
-      }
-    } else {
-      showErrorMessage(response.reasonPhrase!);
-    }
-  }
-
-  void showErrorMessage(String error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Error: $error'),
-        duration:const Duration(seconds: 3),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeMode brightnessValue =
@@ -69,7 +31,6 @@ class _smilartyScreenState extends State<smilartyScreen> {
     bool isDark = brightnessValue == ThemeMode.dark;
     final size = MediaQuery.of(context).size;
     bool result = false;
-
     return BlocProvider(
         create: (context) => SmilartyCubit(),
         child: BlocConsumer<SmilartyCubit, SmilartyState>(
@@ -191,5 +152,40 @@ class _smilartyScreenState extends State<smilartyScreen> {
             ));
           },
         ));
+  }
+  
+  Future<void> generateSimilarityMap() async {
+    const apiUrl = 'http://127.0.0.1:5000/generate_similarity_map';
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'mol_smiles': smile1.text,
+        'refmol_smiles': smile2.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['success']) {
+        setState(() {
+          imagePath = data['image_path'];
+        });
+      } else {
+        showErrorMessage(data['error']);
+      }
+    } else {
+      showErrorMessage(response.reasonPhrase!);
+    }
+  }
+
+  void showErrorMessage(String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Error: $error'),
+        duration:const Duration(seconds: 3),
+      ),
+    );
   }
 }

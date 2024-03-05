@@ -6,12 +6,6 @@ class SmilartyCubit extends Cubit<SmilartyState> {
   SmilartyCubit() : super(SmilartyInitial());
   static SmilartyCubit get(context) => BlocProvider.of(context);
 
-  bool result = false;
-  void changeresult() {
-    result = !result;
-    emit(changeresultstate());
-  }
-
   bool issubmit = false;
  viewResult()  {
     issubmit = !issubmit;
