@@ -1,4 +1,5 @@
 // ignore_for_file: dead_code, avoid_print, use_build_context_synchronously, prefer_interpolation_to_compose_strings
+
 import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/molecule/result.dart';
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
@@ -16,7 +17,7 @@ import '../../core/utils/function/arrowpop.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-DateTime dateToday =  DateTime.now();
+DateTime dateToday = DateTime.now();
 String date = dateToday.toString().substring(0, 10);
 
 // ignore: must_be_immutable
@@ -33,10 +34,52 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
   String _imagePath = '';
   String atoms = '';
   String gester = '';
-  // String result = '';
+  double _saScore = 0.0;
+  double toxicityScore = 0.0;
+
+  Future<void> predictToxicity() async {
+    const apiUrl =
+        'http://127.0.0.1:5000/predictmol'; // Update with your Flask API endpoint
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'smiles': mol.text}),
+    );
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      setState(() {
+        toxicityScore = double.parse(result['toxicity_score'].toString());
+        print('sasccore========$toxicityScore');
+      });
+    } else {
+      setState(() {
+        // toxicityScore = 'Error: ${response.statusCode}';
+      });
+    }
+  }
+
+  Future<void> _calculateSaScore() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:5000/calculate_sa_score'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'smiles': mol.text}),
+    );
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      setState(() {
+        _saScore = double.parse(result['sa_score'].toString());
+        print('sasccore========${_saScore}');
+      });
+    } else {
+      // Handle errors
+      print('Error: ${response.statusCode}');
+    }
+  }
 
   Future<void> computeGasteigerCharges() async {
-     String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
+    String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
     final Map<String, String> headers = {'Content-Type': 'application/json'};
     final String smiles = mol.text;
 
@@ -63,8 +106,9 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
       });
     }
   }
+
   Future<void> _generate3DStructure() async {
-     String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
+    String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
 
     try {
       final response = await http.post(
@@ -107,8 +151,6 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(response.body);
-        // Assuming the data structure is {'atoms': [], 'bonds': []}
-        // Update the code according to the actual structure of your response
         setState(() {
           _result = '${data['bonds']}';
           atoms = '${data['atoms']}';
@@ -129,12 +171,15 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
   Widget build(BuildContext context) {
     CollectionReference history =
         FirebaseFirestore.instance.collection('history');
+    bool result = toxicityScore  > 1 || toxicityScore  == 1
+        ? true
+        : false;
 
     Future<void> addhistory() {
       // Call the user's CollectionReference to add a new user
       return history
           .add({
-            'result': 'toxic',
+            'result':  toxicityScore  > 1 || toxicityScore  == 1?'toxic':'non-toxic',
             'input': mol.text,
             'date': date,
             'category': 'molecule Toxicity',
@@ -229,7 +274,11 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               Center(
                                 child: GestureDetector(
                                   onTap: () {
+                                    print(_saScore);
+                                    print(toxicityScore);
                                     setState(() {
+                                      predictToxicity();
+                                      _calculateSaScore();
                                       computeGasteigerCharges();
                                       _generate3DStructure();
                                       _processSmiles();
@@ -243,12 +292,14 @@ class _MoleculeScreenState extends State<MoleculeScreen> {
                               SizedBox(height: size.height * .02),
                               MoleculeCubit.get(context).issubmit
                                   ? resultmolecule(
-                                    atom:atoms,
-                                    gester: gester,
+                                      atom: atoms,
+                                      gester: gester,
                                       size: size,
+                                      sascore: _saScore,
+                                      toxscore: toxicityScore,
                                       imagepath: _imagePath,
                                       bond: _result,
-                                      result: MoleculeCubit().result,
+                                      result: result,
                                       isDark: isDark)
                                   : Center(
                                       child: Image.asset(

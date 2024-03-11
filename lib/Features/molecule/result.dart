@@ -1,10 +1,11 @@
 // ignore_for_file: camel_case_types
+
 import 'package:Toxicon/core/constants/colorconstant.dart';
-import 'package:Toxicon/core/utils/function/molcircularviewer.dart';
 import 'package:Toxicon/core/utils/function/moreunfo.dart';
 import 'package:Toxicon/core/utils/function/resultcontainer.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 // ignore: must_be_immutable
 class resultmolecule extends StatelessWidget {
@@ -16,6 +17,8 @@ class resultmolecule extends StatelessWidget {
       required this.bond,
       required this.atom,
       required this.gester,
+      required this.sascore,
+      required this.toxscore,
       required this.imagepath});
 
   final Size size;
@@ -25,6 +28,8 @@ class resultmolecule extends StatelessWidget {
   String imagepath;
   String atom;
   String gester;
+  double toxscore;
+  double sascore;
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +62,160 @@ class resultmolecule extends StatelessWidget {
           children: [
             Column(
               children: [
-                molcircularviewer(
-                  isDark: isDark,
-                  Value: 10,
-                  color: seccolor,
-                ),
+              
+                 
+SizedBox(
+  width: 180,
+  height: 210,
+  child:   SfRadialGauge(
+  
+      axes: <RadialAxis>[
+  
+        RadialAxis(minimum: -100,
+  
+            maximum: 100,
+  
+            startAngle:270,
+  
+            endAngle: 270,
+  
+            showLabels: false,
+  
+            showTicks: false,
+  
+            radiusFactor: 0.6,
+  
+            axisLineStyle:const AxisLineStyle(
+  
+                cornerStyle: CornerStyle.bothFlat,
+  
+                color: Colors.black12,
+  
+                thickness: 12),
+  
+            pointers: <GaugePointer>[
+  
+              RangePointer(
+                  value: toxscore,
+  
+                  cornerStyle: CornerStyle.bothFlat,
+  
+                  width: 12,
+  
+                  sizeUnit: GaugeSizeUnit.logicalPixel,
+  
+                  color:  icolor,
+  
+                 ),
+  
+              MarkerPointer(
+  
+                  value: toxscore,
+  
+                  enableDragging: true,
+  
+  
+                  markerHeight: 20,
+  
+                  markerWidth: 20,
+  
+                  markerType: MarkerType.circle,
+  
+                  color: icolor  ,
+  
+                  borderWidth: 2,
+  
+                  borderColor: Colors.white54)
+  
+            ],
+  
+        )
+  
+      ]
+  
+  ),
+),
+                Text('$toxscore',style: Styles.textStyle16,),
                 SizedBox(height: size.height * .02),
                 CustomTextfont24_600(text: 'Tox score')
               ],
             ),
             Column(
               children: [
-                molcircularviewer(
-                  isDark: isDark,
-                  Value: 20,
-                  color: icolor,
-                ),
+                SizedBox(
+  width:180,
+  height: 210,
+  child:   SfRadialGauge(
+  
+      axes: <RadialAxis>[
+  
+        RadialAxis(minimum: -100,
+  
+            maximum: 100,
+  
+            startAngle: 0,
+  
+            endAngle: 360,
+  
+            showLabels: false,
+  
+            showTicks: false,
+  
+            radiusFactor: 0.6,
+  
+            axisLineStyle:const AxisLineStyle(
+  
+                cornerStyle: CornerStyle.bothFlat,
+  
+                color: Colors.black12,
+  
+                thickness: 12),
+  
+            pointers: <GaugePointer>[
+  
+              RangePointer(
+  
+                  value: sascore,
+  
+                  cornerStyle: CornerStyle.bothFlat,
+  
+                  width: 12,
+  
+                  sizeUnit: GaugeSizeUnit.logicalPixel,
+  
+                  color:  seccolor,
+  
+                 ),
+  
+              MarkerPointer(
+  
+                  value: sascore,
+  
+                  enableDragging: true,
+  
+                 
+  
+                  markerHeight: 20,
+  
+                  markerWidth: 20,
+  
+                  markerType: MarkerType.circle,
+  
+                  color: seccolor ,
+  
+                  borderWidth: 2,
+  
+                  borderColor: Colors.white54)
+  
+            ],
+  
+        )
+  
+      ]
+  
+  ),
+),
+                 Text('$sascore',style:Styles.textStyle16,),
                 SizedBox(height: size.height * .02),
                 CustomTextfont24_600(text: 'SA score')
               ],
@@ -86,8 +229,8 @@ class resultmolecule extends StatelessWidget {
           children: [
             CustomTextfont24_600(text: 'More Info'),
             morinformation(
-              gester: gester ,
-              atom:atom ,
+              gester: gester,
+              atom: atom,
               size: size,
               isDark: isDark,
               bond: bond,

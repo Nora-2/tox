@@ -6,7 +6,7 @@ import 'package:circular/circular.dart';
 import 'package:flutter/material.dart';
 
 class molcircularviewer extends StatelessWidget {
-  const molcircularviewer(
+  const molcircularviewer (
       {super.key, required this.isDark, required this.Value,required this.color});
 
   final bool isDark;
@@ -30,8 +30,9 @@ class molcircularviewer extends StatelessWidget {
       ]),
       value: Value,
       maxValue: 50,
+      
       radius: 90,
-      textStyle: const TextStyle(fontSize: 30),
+      textStyle: const TextStyle(fontSize: 30,color: Colors.black),
       color: const Color(0xffEEEEEE),
       sliderColor: color,
       unSelectedColor: const Color(0xffD7DEE7),

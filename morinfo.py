@@ -7,6 +7,7 @@ from rdkit.Chem.Draw import SimilarityMaps
 import matplotlib.pyplot as plt
 import os
 from joblib import load
+from rdkit.Chem import rdMolDescriptors
 app = Flask(__name__)
 CORS(app) 
 
@@ -138,6 +139,52 @@ def generate_similarity_map():
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
+    # sascore
+@app.route('/calculate_sa_score', methods=['POST'])
+def calculate_sa_score():
+    try:
+        data = request.get_json()
+        smiles = data.get('smiles')
+
+        sa_score = calculate_sa_score_internal(smiles)
+
+        if sa_score is not None:
+            return jsonify({'success': True, 'sa_score':str(float(sa_score))[:5] })
+        else:
+            return jsonify({'success': False, 'error': 'Invalid SMILES'}), 400
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+def calculate_sa_score_internal(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+
+    if mol is None:
+        return None
+
+    sa_score = rdMolDescriptors.CalcNumRotatableBonds(mol) + rdMolDescriptors.CalcFractionCSP3(mol)
+    return sa_score
+# molmodel
+svm_model = load('svm_model.joblib')
+@app.route('/predictmol', methods=['POST'])
+
+def predictmolecule():
+    try:
+        data = request.get_json()
+        smiles = data['smiles']
+        fingerprint = generate_morgan_fingerprint(smiles)
+        
+        toxicity_score = (str(float(svm_model.decision_function([fingerprint])[0])) ) # Use decision function for SVM
+        return jsonify({'toxicity_score': toxicity_score[:5]})
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+def generate_morgan_fingerprint(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+    morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024, useChirality=True, useBondTypes=True)
+    return morgan_fp
+
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'

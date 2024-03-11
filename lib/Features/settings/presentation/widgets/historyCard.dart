@@ -52,20 +52,24 @@ class CustomHistoryCard extends StatelessWidget {
                       style:  TextStyle(
                               fontWeight: FontWeight.w600,
                               fontFamily: 'acme',
-                              fontSize: 24),
+                              fontSize: 24,),
                     ),
                     SizedBox(
                       width: size.width * .09,
                     ),
-                    Text(
-                      input,
-                      style:TextStyle(
-                        fontFamily: 'acme',
-                              fontWeight: FontWeight.w500,
-                              color: isDark
-                                  ? Colors.white70
-                                  : black,
-                              fontSize: 20)),
+                    SizedBox(
+                      width: size.width * .65 ,
+                      child: Text(
+                        input,
+                        style:TextStyle(
+                          overflow:TextOverflow.ellipsis,
+                          fontFamily: 'acme',
+                                fontWeight: FontWeight.w500,
+                                color: isDark
+                                    ? Colors.white70
+                                    : black,
+                                fontSize: 20)),
+                    ),
                     
                   ],
                 ),

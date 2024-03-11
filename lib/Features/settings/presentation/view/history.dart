@@ -61,7 +61,7 @@ class HistoryScreen extends StatelessWidget {
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
-                      child: CircularProgressIndicator(color: Colors.black),
+                      child: CircularProgressIndicator(color: Colors.white),
                     );
                   }
                   bool submit = snapshot.data!.docs.isNotEmpty ? true : false;

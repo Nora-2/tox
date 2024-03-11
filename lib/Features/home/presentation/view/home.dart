@@ -61,7 +61,7 @@ class homeScreen extends StatelessWidget {
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
-                    child: CircularProgressIndicator(color: Colors.black),
+                    child: CircularProgressIndicator(color: Colors.white),
                   );
                 }
 
@@ -90,7 +90,7 @@ class homeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    robot(size: size)
+                    // robot(size: size)
                   ],
                 );
               }),
