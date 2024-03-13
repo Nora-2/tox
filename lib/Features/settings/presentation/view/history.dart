@@ -1,8 +1,8 @@
 // ignore_for_file: dead_code
 
 import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/arrowpop.dart';
-import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,7 +27,8 @@ class HistoryScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(gradient: gradientTop(isDark)),
+        // decoration: BoxDecoration(gradient: gradientTop(isDark)),
+        color:  isDark ? black : Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

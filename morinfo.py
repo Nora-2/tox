@@ -185,6 +185,65 @@ def generate_morgan_fingerprint(smiles):
     morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024, useChirality=True, useBondTypes=True)
     return morgan_fp
 
+def smiles_to_sdf2d(smiles):
+    # Create a molecule from the SMILES string
+    mol = Chem.MolFromSmiles(smiles)
+
+    if mol is None:
+        raise ValueError(f"Invalid SMILES: {smiles}")
+
+    # Generate 2D coordinates
+    AllChem.Compute2DCoords(mol)
+
+    # Convert molecule to SDF format
+    sdf_data = Chem.MolToMolBlock(mol)
+
+    return sdf_data
+
+@app.route('/convert', methods=['POST'])
+def convert_smiles_to_sdf2d():
+    try:
+        data = request.get_json(force=True)
+        smiles_input = data['smiles']
+
+        # Convert SMILES to SDF2D
+        sdf2d_data = smiles_to_sdf2d(smiles_input)
+
+        return jsonify({'sdf2d': sdf2d_data})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+def smiles_to_pdb(smiles):
+    # Create a molecule from the SMILES string
+    mol = Chem.MolFromSmiles(smiles)
+
+    if mol is None:
+        raise ValueError(f"Invalid SMILES: {smiles}")
+
+    # Add explicit hydrogen atoms
+    mol = Chem.AddHs(mol)
+
+    # Generate 3D coordinates
+    AllChem.EmbedMolecule(mol, randomSeed=42)
+
+    # Write the molecule to a PDB file
+    pdb_data = Chem.MolToPDBBlock(mol)
+    
+    return pdb_data
+
+@app.route('/generate_pdb', methods=['POST'])
+def generate_pdb():
+    try:
+        data = request.get_json(force=True)
+        smiles_input = data['smiles']
+
+        # Convert SMILES to PDB
+        pdb_data = smiles_to_pdb(smiles_input)
+
+        return jsonify({'pdb': pdb_data})
+    except Exception as e:
+        return jsonify({'error': str(e)})    
+
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'

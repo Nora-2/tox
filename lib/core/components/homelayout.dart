@@ -36,7 +36,8 @@ class HomeLayout extends StatelessWidget {
               onItemSelected: (index) =>
                   HomecubitCubit.get(context).changeIndexBottom(index),
               items: [
-                BottomNavyBarItem(
+          
+                    BottomNavyBarItem(
                   
                     icon: const Icon(
                       CupertinoIcons.home,
@@ -62,6 +63,21 @@ class HomeLayout extends StatelessWidget {
             ),
                     activeColor: isDark?Colors.black:Colors.white,
                     inactiveColor:Colors.white,
+                    ),
+                          BottomNavyBarItem(
+                  
+                    icon: const Icon(
+                      Icons.file_copy,
+                    ),
+                    title:  Text(
+                      'Converter',style: TextStyle(
+                    fontFamily: 'acme',
+                      fontWeight: FontWeight.w400,
+                      color: isDark?darkcolor:kcolor,
+                      fontSize: 20)
+                    ),
+                    activeColor: isDark?Colors.black:Colors.white,
+                    inactiveColor: Colors.white
                     ),
               ], shadowColor: isDark?Colors.grey.withOpacity(0.4):icolor,
             )),

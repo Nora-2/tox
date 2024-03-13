@@ -46,7 +46,7 @@ final Stream<QuerySnapshot> documentStream = FirebaseFirestore.instance.collecti
           return const Text('Something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-        return  const  Center( child: CircularProgressIndicator(color:Colors.black),);
+        return  const  Center( child: CircularProgressIndicator(color:Colors.white),);
           }
         return Scaffold(
             body: Container(

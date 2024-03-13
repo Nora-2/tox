@@ -17,6 +17,8 @@ class ImageConstant {
   static String count = '$imagePath/_count-based fingerprints.png';
   static String onboarddna = '$imagePath/dna.png';
 
+  static String converttop = '$imagePath/converttop.png';
+  static String converthome = '$imagePath/converthome.png';
   static String otp = '$imagePath/Enter OTP-rafiki.png';
 
   static String facebook = '$imagePath/facebook.png';
