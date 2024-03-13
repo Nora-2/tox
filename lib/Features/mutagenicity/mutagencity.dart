@@ -17,7 +17,7 @@ import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.d
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-DateTime dateToday =  DateTime.now();
+DateTime dateToday = DateTime.now();
 String date = dateToday.toString().substring(0, 10);
 
 // ignore: must_be_immutable
@@ -33,12 +33,11 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   String fileName = 'mol.sdf'; // Default file name
   String _result = '';
   String _imagePath = '';
-  String atoms='';
+  String atoms = '';
   String gester = '';
 
-
   Future<void> computeGasteigerCharges() async {
-     String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
+    String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
     final Map<String, String> headers = {'Content-Type': 'application/json'};
     final String smiles = dna.text;
 
@@ -65,8 +64,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
       });
     }
   }
+
   Future<void> _generate3DStructure() async {
-     String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
+    String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
 
     try {
       final response = await http.post(
@@ -97,7 +97,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   }
 
   Future<void> _processSmiles() async {
-     String url =
+    String url =
         'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
 
     try {
@@ -112,8 +112,9 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
         // Assuming the data structure is {'atoms': [], 'bonds': []}
         // Update the code according to the actual structure of your response
         setState(() {
-            _result = '${data['bonds']}';
-           atoms=  '${data['atoms']}';  });
+          _result = '${data['bonds']}';
+          atoms = '${data['atoms']}';
+        });
       } else {
         setState(() {
           _result = 'Error: ${response.statusCode}';
@@ -123,6 +124,31 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
       setState(() {
         _result = 'Error: $e';
       });
+    }
+  }
+
+  int _prediction = 0;
+
+  Future<void> _makePrediction() async {
+    const String apiUrl = 'http://127.0.0.1:5000/predictmutagenicity';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'smiles': dna.text}),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        setState(() {
+          _prediction = data['prediction'];
+        });
+      } else {
+        throw Exception('Failed to connect to the server');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
@@ -142,11 +168,12 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   Widget build(BuildContext context) {
     CollectionReference history =
         FirebaseFirestore.instance.collection('history');
+String prediction=(_prediction == 0||_prediction<0) ? 'non mutagenic' : 'mutagenic';
 
     Future<void> addhistory() {
       return history
           .add({
-            'result': 'mutagenic',
+            'result': prediction,
             'input': dna.text,
             'date': date,
             'File_Sdf': fileName,
@@ -281,6 +308,7 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
+                                          _makePrediction();
                                           computeGasteigerCharges();
                                           _generate3DStructure();
                                           _processSmiles();
@@ -293,12 +321,12 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               SizedBox(height: size.height * .04),
                               DnaCubit.get(context).issubmit
                                   ? dnaresult(
-                                    atom:atoms,
-                                    gester: gester,
+                                      atom: atoms,
+                                      gester: gester,
                                       bond: _result,
                                       imagepath: _imagePath,
                                       size: size,
-                                      result: DnaCubit().result,
+                                      result: (_prediction==0||_prediction<0)?false:true,
                                       isDark: isDark)
                                   : Center(
                                       child: Image.asset(

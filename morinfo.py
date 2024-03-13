@@ -184,7 +184,7 @@ def generate_morgan_fingerprint(smiles):
     mol = Chem.MolFromSmiles(smiles)
     morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024, useChirality=True, useBondTypes=True)
     return morgan_fp
-
+#////////////////// sdf smile//////////
 def smiles_to_sdf2d(smiles):
     # Create a molecule from the SMILES string
     mol = Chem.MolFromSmiles(smiles)
@@ -212,7 +212,7 @@ def convert_smiles_to_sdf2d():
         return jsonify({'sdf2d': sdf2d_data})
     except Exception as e:
         return jsonify({'error': str(e)})
-
+# ///////////smile pdb/////////////////
 def smiles_to_pdb(smiles):
     # Create a molecule from the SMILES string
     mol = Chem.MolFromSmiles(smiles)
@@ -243,6 +243,34 @@ def generate_pdb():
         return jsonify({'pdb': pdb_data})
     except Exception as e:
         return jsonify({'error': str(e)})    
+#//////////// mutagenicity smile////////////////
+# Load the trained model
+model = load('mutagenicitycsv.joblib')
+
+# Endpoint to handle predictions
+@app.route('/predictmutagenicity', methods=['POST'])
+def predict():
+    try:
+        # Get the SMILES string from the request
+        smiles = request.json['smiles']
+
+        # Generate Morgan fingerprint for the input SMILES
+        morgan_fp = generate_morgan_fingerprint(smiles)
+
+        # Make predictions using the pre-trained model
+        prediction = model.predict([morgan_fp])[0]
+
+        # Return the prediction as JSON
+        return jsonify({'prediction': prediction})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Generate Morgan fingerprints for each SMILES string
+def generate_morgan_fingerprint(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+    morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024)  # Radius 2
+    return morgan_fp
 
 @app.route('/')
 def index():
