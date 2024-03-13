@@ -245,11 +245,12 @@ def generate_pdb():
         return jsonify({'error': str(e)})    
 #//////////// mutagenicity smile////////////////
 # Load the trained model
+# Load the trained model
 model = load('mutagenicitycsv.joblib')
 
 # Endpoint to handle predictions
 @app.route('/predictmutagenicity', methods=['POST'])
-def predict():
+def predictmutagenicity():
     try:
         # Get the SMILES string from the request
         smiles = request.json['smiles']
@@ -258,12 +259,13 @@ def predict():
         morgan_fp = generate_morgan_fingerprint(smiles)
 
         # Make predictions using the pre-trained model
-        prediction = model.predict([morgan_fp])[0]
+        prediction = int(model.predict([morgan_fp])[0])
 
         # Return the prediction as JSON
         return jsonify({'prediction': prediction})
 
     except Exception as e:
+        print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500
 
 # Generate Morgan fingerprints for each SMILES string
@@ -271,7 +273,6 @@ def generate_morgan_fingerprint(smiles):
     mol = Chem.MolFromSmiles(smiles)
     morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024)  # Radius 2
     return morgan_fp
-
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'
