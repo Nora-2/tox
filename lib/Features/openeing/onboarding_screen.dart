@@ -84,20 +84,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                Navigator.of(context).pushReplacement(signin());
                             }),
                           ),
-                          // SizedBox(
-                          //   height: MediaQuery.of(context).size.height * 0.003,
-                          // ),
                           Image.asset(
                               screens[index % screens.length].lottieBuilder,
                               width: MediaQuery.of(context).size.width * 0.8,
-                              height: MediaQuery.of(context).size.height * 0.7),
+                              height: MediaQuery.of(context).size.height * 0.65),
                           Text(
                             screens[index % screens.length].text,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 29.0,
                               fontWeight: FontWeight.bold,
-                              // color: black,
                             ),
                           ),
                           Text(

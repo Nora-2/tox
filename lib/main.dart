@@ -10,6 +10,7 @@ import 'package:Toxicon/core/components/cubit/app_cubit.dart';
 import 'package:Toxicon/core/components/cubit/blocopserver.dart';
 import 'package:Toxicon/core/utils/app_routes.dart';
 import 'package:Toxicon/firebase_options.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,10 @@ Future<void> main() async {
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
   Bloc.observer = MyBlocObserver();
 
-  runApp(Toxicon(isDarkFromShared));
+  runApp(DevicePreview( 
+    enabled: true, 
+    builder: (context) => Toxicon(isDarkFromShared) 
+  )); 
 }
 
 class Toxicon extends StatelessWidget {
@@ -77,6 +81,9 @@ class Toxicon extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             return MaterialApp(
+            
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 brightness: AppCubit.get(context).isdark

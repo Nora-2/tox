@@ -9,7 +9,6 @@ import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -152,17 +151,17 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
     }
   }
 
-  // Function to handle file selection
-  void _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+  // // Function to handle file selection
+  // void _pickFile() async {
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
-      setState(() {
-        fileName = result.files.single.name;
-        // Perform any additional actions with the selected file if needed
-      });
-    }
-  }
+  //   if (result != null) {
+  //     setState(() {
+  //       fileName = result.files.single.name;
+  //       // Perform any additional actions with the selected file if needed
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -268,39 +267,39 @@ String prediction=(_prediction == 0||_prediction<0) ? 'non mutagenic' : 'mutagen
                               SizedBox(
                                 height: size.height * .01,
                               ),
-                              Container(
-                                height: size.height * .055,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1,
-                                      color: Colors.grey.withOpacity(.8)),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 8),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        fileName,
-                                        style: const TextStyle(
-                                            fontSize: 18, color: Colors.grey),
-                                      ),
-                                      IconButton(
-                                          onPressed: _pickFile,
-                                          icon: const Icon(
-                                            Icons.upload_file,
-                                            color: kcolor,
-                                            size: 28,
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   height: size.height * .055,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //         width: 1,
+                              //         color: Colors.grey.withOpacity(.8)),
+                              //     borderRadius: BorderRadius.circular(10),
+                              //   ),
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.symmetric(
+                              //         vertical: 4.0, horizontal: 8),
+                              //     child: Row(
+                              //       mainAxisAlignment:
+                              //           MainAxisAlignment.spaceBetween,
+                              //       crossAxisAlignment:
+                              //           CrossAxisAlignment.center,
+                              //       children: [
+                              //         Text(
+                              //           fileName,
+                              //           style: const TextStyle(
+                              //               fontSize: 18, color: Colors.grey),
+                              //         ),
+                              //         IconButton(
+                              //             onPressed: _pickFile,
+                              //             icon: const Icon(
+                              //               Icons.upload_file,
+                              //               color: kcolor,
+                              //               size: 28,
+                              //             ))
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                               SizedBox(
                                 height: size.height * .02,
                               ),

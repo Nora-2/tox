@@ -90,7 +90,7 @@ class homeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // robot(size: size)
+                    robot(size: size)
                   ],
                 );
               }),

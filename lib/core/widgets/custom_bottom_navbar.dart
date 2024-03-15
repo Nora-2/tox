@@ -62,31 +62,29 @@ class BottomNavyBar extends StatelessWidget {
         ],
         // borderRadius: BorderRadius.circular(itemCornerRadius),
       ),
-      child: SafeArea(
-        child: Container(
-          color: isDark ? darkcolor : icolor,
-          width: double.infinity,
-          height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-          child: Row(
-            mainAxisAlignment: mainAxisAlignment,
-            children: items.map((item) {
-              var index = items.indexOf(item);
-              return GestureDetector(
-                onTap: () => onItemSelected(index),
-                child: _ItemWidget(
-                  item: item,
-                  iconSize: iconSize,
-                  isSelected: index == selectedIndex,
-                  backgroundColor: isDark ? black : icolor,
-                  itemCornerRadius: itemCornerRadius,
-                  animationDuration: animationDuration,
-                  itemPadding: itemPadding,
-                  curve: curve,
-                ),
-              );
-            }).toList(),
-          ),
+      child: Container(
+        color: isDark ? darkcolor : icolor,
+        width: double.infinity,
+        height: containerHeight,
+         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+        child: Row(
+          mainAxisAlignment: mainAxisAlignment,
+          children: items.map((item) {
+            var index = items.indexOf(item);
+            return GestureDetector(
+              onTap: () => onItemSelected(index),
+              child: _ItemWidget(
+                item: item,
+                iconSize: iconSize,
+                isSelected: index == selectedIndex,
+                backgroundColor: isDark ? black : icolor,
+                itemCornerRadius: itemCornerRadius,
+                animationDuration: animationDuration,
+                itemPadding: itemPadding,
+                curve: curve,
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

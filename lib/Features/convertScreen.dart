@@ -93,13 +93,11 @@ class _convertScreenState extends State<convertScreen> {
               height: size.height * .02,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
             
-                SizedBox(
-                  width: size.width * .2,
-                ),
+                
                 Image.asset(
                   ImageConstant.converttop,
                   width: 190,
@@ -149,7 +147,7 @@ class _convertScreenState extends State<convertScreen> {
                             ),
                             controller: _smilesController),
                         SizedBox(
-                          height: size.height * .06,
+                          height: size.height * .04,
                         ),
                         Center(
                           child: GestureDetector(
@@ -172,12 +170,12 @@ class _convertScreenState extends State<convertScreen> {
                             child: customButtonContainer(size: size, text: 'Convert and Download SDF')
                           ),
                         ),
-                        SizedBox(height: size.height * .04),
+                        SizedBox(height: size.height * .02),
                         Center(
                             child: Image.asset(
                           ImageConstant.converthome,
                           width: size.width * .9,
-                          height: size.height * .5,
+                          height: size.height * .4,
                         ))
                       ],
                     ),
