@@ -8,13 +8,9 @@ import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/utils/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 DateTime dateToday = DateTime.now();
 String date = dateToday.toString().substring(0, 10);
@@ -29,160 +25,11 @@ class MutagencityScreen extends StatefulWidget {
 
 class _MutagencityScreenState extends State<MutagencityScreen> {
   TextEditingController dna = TextEditingController();
-  String fileName = 'mol.sdf'; // Default file name
-  String _result = '';
-  String _imagePath = '';
-  String atoms = '';
-  String gester = '';
-
-  Future<void> computeGasteigerCharges() async {
-    String url = 'http://127.0.0.1:5000/compute_gasteiger_charges';
-    final Map<String, String> headers = {'Content-Type': 'application/json'};
-    final String smiles = dna.text;
-
-    try {
-      final http.Response response = await http.post(
-        Uri.parse(url),
-        headers: headers,
-        body: jsonEncode({'smiles': smiles}),
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> ge = jsonDecode(response.body);
-        setState(() {
-          gester = ge['result'];
-        });
-      } else {
-        setState(() {
-          gester = 'Error: ${response.statusCode}';
-        });
-      }
-    } catch (e) {
-      setState(() {
-        gester = 'Error: $e';
-      });
-    }
-  }
-
-  Future<void> _generate3DStructure() async {
-    String apiUrl = 'http://127.0.0.1:5000/generate_3d_structure';
-
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'smiles': dna.text}),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['success']) {
-          setState(() {
-            _imagePath = 'http://127.0.0.1:5000/' + data['image_path'];
-          });
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${data['message']}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${response.reasonPhrase}')),
-        );
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
-  Future<void> _processSmiles() async {
-    String url =
-        'http://127.0.0.1:5000/process_smiles'; // Update with your server URL
-
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'smiles': dna.text}),
-      );
-
-      if (response.statusCode == 200) {
-        Map<String, dynamic> data = jsonDecode(response.body);
-        // Assuming the data structure is {'atoms': [], 'bonds': []}
-        // Update the code according to the actual structure of your response
-        setState(() {
-          _result = '${data['bonds']}';
-          atoms = '${data['atoms']}';
-        });
-      } else {
-        setState(() {
-          _result = 'Error: ${response.statusCode}';
-        });
-      }
-    } catch (e) {
-      setState(() {
-        _result = 'Error: $e';
-      });
-    }
-  }
-
-  int _prediction = 0;
-
-  Future<void> _makePrediction() async {
-    const String apiUrl = 'http://127.0.0.1:5000/predictmutagenicity';
-
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'smiles': dna.text}),
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        setState(() {
-          _prediction = data['prediction'];
-        });
-      } else {
-        throw Exception('Failed to connect to the server');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
-  // // Function to handle file selection
-  // void _pickFile() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-  //   if (result != null) {
-  //     setState(() {
-  //       fileName = result.files.single.name;
-  //       // Perform any additional actions with the selected file if needed
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    CollectionReference history =
-        FirebaseFirestore.instance.collection('history');
-String prediction=(_prediction == 0||_prediction<0) ? 'non mutagenic' : 'mutagenic';
-
-    Future<void> addhistory() {
-      return history
-          .add({
-            'result': prediction,
-            'input': dna.text,
-            'date': date,
-            'File_Sdf': fileName,
-            'category': 'mutagenicity',
-            'id': FirebaseAuth.instance.currentUser!.uid,
-          })
-          .then((value) => print("history Added"))
-          .catchError((error) => print("Failed to add user: $error"));
-    }
-
+    DnaCubit cubit = DnaCubit.get(context);
+    String prediction =
+        (cubit.predictiondna == 0 || cubit.predictiondna < 0) ? 'non mutagenic' : 'mutagenic';
     final size = MediaQuery.of(context).size;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
@@ -307,11 +154,14 @@ String prediction=(_prediction == 0||_prediction<0) ? 'non mutagenic' : 'mutagen
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          _makePrediction();
-                                          computeGasteigerCharges();
-                                          _generate3DStructure();
-                                          _processSmiles();
-                                          addhistory();
+                                          cubit.makePrediction(dna.text);
+                                          cubit.computeGasteigerCharges(dna.text);
+                                          cubit.generate3DStructure(dna.text);
+                                          cubit.processSmiles(dna.text);
+                                          cubit.addhistory(
+                                              dna: dna.text,
+                                              prediction: prediction,
+                                              date: date);
                                           DnaCubit.get(context).viewResult();
                                         });
                                       },
@@ -320,12 +170,15 @@ String prediction=(_prediction == 0||_prediction<0) ? 'non mutagenic' : 'mutagen
                               SizedBox(height: size.height * .04),
                               DnaCubit.get(context).issubmit
                                   ? dnaresult(
-                                      atom: atoms,
-                                      gester: gester,
-                                      bond: _result,
-                                      imagepath: _imagePath,
+                                      atom: cubit.atoms,
+                                      gester: cubit.gester,
+                                      bond: cubit.resultdna,
+                                      imagepath: cubit.imagePath,
                                       size: size,
-                                      result: (_prediction==0||_prediction<0)?false:true,
+                                      result:
+                                          (cubit.predictiondna == 0 || cubit.predictiondna < 0)
+                                              ? false
+                                              : true,
                                       isDark: isDark)
                                   : Center(
                                       child: Image.asset(

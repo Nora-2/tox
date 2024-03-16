@@ -8,3 +8,12 @@ sealed class DnaState {}
 final class DnaInitial extends DnaState {}
 class changemodestate extends DnaState {}
 class changeresultstate extends DnaState {}
+class d2sucssess extends DnaState {}
+class d2failed extends DnaState {}
+class gestersucssess extends DnaState {}
+class gesterfailed extends DnaState {}
+class predictsucssess extends DnaState {}
+class predictfailed extends DnaState {}
+class atomsucssess extends DnaState {}
+class atomfailed extends DnaState {}
+

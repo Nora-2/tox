@@ -7,4 +7,5 @@ sealed class SmilartyState {}
 
 final class SmilartyInitial extends SmilartyState {}
 class changemodestate extends SmilartyState {}
-
+class smisuccess extends SmilartyState {}
+class smifailed extends SmilartyState {}

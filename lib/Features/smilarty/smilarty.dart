@@ -11,8 +11,7 @@ import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 // ignore: must_be_immutable
 class smilartyScreen extends StatefulWidget {
   const smilartyScreen({super.key});
@@ -120,7 +119,7 @@ class _smilartyScreenState extends State<smilartyScreen> {
                               Center(
                                 child: GestureDetector(
                                   onTap: () {
-                                    generateSimilarityMap();
+                                   SmilartyCubit.get(context).generateSimilarityMap(smile1: smile1.text,smile2: smile2.text);
                                     setState(()async {
                                     await  SmilartyCubit.get(context).viewResult();
                                     });
@@ -154,38 +153,5 @@ class _smilartyScreenState extends State<smilartyScreen> {
         ));
   }
   
-  Future<void> generateSimilarityMap() async {
-    const apiUrl = 'http://127.0.0.1:5000/generate_similarity_map';
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'mol_smiles': smile1.text,
-        'refmol_smiles': smile2.text,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      if (data['success']) {
-        setState(() {
-          imagePath = data['image_path'];
-        });
-      } else {
-        showErrorMessage(data['error']);
-      }
-    } else {
-      showErrorMessage(response.reasonPhrase!);
-    }
-  }
-
-  void showErrorMessage(String error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Error: $error'),
-        duration:const Duration(seconds: 3),
-      ),
-    );
-  }
 }
