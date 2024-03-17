@@ -19,7 +19,7 @@ class arrowpop extends StatelessWidget {
           Navigator.pop(context);
         },
         child: Icon(
-          Icons.arrow_back,
+          Icons.arrow_back_ios,
           color: isDark ? Colors.white : black,
         ));
   }

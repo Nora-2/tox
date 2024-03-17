@@ -5,11 +5,11 @@ import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
 import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
 import 'package:Toxicon/Features/smilarty/cubit/smilarty_cubit.dart';
-import 'package:Toxicon/core/components/cachhelper.dart';
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
-import 'package:Toxicon/core/components/cubit/blocopserver.dart';
-import 'package:Toxicon/core/utils/app_routes.dart';
-import 'package:Toxicon/firebase_options.dart';
+import 'package:Toxicon/core/config/helper/cachhelper.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/blocopserver.dart';
+import 'package:Toxicon/core/config/Route/app_routes.dart';
+import 'package:Toxicon/core/config/firebase/firebase_options.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +18,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 int? isViewed;
-// List data = CacheHelper.data;
-// List History = CacheHelper.History;
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -38,10 +36,8 @@ Future<void> main() async {
       print('User is signed in!');
     }
   });
-  // print("History======================>${History}");
   var isDarkFromShared = CacheHelper.getBoolean(key: 'isDark');
   Bloc.observer = MyBlocObserver();
-
   runApp(DevicePreview( 
     enabled: true, 
     builder: (context) => Toxicon(isDarkFromShared) 

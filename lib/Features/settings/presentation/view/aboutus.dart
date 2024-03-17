@@ -1,8 +1,8 @@
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:Toxicon/core/utils/function/arrowpop.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/Customaboutcard.dart';

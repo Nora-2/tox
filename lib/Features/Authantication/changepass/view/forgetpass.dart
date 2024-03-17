@@ -1,9 +1,9 @@
 // ignore_for_file: unused_local_variable, non_constant_identifier_names
 import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
-import 'package:Toxicon/Features/Authantication/checker.dart';
+import 'package:Toxicon/core/utils/checker.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

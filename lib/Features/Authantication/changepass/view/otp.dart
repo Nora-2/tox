@@ -1,7 +1,7 @@
 
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';

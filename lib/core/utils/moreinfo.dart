@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'dart:typed_data';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 

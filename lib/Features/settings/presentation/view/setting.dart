@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
-import 'package:Toxicon/core/utils/homeutilis.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/Features/home/presentation/widgets/homeutilis.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

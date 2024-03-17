@@ -1,7 +1,7 @@
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
-import 'package:Toxicon/core/utils/homeutilis.dart';
+import 'package:Toxicon/Features/home/presentation/widgets/homeutilis.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,9 +1,9 @@
 // ignore_for_file: dead_code
 
-import 'package:Toxicon/core/components/cubit/app_cubit.dart';
+import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/arrowpop.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

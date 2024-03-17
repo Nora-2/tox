@@ -1,10 +1,10 @@
 // ignore_for_file: camel_case_types, dead_code, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
-import 'package:Toxicon/Features/Authantication/checker.dart';
+import 'package:Toxicon/core/utils/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/custom_snack_bar.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/forgetpass.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
-import 'package:Toxicon/core/components/homelayout.dart';
+import 'package:Toxicon/core/config/layout/homelayout.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 
 // ignore: must_be_immutable

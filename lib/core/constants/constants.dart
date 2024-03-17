@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types, avoid_print
-import 'package:Toxicon/core/components/homelayout.dart';
+import 'package:Toxicon/core/config/layout/homelayout.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
-import 'package:Toxicon/core/utils/image_constant.dart';
+import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../Data/Models/OnboardModel/onboard_model.dart';
+import '../models/OnboardModel/onboard_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 List<OnboardModel> screens = <OnboardModel>[
