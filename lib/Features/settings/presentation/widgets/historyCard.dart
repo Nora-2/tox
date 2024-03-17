@@ -31,8 +31,8 @@ class CustomHistoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : Colors.white,
-        shadowColor: isDark ? black : Colors.white,
+        color: isDark ? darkcolor : icolor,
+        shadowColor: isDark ? black : icolor,
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,

@@ -3,7 +3,6 @@
 import 'package:Toxicon/core/utils/checker.dart';
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
 import 'package:Toxicon/Features/Authantication/signup/registercubit/register_cubit.dart';
-import 'package:Toxicon/core/config/helper/cachhelper.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/constants/constants.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
@@ -61,8 +60,7 @@ class _SignUpState extends State<SignUp> {
                         builder: (_) =>  SignIn(),
                       ),
                       (route) => false);
-                      // CacheHelper.getdataHistory() ?? '';
-                   CacheHelper.getdata() ?? '';
+                
             } else if (state is Registerfailure) {
               customSnackBar(context, state.error);
             }

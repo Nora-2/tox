@@ -28,7 +28,7 @@ class AppCubit extends Cubit<AppState> {
       emit(GetDataFromfirebasState());
 }
 
-  bool isdark = false;
+  bool isdark = true;
   void changemode({fromShared}) {
     if (fromShared != null) {
       isdark = fromShared;

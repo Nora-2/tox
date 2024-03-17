@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable, avoid_print
 import 'package:Toxicon/Features/Authantication/signin/login_cubit/login_cubit.dart';
+import 'package:Toxicon/Features/converter/cubit/convert_cubit.dart';
 import 'package:Toxicon/Features/home/cubit_home/homecubit_cubit.dart';
 import 'package:Toxicon/Features/liver/cubit/livercubit_cubit.dart';
 import 'package:Toxicon/Features/molecule/cubit/molecule_cubit.dart';
 import 'package:Toxicon/Features/mutagenicity/cubit/dna_cubit.dart';
+import 'package:Toxicon/Features/settings/EditProfile/cubit/profile_cubit.dart';
 import 'package:Toxicon/Features/smilarty/cubit/smilarty_cubit.dart';
 import 'package:Toxicon/core/config/helper/cachhelper.dart';
 import 'package:Toxicon/core/config/cubit/app_cubit.dart';
@@ -71,6 +73,13 @@ class Toxicon extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SmilartyCubit(),
+          ),
+          BlocProvider(
+            create: (context) => ProfileCubit(),
+
+          ),
+          BlocProvider(
+            create: (context) => ConvertCubit(),
           ),
         ],
         child: BlocConsumer<AppCubit, AppState>(
