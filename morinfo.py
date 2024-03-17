@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from flask_cors import CORS  # Import the CORS extension
+from flask_cors import CORS 
 from rdkit.Chem import Draw
 from rdkit.Chem.Draw import SimilarityMaps
 import matplotlib.pyplot as plt
@@ -139,7 +139,7 @@ def generate_similarity_map():
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
-    # sascore
+    #///////////// sascore/////////////
 @app.route('/calculate_sa_score', methods=['POST'])
 def calculate_sa_score():
     try:
@@ -164,7 +164,7 @@ def calculate_sa_score_internal(smiles):
 
     sa_score = rdMolDescriptors.CalcNumRotatableBonds(mol) + rdMolDescriptors.CalcFractionCSP3(mol)
     return sa_score
-# molmodel
+#/////////////////// molmodel/////////////////
 svm_model = load('svm_model.joblib')
 @app.route('/predictmol', methods=['POST'])
 
@@ -245,9 +245,7 @@ def generate_pdb():
         return jsonify({'error': str(e)})    
 #//////////// mutagenicity smile////////////////
 # Load the trained model
-# Load the trained model
 model = load('mutagenicitycsv.joblib')
-
 # Endpoint to handle predictions
 @app.route('/predictmutagenicity', methods=['POST'])
 def predictmutagenicity():
