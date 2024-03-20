@@ -14,3 +14,5 @@ class pdbsucsesssave extends ConvertState {}
 class pdpfailedsave extends ConvertState {}
 class sdfsucssessave extends ConvertState {}
 class sdffailedsave extends ConvertState {}
+class sdfsmilesucssess extends ConvertState {}
+class sdffailedsmile extends ConvertState {}

@@ -1,13 +1,13 @@
-// ignore_for_file: avoid_print, unused_field, avoid_web_libraries_in_flutter, camel_case_types
+// ignore_for_file: avoid_print, unused_field, avoid_web_libraries_in_flutter, camel_case_types, use_build_context_synchronously
 
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:Toxicon/Features/converter/cubit/convert_cubit.dart';
 import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
-import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/constants/image_constant.dart';
 import 'package:Toxicon/core/utils/styles.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +21,7 @@ class _convertScreenState extends State<convertScreen> {
   final TextEditingController _smilesController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String fileName = 'input.sdf';
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
     bool isDark = brightnessValue == ThemeMode.dark;
@@ -79,7 +80,7 @@ class _convertScreenState extends State<convertScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomTextfont24_600(text: 'Input'),
+                                CustomTextfont24_600(text: 'Input Smile'),
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
@@ -93,37 +94,161 @@ class _convertScreenState extends State<convertScreen> {
                                     ),
                                     controller: _smilesController),
                                 SizedBox(
-                                  height: size.height * .04,
+                                  height: size.height * .02,
                                 ),
-                                Center(
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          ConvertCubit.get(context).convertAndDownloadpdb(_smilesController.text);
-                                        });
-                                      },
-                                      child: customButtonContainer(
-                                          size: size,
-                                          text: 'Convert and Download PDB')),
+                                CustomTextfont24_600(text: 'Input Sdf'),
+                                SizedBox(
+                                  height: size.height * .015,
                                 ),
-                                SizedBox(height: size.height * .04),
-                                Center(
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          ConvertCubit.get(context).convertAndDownload(_smilesController.text);
-                                        });
-                                      },
-                                      child: customButtonContainer(
-                                          size: size,
-                                          text: 'Convert and Download SDF')),
+                                Container(
+                                  height: size.height * .055,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1,
+                                        color: Colors.grey.withOpacity(.8)),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          fileName,
+                                          style: const TextStyle(
+                                              fontSize: 18, color: Colors.grey),
+                                        ),
+                                        IconButton(
+                                            onPressed: () async {
+                                              FilePickerResult? result =
+                                                  await FilePicker.platform
+                                                      .pickFiles();
+
+                                              if (result != null) {
+                                                setState(() {
+                                                  fileName =
+                                                      result.files.single.name;
+                                                  ConvertCubit.get(context).selectedFile =
+                                                      result.files.single;
+                                                });
+                                              }
+                                            },
+                                            icon: const Icon(
+                                              Icons.upload_file,
+                                              color: kcolor,
+                                              size: 28,
+                                            ))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: size.height * .02,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              ConvertCubit.get(context)
+                                                  .convertAndDownloadpdb(
+                                                      _smilesController.text);
+                                            });
+                                          },
+                                          child:   Container(
+                                            height: 38,
+                                            width: size.width * .3,
+                                            decoration: BoxDecoration(
+                                              color: kcolor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: const Center(
+                                              child: Text('Pdp',
+                                                  style: TextStyle(
+                                                    fontFamily: 'sanchez',
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                  )),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: size.width * .02,
+                                    ),
+                                    Center(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              ConvertCubit.get(context)
+                                                  .convertAndDownload(
+                                                      _smilesController.text);
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 38,
+                                            width: size.width * .3,
+                                            decoration: BoxDecoration(
+                                              color: kcolor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: const Center(
+                                              child: Text('Smile',
+                                                  style: TextStyle(
+                                                    fontFamily: 'sanchez',
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                  )),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(width: size.width * .02),
+                                    Center(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              ConvertCubit.get(context)
+                                                  .uploadFile(
+                                                      context);
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 38,
+                                            width: size.width * .3,
+                                            decoration: BoxDecoration(
+                                              color: kcolor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: const Center(
+                                              child: Text('Sdf',
+                                                  style: TextStyle(
+                                                    fontFamily: 'sanchez',
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                  )),
+                                            ),
+                                          )),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: size.height * .02),
                                 Center(
                                     child: Image.asset(
                                   ImageConstant.converthome,
                                   width: size.width * .9,
-                                  height: size.height * .4,
+                                  height: size.height * .45,
                                 ))
                               ],
                             ),

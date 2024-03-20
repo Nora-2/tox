@@ -271,6 +271,30 @@ def generate_morgan_fingerprint(smiles):
     mol = Chem.MolFromSmiles(smiles)
     morgan_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024)  # Radius 2
     return morgan_fp
+# sdf to smile 
+@app.route('/converttosmile', methods=['POST'])
+def convert_sdf_to_smiles():
+    try:
+        # Receive SDF file from Flutter app
+        sdf_file = request.files['file']
+        sdf_file.save('temp.sdf')  # Save the uploaded file temporarily
+        
+        # Load the saved SDF file using RDKit
+        sdf_supplier = Chem.SDMolSupplier('temp.sdf')
+        
+        # Convert each molecule to SMILES
+        smiles_list = [Chem.MolToSmiles(mol) for mol in sdf_supplier if mol]
+        
+        # Save SMILES to a file
+        with open('smiles.smi', 'w') as f:
+            for smi in smiles_list:
+                f.write("{}\n".format(smi))
+        
+        # Return success response
+        return jsonify({"message": "Conversion successful"}), 200
+    except Exception as e:
+        print("Error:", e)  # Print the error message to console
+        return jsonify({"error": str(e)}), 500
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'
