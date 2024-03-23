@@ -98,7 +98,7 @@ def compute_gasteiger_charges():
 
 
 # //////////////////////////dili///////////////////////
-loaded_model = load('dili.joblib')
+loaded_model = load('model (1).joblib')
 
 @app.route('/predict', methods=['POST'])
 def predict():
