@@ -202,7 +202,7 @@ class _convertScreenState extends State<convertScreen> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: const Center(
-                                              child: Text('Smile',
+                                              child: Text('Sdf',
                                                   style: TextStyle(
                                                     fontFamily: 'sanchez',
                                                     fontWeight: FontWeight.w500,
@@ -231,7 +231,7 @@ class _convertScreenState extends State<convertScreen> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: const Center(
-                                              child: Text('Sdf',
+                                              child: Text('Smile',
                                                   style: TextStyle(
                                                     fontFamily: 'sanchez',
                                                     fontWeight: FontWeight.w500,

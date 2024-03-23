@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Text(
                 snapshot.data!.docs.isNotEmpty
                     ? snapshot.data!.docs.last['full_name']
-                    : 'Nora Mohamed',
+                    : FirebaseAuth.instance.currentUser!.displayName,
                 style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontFamily: 'acme',
@@ -143,34 +143,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     size: size,
                     subtitel: snapshot.data!.docs.isNotEmpty
                         ? snapshot.data!.docs.last['full_name']
-                        : '',
+                        :FirebaseAuth.instance.currentUser!.displayName ,
                   ),
                   CustomProfileCard(
                     icon: Icons.email,
                     size: size,
                     subtitel: snapshot.data!.docs.isNotEmpty
                         ? snapshot.data!.docs.last['email']
-                        : '',
+                        : FirebaseAuth.instance.currentUser!.email,
                   ),
                   CustomProfileCard(
                     icon: Icons.phone,
                     size: size,
-                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['phone'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['phone'] : '010**********',
                   ),
                   CustomProfileCard(
                     icon: Icons.place,
                     size: size,
-                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['country'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['country'] : 'Your Country',
                   ),
                   CustomProfileCard(
                     icon: Icons.date_range,
                     size: size,
-                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['birth'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['birth'] : 'Date Of Birth',
                   ),
                   CustomProfileCard(
                     icon: Icons.work_rounded,
                     size: size,
-                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['company'] : '',
+                    subtitel: snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['company'] : 'Company',
                   ),
                 ],
               ),

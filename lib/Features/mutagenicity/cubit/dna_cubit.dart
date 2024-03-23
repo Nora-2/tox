@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print, prefer_interpolation_to_compose_strings
+
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -23,17 +26,49 @@ class DnaCubit extends Cubit<DnaState> {
     emit(changemodestate());
   }
 
-  // // Function to handle file selection
-  // void _pickFile() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles();
+  int ?predictionResult;
 
-  //   if (result != null) {
-  //     setState(() {
-  //       fileName = result.files.single.name;
-  //       // Perform any additional actions with the selected file if needed
-  //     });
-  //   }
-  // }
+  Future<void> predictMutagenicity(List<int> fileBytes) async {
+    try {
+      var uri = Uri.parse('http://127.0.0.1:5000/predictsdfmutagenicity');
+      var request = http.MultipartRequest('POST', uri)
+        ..files.add(http.MultipartFile.fromBytes('sdf_file', fileBytes,
+            filename: 'sdf_file'));
+
+      var response = await request.send();
+      var responseData = await response.stream.bytesToString();
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(responseData);
+
+        predictionResult = data['predictions'];
+        emit(sdfsucssess());
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      emit(sdffailed());
+    }
+  }
+
+  Future<void> handleFileUpload() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['sdf'],
+      );
+      if (result != null) {
+        List<int> fileBytes = result.files.single.bytes!;
+        predictMutagenicity(fileBytes);
+        emit(sdffilesucssess());
+      }
+    } catch (e) {
+      print('Error picking file: $e');
+      emit(sdffilefailed());
+    }
+  }
+
   CollectionReference history =
       FirebaseFirestore.instance.collection('history');
   Future<void> addhistory(
@@ -137,7 +172,7 @@ class DnaCubit extends Cubit<DnaState> {
     }
   }
 
-  int predictiondna = 0;
+  int ?predictiondna ;
 
   Future<void> makePrediction(String dna) async {
     const String apiUrl = 'http://127.0.0.1:5000/predictmutagenicity';
@@ -155,9 +190,8 @@ class DnaCubit extends Cubit<DnaState> {
         predictiondna = data['prediction'];
         emit(predictsucssess());
       } else {
-         emit(predictfailed());
+        emit(predictfailed());
         throw Exception('Failed to connect to the server');
-       
       }
     } catch (e) {
       print('Error: $e');

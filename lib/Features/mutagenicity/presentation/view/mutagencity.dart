@@ -27,8 +27,10 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
   TextEditingController dna = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    String prediction =
-        (DnaCubit.get(context).predictiondna == 0 || DnaCubit.get(context).predictiondna < 0) ? 'non mutagenic' : 'mutagenic';
+    String prediction=DnaCubit.get(context).predictiondna!=null?(DnaCubit.get(context).predictiondna == 0 ||
+            DnaCubit.get(context).predictiondna! < 0)?'mutagenic':'non-mutagenic':DnaCubit.get(context).predictionResult!=null?(DnaCubit.get(context).predictionResult == 0 ||
+            DnaCubit.get(context).predictionResult! < 0)?'mutagenic':'non-mutagenic':'';
+
     final size = MediaQuery.of(context).size;
     final ThemeMode brightnessValue =
         AppCubit.get(context).isdark ? ThemeMode.dark : ThemeMode.light;
@@ -113,39 +115,42 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                               SizedBox(
                                 height: size.height * .01,
                               ),
-                              // Container(
-                              //   height: size.height * .055,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //         width: 1,
-                              //         color: Colors.grey.withOpacity(.8)),
-                              //     borderRadius: BorderRadius.circular(10),
-                              //   ),
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.symmetric(
-                              //         vertical: 4.0, horizontal: 8),
-                              //     child: Row(
-                              //       mainAxisAlignment:
-                              //           MainAxisAlignment.spaceBetween,
-                              //       crossAxisAlignment:
-                              //           CrossAxisAlignment.center,
-                              //       children: [
-                              //         Text(
-                              //           fileName,
-                              //           style: const TextStyle(
-                              //               fontSize: 18, color: Colors.grey),
-                              //         ),
-                              //         IconButton(
-                              //             onPressed: _pickFile,
-                              //             icon: const Icon(
-                              //               Icons.upload_file,
-                              //               color: kcolor,
-                              //               size: 28,
-                              //             ))
-                              //       ],
-                              //     ),
-                              //   ),
-                              // ),
+                              Container(
+                                height: size.height * .055,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey.withOpacity(.8)),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0, horizontal: 8),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        'input.sdf',
+                                        style: TextStyle(
+                                            fontSize: 18, color: Colors.grey),
+                                      ),
+                                      IconButton(
+                                          onPressed: () async {
+                                            DnaCubit.get(context)
+                                                .handleFileUpload();
+                                          },
+                                          icon: const Icon(
+                                            Icons.upload_file,
+                                            color: kcolor,
+                                            size: 28,
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 height: size.height * .02,
                               ),
@@ -153,10 +158,17 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          DnaCubit.get(context).makePrediction(dna.text);
-                                          DnaCubit.get(context).computeGasteigerCharges(dna.text);
-                                          DnaCubit.get(context).generate3DStructure(dna.text);
-                                          DnaCubit.get(context).processSmiles(dna.text);
+                                          
+
+                                          DnaCubit.get(context)
+                                              .makePrediction(dna.text);
+                                          DnaCubit.get(context)
+                                              .computeGasteigerCharges(
+                                                  dna.text);
+                                          DnaCubit.get(context)
+                                              .generate3DStructure(dna.text);
+                                          DnaCubit.get(context)
+                                              .processSmiles(dna.text);
                                           DnaCubit.get(context).addhistory(
                                               dna: dna.text,
                                               prediction: prediction,
@@ -172,12 +184,12 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                       atom: DnaCubit.get(context).atoms,
                                       gester: DnaCubit.get(context).gester,
                                       bond: DnaCubit.get(context).resultdna,
-                                      imagepath: DnaCubit.get(context).imagePath,
+                                      imagepath:
+                                          DnaCubit.get(context).imagePath,
                                       size: size,
-                                      result:
-                                          (DnaCubit.get(context).predictiondna == 0 || DnaCubit.get(context).predictiondna < 0)
-                                              ? false
-                                              : true,
+                                      result: DnaCubit.get(context).predictiondna!=null?(DnaCubit.get(context).predictiondna == 0 ||
+            DnaCubit.get(context).predictiondna! < 0)?false:true:DnaCubit.get(context).predictionResult!=null?(DnaCubit.get(context).predictionResult == 0 ||
+            DnaCubit.get(context).predictionResult! < 0)?false:true:false,
                                       isDark: isDark)
                                   : Center(
                                       child: Image.asset(

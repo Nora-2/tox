@@ -37,7 +37,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       _pageController.animateToPage(
         currentIndex,
         duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
+        curve: Curves.easeInOutCirc,
       );
     });
     super.initState();
@@ -101,7 +101,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 16.0,
-                              // color: black,
+                              
                             ),
                           ),
                         ],

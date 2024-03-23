@@ -1,11 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_web_libraries_in_flutter, depend_on_referenced_packages, avoid_print
 
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'dart:html' show AnchorElement, Blob, Url;
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;

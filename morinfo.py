@@ -7,10 +7,11 @@ from rdkit.Chem.Draw import SimilarityMaps
 import matplotlib.pyplot as plt
 import os
 from joblib import load
+import numpy as np    
 from rdkit.Chem import rdMolDescriptors
+import tempfile
 app = Flask(__name__)
 CORS(app) 
-
 #////////////////////////////bond//////////////////
 def process_smiles(smiles):
     molecule = Chem.MolFromSmiles(smiles)
@@ -295,6 +296,26 @@ def convert_sdf_to_smiles():
     except Exception as e:
         print("Error:", e)  # Print the error message to console
         return jsonify({"error": str(e)}), 500
+    #//////////// sdfmutagenicity//////////////
+model = load('mutagenicitysdf.joblib')
+temp_dir = tempfile.gettempdir()
+@app.route('/predictsdfmutagenicity', methods=['POST'])
+def predictsdfmuta():
+    try:
+        sdf_file = request.files['sdf_file']
+        temp_sdf_path = os.path.join(temp_dir, 'temp.sdf')
+        sdf_file.save(temp_sdf_path)
+        supplier = Chem.SDMolSupplier(temp_sdf_path)
+        smiles_list = [Chem.MolToSmiles(mol) for mol in supplier if mol is not None]
+        molecules = [Chem.MolFromSmiles(smiles) for smiles in smiles_list]
+        fingerprints = [AllChem.GetMorganFingerprintAsBitVect(mol, 3, nBits=2048) for mol in molecules]
+        fingerprints_np = np.array(fingerprints)
+        predictions = model.predict(fingerprints_np)
+        return jsonify({'predictions': predictions.tolist()[0]})
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'

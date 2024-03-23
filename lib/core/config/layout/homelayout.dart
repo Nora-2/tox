@@ -27,7 +27,7 @@ class HomeLayout extends StatelessWidget {
                 .Screens[HomecubitCubit.get(context).indexBottomNavBar],
             bottomNavigationBar: BottomNavyBar(
               backgroundColor:isDark?darkcolor:icolor,
-              curve: Curves.easeIn,
+              curve: Curves.easeInOutCirc,
               selectedIndex:
                   HomecubitCubit.get(context).indexBottomNavBar,
               showElevation: true,

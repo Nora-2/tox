@@ -49,10 +49,10 @@ static String id = 'SplashScreen';
             alignment: Alignment.bottomCenter,
             child: TextAnimator('TOXIKON',
                 initialDelay: const Duration(seconds: 1),
-                characterDelay: const Duration(milliseconds: 250),
-                incomingEffect: WidgetTransitionEffects.incomingScaleDown(),
+                characterDelay: const Duration(milliseconds: 200),
+                incomingEffect: WidgetTransitionEffects.incomingScaleUp(),
                 atRestEffect: WidgetRestingEffects.bounce(),
-                outgoingEffect: WidgetTransitionEffects.outgoingScaleUp(),
+                outgoingEffect: WidgetTransitionEffects.outgoingScaleDown(),
                 style:  const TextStyle(
                       fontFamily: 'sanchez',
                         fontWeight: FontWeight.w900,
