@@ -342,11 +342,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             await ProfileCubit.get(context)
                                                 .uploadImageToFirebase();
                                         if (uploadedImageUrl != null) {
-                                          // setState(() {
-                                          //   url = uploadedImageUrl;
-                                          // });
-                                          addUser();
                                         }
+                                        addUser();
                                       },
                                       child: save(size: size, isDark: isDark),
                                     ),
