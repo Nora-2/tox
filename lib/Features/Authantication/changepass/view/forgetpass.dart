@@ -8,6 +8,7 @@ import 'package:Toxicon/core/utils/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 
 final FormKey = GlobalKey<FormState>();
 
@@ -94,12 +95,39 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         if (FormKey.currentState!.validate()) {
                           FirebaseAuth.instance
                               .sendPasswordResetEmail(email: email.text);
-                          Navigator.push(
+                              showDialog(
+   context: context,
+   builder: (BuildContext context) {
+     return GiffyDialog.image(
+      Image.asset('assets/images/Messages-rafiki.png',
+         height: 200,
+         fit: BoxFit.cover,
+       ),
+       title:const Text(
+         'Check your Gmail',
+         textAlign: TextAlign.center,
+       ),
+      
+       actions: [
+         TextButton(
+           onPressed: () => Navigator.pop(context, 'CANCEL'),
+           child: const Text('CANCEL'),
+         ),
+        const SizedBox(width: 100,),
+         TextButton(
+           onPressed: () =>Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => const ResetPassword(),
                             ),
-                          );
+           ),
+           child: const Text('OK'),
+         ),
+       ],
+     );
+   },
+ );
+                          
                         }
                       },
                       child:

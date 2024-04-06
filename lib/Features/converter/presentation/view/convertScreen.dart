@@ -6,7 +6,6 @@ import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/constants/image_constant.dart';
-import 'package:Toxicon/core/utils/styles.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,21 +38,24 @@ class _convertScreenState extends State<convertScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.height * .02,
+                      height: size.height * .04,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                       
                         Image.asset(
+                       
                           ImageConstant.converttop,
-                          width: 190,
+                          width: 300,
                           height: 100,
                         )
+
                       ],
                     ),
                     SizedBox(
-                      height: size.height * .02,
+                      height: size.height * .000001,
                     ),
                     Expanded(
                       child: Container(
@@ -80,7 +82,12 @@ class _convertScreenState extends State<convertScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomTextfont24_600(text: 'Input Smile'),
+                              //  const customtext60020(text: 'Input Smile'),
+                              const Text( 'Input Smile',style: TextStyle(
+            fontFamily: 'acme',
+              fontWeight: FontWeight.w600,
+              
+              fontSize: 22),),
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
@@ -96,7 +103,11 @@ class _convertScreenState extends State<convertScreen> {
                                 SizedBox(
                                   height: size.height * .02,
                                 ),
-                                CustomTextfont24_600(text: 'Input Sdf'),
+                               const Text( 'Input Sdf',style: TextStyle(
+            fontFamily: 'acme',
+              fontWeight: FontWeight.w600,
+              
+              fontSize: 22),),
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
