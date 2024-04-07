@@ -6,6 +6,7 @@ import 'package:Toxicon/core/config/cubit/app_cubit.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/gradientTop.dart';
 import 'package:Toxicon/core/constants/image_constant.dart';
+import 'package:Toxicon/core/utils/showdialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,24 +39,23 @@ class _convertScreenState extends State<convertScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.height * .04,
+                      height: size.height * .1,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                       
-                        Image.asset(
-                       
-                          ImageConstant.converttop,
-                          width: 300,
-                          height: 100,
-                        )
-
+                        Text(
+                          "  Let's start convert",
+                          style: TextStyle(
+                              fontFamily: 'acme',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20),
+                        ),
                       ],
                     ),
                     SizedBox(
-                      height: size.height * .000001,
+                      height: size.height * .01,
                     ),
                     Expanded(
                       child: Container(
@@ -82,12 +82,14 @@ class _convertScreenState extends State<convertScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                              //  const customtext60020(text: 'Input Smile'),
-                              const Text( 'Input Smile',style: TextStyle(
-            fontFamily: 'acme',
-              fontWeight: FontWeight.w600,
-              
-              fontSize: 22),),
+                                //  const customtext60020(text: 'Input Smile'),
+                                const Text(
+                                  'Input Smile',
+                                  style: TextStyle(
+                                      fontFamily: 'acme',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22),
+                                ),
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
@@ -103,11 +105,13 @@ class _convertScreenState extends State<convertScreen> {
                                 SizedBox(
                                   height: size.height * .02,
                                 ),
-                               const Text( 'Input Sdf',style: TextStyle(
-            fontFamily: 'acme',
-              fontWeight: FontWeight.w600,
-              
-              fontSize: 22),),
+                                const Text(
+                                  'Input Sdf',
+                                  style: TextStyle(
+                                      fontFamily: 'acme',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22),
+                                ),
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
@@ -143,9 +147,12 @@ class _convertScreenState extends State<convertScreen> {
                                                 setState(() {
                                                   fileName =
                                                       result.files.single.name;
-                                                  ConvertCubit.get(context).selectedFile =
+                                                  ConvertCubit.get(context)
+                                                          .selectedFile =
                                                       result.files.single;
                                                 });
+                                                showdialogcustomconvert(
+                                                    context);
                                               }
                                             },
                                             icon: const Icon(
@@ -171,9 +178,10 @@ class _convertScreenState extends State<convertScreen> {
                                               ConvertCubit.get(context)
                                                   .convertAndDownloadpdb(
                                                       _smilesController.text);
+                                              showdialogcustomconvert(context);
                                             });
                                           },
-                                          child:   Container(
+                                          child: Container(
                                             height: 38,
                                             width: size.width * .3,
                                             decoration: BoxDecoration(
@@ -202,6 +210,7 @@ class _convertScreenState extends State<convertScreen> {
                                               ConvertCubit.get(context)
                                                   .convertAndDownload(
                                                       _smilesController.text);
+                                              showdialogcustomconvert(context);
                                             });
                                           },
                                           child: Container(
@@ -229,8 +238,7 @@ class _convertScreenState extends State<convertScreen> {
                                           onTap: () {
                                             setState(() {
                                               ConvertCubit.get(context)
-                                                  .uploadFile(
-                                                      context);
+                                                  .uploadFile(context);
                                             });
                                           },
                                           child: Container(

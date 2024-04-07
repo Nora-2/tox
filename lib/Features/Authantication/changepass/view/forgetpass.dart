@@ -1,14 +1,13 @@
 // ignore_for_file: unused_local_variable, non_constant_identifier_names
-import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
 import 'package:Toxicon/core/utils/checker.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/utils/function/buttons.dart';
 import 'package:Toxicon/core/constants/image_constant.dart';
+import 'package:Toxicon/core/utils/showdialog.dart';
 import 'package:Toxicon/core/utils/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 
 final FormKey = GlobalKey<FormState>();
 
@@ -95,39 +94,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         if (FormKey.currentState!.validate()) {
                           FirebaseAuth.instance
                               .sendPasswordResetEmail(email: email.text);
-                              showDialog(
-   context: context,
-   builder: (BuildContext context) {
-     return GiffyDialog.image(
-      Image.asset('assets/images/Messages-rafiki.png',
-         height: 200,
-         fit: BoxFit.cover,
-       ),
-       title:const Text(
-         'Check your Gmail',
-         textAlign: TextAlign.center,
-       ),
-      
-       actions: [
-         TextButton(
-           onPressed: () => Navigator.pop(context, 'CANCEL'),
-           child: const Text('CANCEL'),
-         ),
-        const SizedBox(width: 100,),
-         TextButton(
-           onPressed: () =>Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const ResetPassword(),
-                            ),
-           ),
-           child: const Text('OK'),
-         ),
-       ],
-     );
-   },
- );
-                          
+                          showdialogcustom(
+                              context, 'assets/images/Messages-rafiki.png');
                         }
                       },
                       child:
