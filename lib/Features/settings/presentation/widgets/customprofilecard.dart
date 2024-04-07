@@ -31,9 +31,10 @@ class _CustomProfileCardState extends State<CustomProfileCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : icolor.withOpacity(.95),
-        shadowColor: isDark ? Colors.grey : black,
+       color: isDark ? darkcolor : Colors.white,
+        shadowColor: isDark ? Colors.grey.withOpacity(.6) : const Color(0xfff1f3f4).withOpacity(.48),
         elevation: 10,
+      
         child: SizedBox(
           width: widget.size.width * .95,
           height: widget.size.height * .09,

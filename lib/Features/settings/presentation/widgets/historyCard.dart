@@ -31,8 +31,8 @@ class CustomHistoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : icolor,
-        shadowColor: isDark ? black : icolor,
+        color: isDark ? darkcolor : Colors.white,
+        shadowColor: isDark ? black : const Color(0xfff1f3f4).withOpacity(.48),
         elevation: 10,
         child: SizedBox(
           width: size.width * .95,
@@ -52,7 +52,7 @@ class CustomHistoryCard extends StatelessWidget {
                       style:  TextStyle(
                               fontWeight: FontWeight.w600,
                               fontFamily: 'acme',
-                              fontSize: 24,),
+                              fontSize: 20,),
                     ),
                     SizedBox(
                       width: size.width * .09,
@@ -68,7 +68,7 @@ class CustomHistoryCard extends StatelessWidget {
                                 color: isDark
                                     ? Colors.white70
                                     : black,
-                                fontSize: 20)),
+                                fontSize: 18)),
                     ),
                     
                   ],
@@ -89,7 +89,7 @@ class CustomHistoryCard extends StatelessWidget {
                               fontSize: 20)),
                     
                     SizedBox(
-                      width: size.width * .09,
+                      width: size.width * .05,
                     ),
                     Text(
                       category,
@@ -99,7 +99,7 @@ class CustomHistoryCard extends StatelessWidget {
                               color: isDark
                                   ? Colors.white70
                                   : black,
-                              fontSize: 20)),
+                              fontSize: 18)),
                     
                   ],
                 ),
@@ -116,10 +116,10 @@ class CustomHistoryCard extends StatelessWidget {
                         fontFamily: 'acme',
                               fontWeight: FontWeight.w600,
                               // color:  isDark?black:Colors.white,
-                              fontSize: 26)),
+                              fontSize: 20)),
                     
                     SizedBox(
-                      width: size.width * .09,
+                      width: size.width * .1,
                     ),
                     Text(
                       date,
@@ -129,7 +129,7 @@ class CustomHistoryCard extends StatelessWidget {
                               color: isDark
                                   ? Colors.white70
                                   : black,
-                              fontSize: 20)),
+                              fontSize: 18)),
                     
                   ],
                 ),
@@ -145,10 +145,10 @@ class CustomHistoryCard extends StatelessWidget {
                       style:  TextStyle(
                               fontWeight: FontWeight.w600,
                              fontFamily: 'acme',
-                              fontSize: 24)),
+                              fontSize: 20)),
                     
                     SizedBox(
-                      width: size.width * .09,
+                      width: size.width * .08,
                     ),
                     Text(
                       output,
@@ -158,7 +158,7 @@ class CustomHistoryCard extends StatelessWidget {
                               color: isDark
                                   ? Colors.white70
                                   : black,
-                              fontSize: 20),
+                              fontSize: 18),
                     ),
                   ],
                 ),

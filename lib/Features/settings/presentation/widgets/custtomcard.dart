@@ -25,14 +25,14 @@ class CustomContainerCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : icolor.withOpacity(.95),
-        shadowColor: isDark ? Colors.grey.withOpacity(.5) :  black,
+        color: isDark ? darkcolor :Colors.white,
+        shadowColor: isDark ? Colors.grey.withOpacity(.5) :  const Color(0xfff1f3f4).withOpacity(.48),
         elevation: 10,
         child: SizedBox(
-          width: size.width * .90,
-          height: size.height * .07,
+          width: size.width * .95,
+          height: size.height * .1,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8),
+            padding: const EdgeInsets.only(left: 4.0, right: 4,top:5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,6 +40,7 @@ class CustomContainerCard extends StatelessWidget {
                 Icon(
                   icon,
                   size: 30,
+                  color:isDark?Colors.white: darkcolor,
                 ),
                 Text(
                   titel,

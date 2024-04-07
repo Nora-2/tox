@@ -39,7 +39,7 @@ class _convertScreenState extends State<convertScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.height * .05,
+                      height: size.height * .09,
                     ),
                      Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,9 +48,9 @@ class _convertScreenState extends State<convertScreen> {
                      const Text(
                           "  Let's start convert your data\n  in an easy way...",
                           style: TextStyle(
-                              fontFamily: 'acme',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20),
+                              fontFamily: 'Poppins Regular',
+                              fontWeight: FontWeight.w800,
+                              fontSize: 21),
                         ),
                         Image.asset(
                                   ImageConstant.converttop,
@@ -111,9 +111,9 @@ class _convertScreenState extends State<convertScreen> {
                                 const Text(
                                   'Input Smile',
                                   style: TextStyle(
-                                      fontFamily: 'acme',
+                                      fontFamily: 'Poppins Regular',
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22),
+                                      fontSize: 20),
                                 ),
                                 SizedBox(
                                   height: size.height * .015,
@@ -136,9 +136,9 @@ class _convertScreenState extends State<convertScreen> {
                                 const Text(
                                   'Input Sdf',
                                   style: TextStyle(
-                                      fontFamily: 'acme',
+                                      fontFamily: 'Poppins Regular',
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22),
+                                      fontSize: 20),
                                 ),
                                 SizedBox(
                                   height: size.height * .015,
@@ -294,8 +294,8 @@ class _convertScreenState extends State<convertScreen> {
                                 Center(
                                     child: Image.asset(
                                   ImageConstant.converthome,
-                                  width: size.width * .9,
-                                  height: size.height * .45,
+                                  width: size.width * .8,
+                                  height: size.height * .35,
                                 ))
                               ],
                             ),

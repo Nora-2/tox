@@ -23,8 +23,8 @@ class CustomContainerCtegory extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : icolor.withOpacity(.95),
-        shadowColor: isDark ? Colors.grey.withOpacity(.6) :  black,
+        color: isDark ? darkcolor : Colors.white,
+        shadowColor: isDark ? Colors.grey.withOpacity(.6) : const Color(0xfff1f3f4).withOpacity(.48),
         elevation: 10,
         child: SizedBox(
           width: size.width * .89,
@@ -39,9 +39,9 @@ class CustomContainerCtegory extends StatelessWidget {
                   titel,
                   // lakkiReddy
                   style: const TextStyle(
-                        fontFamily: 'lakkiRaddy',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 26),
+                        fontFamily:'Poppins Regular',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
                 ),
                 Image(
                   image: AssetImage(

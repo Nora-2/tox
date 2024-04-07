@@ -27,8 +27,8 @@ class CustomInfoCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: isDark ? darkcolor : icolor.withOpacity(.95),
-        shadowColor: isDark ? Colors.grey :  black,
+        color: isDark ? darkcolor : Colors.white,
+        shadowColor: isDark ? Colors.grey :  const Color(0xfff1f3f4).withOpacity(.48),
         elevation: 10,
         child: SizedBox(
           width: size.width * .90,
