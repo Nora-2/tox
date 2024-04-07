@@ -39,19 +39,24 @@ class _convertScreenState extends State<convertScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.height * .1,
+                      height: size.height * .05,
                     ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          "  Let's start convert",
+                     const Text(
+                          "  Let's start convert your data\n  in an easy way...",
                           style: TextStyle(
                               fontFamily: 'acme',
                               fontWeight: FontWeight.w600,
                               fontSize: 20),
                         ),
+                        Image.asset(
+                                  ImageConstant.converttop,
+                                  width: size.width * .2,
+                                  height: size.height * .1,
+                                )
                       ],
                     ),
                     SizedBox(
@@ -82,7 +87,27 @@ class _convertScreenState extends State<convertScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                //  const customtext60020(text: 'Input Smile'),
+                    //             Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                    //   children: [
+                    // //  const Text(
+                    // //       "  Let's start convert your data..",
+                    // //       style: TextStyle(
+                    // //           fontFamily: 'acme',
+                    // //           fontWeight: FontWeight.w600,
+                    // //           fontSize: 20),
+                    // //     ),
+                    //     Image.asset(
+                    //               ImageConstant.converttop,
+                    //               width: size.width * .2,
+                    //               height: size.height * .1,
+                    //             )
+                    //   ],
+                    // ),
+                                //  SizedBox(
+                                //   height: size.height * .015,
+                                // ),
                                 const Text(
                                   'Input Smile',
                                   style: TextStyle(
@@ -93,15 +118,18 @@ class _convertScreenState extends State<convertScreen> {
                                 SizedBox(
                                   height: size.height * .015,
                                 ),
-                                CustomFormField(
-                                    ispass: false,
-                                    hint: 'Enter your Smile',
-                                    preicon: const Icon(
-                                      Icons.edit,
-                                      size: 19,
-                                      color: kcolor,
-                                    ),
-                                    controller: _smilesController),
+                                SizedBox(
+                                   height: size.height * .055,
+                                  child: CustomFormField(
+                                      ispass: false,
+                                      hint: 'Enter your Smile',
+                                      preicon: const Icon(
+                                        Icons.edit,
+                                        size: 19,
+                                        color: kcolor,
+                                      ),
+                                      controller: _smilesController),
+                                ),
                                 SizedBox(
                                   height: size.height * .02,
                                 ),
