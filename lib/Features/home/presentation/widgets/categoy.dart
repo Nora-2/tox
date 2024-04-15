@@ -40,8 +40,8 @@ class CustomContainerCtegory extends StatelessWidget {
                   // lakkiReddy
                   style: const TextStyle(
                         fontFamily:'Poppins Regular',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24),
+                          fontWeight: FontWeight.w900,
+                          fontSize: 23),
                 ),
                 Image(
                   image: AssetImage(

@@ -2,10 +2,8 @@
 import 'package:Toxicon/core/config/layout/homelayout.dart';
 import 'package:Toxicon/core/constants/colorconstant.dart';
 import 'package:Toxicon/core/constants/image_constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../models/OnboardModel/onboard_model.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 List<OnboardModel> screens = <OnboardModel>[
   OnboardModel(
@@ -97,30 +95,6 @@ class socialmedia extends StatelessWidget {
   // final GoogleSignIn googleSignIn = new GoogleSignIn();
 
  
-  Future signInWithGoogle() async {
-    try {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      // Once signed in, return the UserCredential
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      // Handle any errors that occur during the sign-in process
-      print('Error signing in with Google: $e');
-    
-      rethrow;
-    }
-  }
  const socialmedia({
     super.key,
     required this.size,
@@ -149,9 +123,7 @@ class socialmedia extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () async{
-            signInWithGoogle()
-                .then((user) => print(user))
-                .catchError((e) => print(e));
+           
                 AppMessage.customSnackBar(
         context: context,
         content: 'An error occurred while signing in with Google. Please try again.',

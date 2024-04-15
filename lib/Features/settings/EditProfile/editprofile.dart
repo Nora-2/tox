@@ -180,7 +180,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   ImageConstant.profile,
                                                 ),
                                               )
-                                        : Container(),
+                                        : CircleAvatar(
+                                                radius: 50,
+                                                backgroundColor: Colors
+                                                    .transparent
+                                                    .withOpacity(0),
+                                                backgroundImage: AssetImage(
+                                                  ImageConstant.profile,
+                                                ),
+                                              ),
                                     Positioned(
                                       right: 10,
                                       bottom: 10,

@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +24,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(Loginsucsess());
     } on FirebaseAuthException catch (ex) {
       if (ex.code == 'user-not-found') {
+      
         emit(Loginfailure(error: 'user-not-found'));
       } else if (ex.code == 'wrong-password') {
         emit(Loginfailure(error: 'wrong-password'));

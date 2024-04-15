@@ -11,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:Toxicon/Features/settings/presentation/widgets/custtomcard.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -98,7 +97,8 @@ final Stream<QuerySnapshot> documentStream = FirebaseFirestore.instance.collecti
                           child: Text(
                                snapshot.data!.docs.isNotEmpty
                                 ?    snapshot.data!.docs.last['full_name']
-                                : 'Nora Mohamed',
+                                : FirebaseAuth
+                                      .instance.currentUser!.displayName,
                             style: const TextStyle(
                                 fontFamily: 'acme',
                                 overflow: TextOverflow.ellipsis,
@@ -196,8 +196,7 @@ final Stream<QuerySnapshot> documentStream = FirebaseFirestore.instance.collecti
                       ),
                       GestureDetector(
                         onTap: () async {
-                          GoogleSignIn google = GoogleSignIn();
-                          google.disconnect();
+                          
                           FacebookAuth.instance.logOut();
                           await FirebaseAuth.instance.signOut();
                           Navigator.pushReplacement(

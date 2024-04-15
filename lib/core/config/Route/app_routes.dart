@@ -1,5 +1,4 @@
 import 'package:Toxicon/Features/Authantication/changepass/view/forgetpass.dart';
-import 'package:Toxicon/Features/Authantication/changepass/view/otp.dart';
 import 'package:Toxicon/Features/Authantication/changepass/view/resetpass.dart';
 import 'package:Toxicon/Features/Authantication/signin/view/sign_in_view.dart';
 import 'package:Toxicon/Features/Authantication/signup/view/signup.dart';
@@ -46,7 +45,6 @@ class AppRoutes {
     ChatScreen.id: (context) => const ChatScreen(),
     smilartyScreen.id: (context) => const smilartyScreen(),
     ForgetPassword.id:(context)=>const ForgetPassword(),
-    OtpVerify.id:(context)=>const OtpVerify(),
     ResetPassword.id:(context)=>const ResetPassword(),
     InfoScreen.id: (context) => const InfoScreen(),
     HistoryScreen.id:(context)=> HistoryScreen(),

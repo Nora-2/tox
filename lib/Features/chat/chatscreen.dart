@@ -127,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 5,),
+           const SizedBox(height: 5,),
             Container(height: 2,width: double.infinity,color :const Color(0xfff1f3f4).withOpacity(.48),)
             ,Expanded(
               child: ListView.builder(
@@ -204,7 +204,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       width: double.infinity,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.white : Colors.white,
+                        color: isDark ? Colors.white : Colors.blue.shade100,
                 boxShadow: [
                   BoxShadow(
                    

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_field, avoid_web_libraries_in_flutter, camel_case_types, use_build_context_synchronously
+// ignore_for_file: avoid_print, unused_field, avoid_web_libraries_in_flutter, camel_case_types, use_build_context_synchronously, file_names
 
 import 'package:Toxicon/Features/Authantication/signin/widgets/customformfield.dart';
 import 'package:Toxicon/Features/converter/cubit/convert_cubit.dart';
@@ -46,11 +46,11 @@ class _convertScreenState extends State<convertScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                      const Text(
-                          "  Let's start convert your data\n  in an easy way...",
+                          "  Let's start...\n   convert your data in an easy way!",
                           style: TextStyle(
                               fontFamily: 'Poppins Regular',
-                              fontWeight: FontWeight.w800,
-                              fontSize: 21),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 18),
                         ),
                         Image.asset(
                                   ImageConstant.converttop,
