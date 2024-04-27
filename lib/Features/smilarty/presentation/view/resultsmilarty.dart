@@ -25,6 +25,7 @@ class resultsimilarty extends StatelessWidget {
         SizedBox(height: size.height * .04),
         CustomTextfont24_600(text: 'SimilarityMapForFingerprint'),
         SizedBox(height: size.height * .02),
+    
         Center(
           child: (imagepath.isNotEmpty)
               ? Image.network(imagepath,height: size.height * .4,

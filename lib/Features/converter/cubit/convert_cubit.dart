@@ -91,8 +91,7 @@ class ConvertCubit extends Cubit<ConvertState> {
   }
 
   PlatformFile? selectedFile;
-  Future<void> uploadFile(
-      BuildContext context) async {
+  Future<void> uploadFile(BuildContext context) async {
     if (selectedFile == null) {
       // Handle case when no file is selected
       return;
@@ -151,4 +150,5 @@ class ConvertCubit extends Cubit<ConvertState> {
       );
     }
   }
+
 }

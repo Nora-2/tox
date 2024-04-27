@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class DnaCubit extends Cubit<DnaState> {
     emit(changemodestate());
   }
 
-  int ?predictionResult;
+  int? predictionResult;
 
   Future<void> predictMutagenicity(List<int> fileBytes) async {
     try {
@@ -61,6 +62,7 @@ class DnaCubit extends Cubit<DnaState> {
       if (result != null) {
         List<int> fileBytes = result.files.single.bytes!;
         predictMutagenicity(fileBytes);
+        convertSdfToSmiles(fileBytes);
         emit(sdffilesucssess());
       }
     } catch (e) {
@@ -172,7 +174,7 @@ class DnaCubit extends Cubit<DnaState> {
     }
   }
 
-  int ?predictiondna ;
+  int? predictiondna;
 
   Future<void> makePrediction(String dna) async {
     const String apiUrl = 'http://127.0.0.1:5000/predictmutagenicity';
@@ -195,6 +197,38 @@ class DnaCubit extends Cubit<DnaState> {
       }
     } catch (e) {
       print('Error: $e');
+    }
+  }
+
+  String? smilesdf = '';
+  Future<Map<String, dynamic>?> convertSdfToSmiles(dynamic file) async {
+    try {
+      var url =
+          'http://localhost:5000/converttosmile2'; // Update with your server URL
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      if (file is Uint8List) {
+        request.files.add(
+            http.MultipartFile.fromBytes('file', file, filename: 'temp.sdf'));
+      } else if (file is String) {
+        request.files.add(await http.MultipartFile.fromPath('file', file));
+      }
+
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        String smile = await response.stream.bytesToString();
+        smilesdf = smile;
+        emit(sdftosmilesucssess());
+        print('Converted SMILES: $smile');
+        return {'smiles': smile}; // Return the converted SMILES string
+      } else {
+        print('Failed to convert SDF to SMILES: ${response.reasonPhrase}');
+        return null; // Return null if conversion fails
+      }
+    } catch (e) {
+      print('Error converting SDF to SMILES: $e');
+      return null; // Return null in case of error
     }
   }
 }

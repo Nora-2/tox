@@ -76,7 +76,7 @@ class homeScreen extends StatelessWidget {
                         children: [
                           CustomText(
                             text:
-                                'Hi,${snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName}!',
+                                'Hi,${ snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.last['full_name'] : FirebaseAuth.instance.currentUser!.displayName}!',
                             style: Styles.textStyleacme30,
                           ),
                           customsizebox(

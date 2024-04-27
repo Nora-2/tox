@@ -18,6 +18,6 @@ class atomsucssess extends DnaState {}
 class atomfailed extends DnaState {}
 class sdfsucssess extends DnaState {}
 class sdffailed extends DnaState {}
-
+class sdftosmilesucssess extends DnaState {}
 class sdffilesucssess extends DnaState {}
 class sdffilefailed extends DnaState {}

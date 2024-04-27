@@ -130,7 +130,7 @@ class _smilartyScreenState extends State<smilartyScreen> {
                               SizedBox(height: size.height * .04),
                               SmilartyCubit.get(context).issubmit
                                   ? resultsimilarty(
-                                    imagepath: imagePath,
+                                    imagepath:SmilartyCubit.get(context).imagePath,
                                       size: size,
                                       result: result,
                                       isDark: isDark)

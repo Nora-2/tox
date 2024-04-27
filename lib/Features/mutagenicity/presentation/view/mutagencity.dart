@@ -159,18 +159,21 @@ class _MutagencityScreenState extends State<MutagencityScreen> {
                                       onTap: () {
                                         setState(() {
                                           
-
                                           DnaCubit.get(context)
                                               .makePrediction(dna.text);
                                           DnaCubit.get(context)
                                               .computeGasteigerCharges(
-                                                  dna.text);
+                                                  dna.text==''?DnaCubit.get(context).smilesdf!
+                                                  :' ');
                                           DnaCubit.get(context)
-                                              .generate3DStructure(dna.text);
+                                              .generate3DStructure(dna.text==''?DnaCubit.get(context).smilesdf!
+                                                  :' ');
                                           DnaCubit.get(context)
-                                              .processSmiles(dna.text);
+                                              .processSmiles(dna.text==''?DnaCubit.get(context).smilesdf!
+                                                  :' ');
                                           DnaCubit.get(context).addhistory(
-                                              dna: dna.text,
+                                              dna: dna.text==''?DnaCubit.get(context).smilesdf!
+                                                  :' ',
                                               prediction: prediction,
                                               date: date);
                                           DnaCubit.get(context).viewResult();

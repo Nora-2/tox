@@ -12,7 +12,11 @@ from rdkit.Chem import rdMolDescriptors
 import tempfile
 app = Flask(__name__)
 CORS(app) 
+
+
+
 #////////////////////////////bond//////////////////
+
 def process_smiles(smiles):
     molecule = Chem.MolFromSmiles(smiles)
 
@@ -316,6 +320,27 @@ def predictsdfmuta():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500
+    
+    # sdf to smile string
+@app.route('/converttosmile2', methods=['POST'])
+def convert_sdf_to_smiles2():
+    try:
+        # Receive SDF file from Flutter app
+        sdf_file = request.files['file']
+        sdf_file.save('temp.sdf')  # Save the uploaded file temporarily
+        
+        # Load the saved SDF file using RDKit
+        sdf_supplier = Chem.SDMolSupplier('temp.sdf')
+        
+        # Convert each molecule to SMILES and concatenate into a single string
+        smiles_str = '\n'.join([Chem.MolToSmiles(mol) for mol in sdf_supplier if mol])
+        
+        # Return the converted SMILES string
+        return smiles_str, 200
+    except Exception as e:
+        print("Error:", e)  # Print the error message to console
+        return jsonify({'error': str(e)}), 500
+    
 @app.route('/')
 def index():
     return 'Welcome to the Toxikon API!'
